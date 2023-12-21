@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="changePain" prefHeight="600.0" prefWidth="1045.0" style="-fx-background-radius: 50; -fx-background-color: white;" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.DashBoardDetailsFormController">
+   <children>
+      <Pane layoutX="16.0" layoutY="17.0" prefHeight="66.0" prefWidth="364.0" style="-fx-background-color: fdedd0; -fx-background-radius: 25;">
+         <children>
+            <Text fill="#d7a30f" layoutX="28.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCTS">
+               <font>
+                  <Font name="Dyuthi Regular" size="20.0" />
+               </font>
+            </Text>
+            <Text fill="#d7a30f" layoutX="243.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" PRICE(LKR)" wrappingWidth="126.0">
+               <font>
+                  <Font name="Dyuthi Regular" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="120.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel Price" wrappingWidth="141.0">
+               <font>
+                  <Font name="Dyuthi Regular" size="25.0" />
+               </font>
+            </Text>
+         </children>
+         <effect>
+            <DropShadow>
+               <input>
+                  <Glow />
+               </input>
+               <color>
+                  <Color red="0.9098039269447327" green="0.8235294222831726" blue="0.7490196228027344" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Pane>
+      <AnchorPane layoutX="585.0" layoutY="28.0" prefHeight="262.0" prefWidth="420.0" style="-fx-background-color: fdedd0; -fx-background-radius: 30;">
+         <children>
+            <AnchorPane fx:id="clanderpane" layoutY="12.0" prefHeight="262.0" prefWidth="420.0" />
+         </children>
+      </AnchorPane>
+      <BarChart fx:id="barChart" layoutX="404.0" layoutY="364.0" prefHeight="223.0" prefWidth="585.0">
+         <xAxis>
+            <CategoryAxis label="Month" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="Amount(LKR)" side="LEFT" />
+         </yAxis>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.9098039269447327" green="0.8235294222831726" blue="0.7490196228027344" />
+               </color>
+            </DropShadow>
+         </effect>
+      </BarChart>
+      <Pane layoutX="16.0" layoutY="109.0" prefHeight="460.0" prefWidth="235.0" style="-fx-background-color: fdedd0; -fx-background-radius: 25;">
+         <children>
+            <Label layoutX="8.0" layoutY="391.0" text="Xtra Premium Euro 3">
+               <font>
+                  <Font name="Dyuthi Regular" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="323.0" text="Xtra Premium 95">
+               <font>
+                  <Font name="Dyuthi Regular" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="ladpane" layoutX="12.0" layoutY="28.0" prefHeight="48.0" prefWidth="199.0" text="Lanka Auto Diesel">
+               <font>
+                  <Font name="Dyuthi Regular" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="106.0" prefHeight="44.0" prefWidth="208.0" text="Lanka Super Diesel">
+               <font>
+                  <Font name="Dyuthi Regular" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="12.0" layoutY="177.0" prefHeight="48.0" prefWidth="189.0" text="Xtra Mile Diesel">
+               <font>
+                  <Font name="Dyuthi Regular" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="251.0" text="Lanka Petrol 92">
+               <font>
+                  <Font name="Dyuthi Regular" size="24.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.9098039269447327" green="0.8235294222831726" blue="0.7490196228027344" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Pane>
+      <Pane layoutX="262.0" layoutY="107.0" prefHeight="460.0" prefWidth="113.0" style="-fx-background-color: fdedd0; -fx-background-radius: 25;">
+         <children>
+            <Text fx:id="txtXPEuro3" layoutX="11.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="111.0" />
+            <Text fx:id="txtLSDiesel" layoutX="10.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="111.0" />
+            <Text fx:id="txtLADiesel" layoutX="10.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="117.0634765625" />
+            <Text fx:id="txtXMDiesel" layoutX="11.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="111.0" />
+            <Text fx:id="txtXP95" layoutX="11.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="111.0" />
+            <Text fx:id="txtLP92" layoutX="10.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="111.0" />
+         </children>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.9098039269447327" green="0.8235294222831726" blue="0.7490196228027344" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Pane>
+      <Circle fill="#f69f3c" layoutX="485.0" layoutY="109.0" radius="69.0" stroke="#e8d2bf" strokeType="INSIDE" />
+      <Text fx:id="txtEmpCount" layoutX="465.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="57.7294921875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Label layoutX="438.0" layoutY="101.0" text="Employees">
+         <font>
+            <Font name="Dyuthi Regular" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="55.0" fitWidth="58.0" layoutX="456.0" layoutY="56.0">
+         <image>
+            <Image url="@../asserts/icons/empicon.png" />
+         </image>
+      </ImageView>
+      <Circle fill="#f69f3c" layoutX="486.0" layoutY="270.0" radius="69.0" stroke="#e8d2bf" strokeType="INSIDE" />
+      <Group layoutX="883.0" layoutY="194.0" />
+      <Label layoutX="449.0" layoutY="262.0" text=" Orders">
+         <font>
+            <Font name="Dyuthi Regular" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="48.0" fitWidth="58.0" layoutX="456.0" layoutY="222.0">
+         <image>
+            <Image url="@../asserts/icons/fueltankicon.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="txtOrderCount" layoutX="468.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="65.7294921875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

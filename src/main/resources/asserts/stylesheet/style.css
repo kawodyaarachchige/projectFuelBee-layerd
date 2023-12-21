@@ -1,0 +1,148 @@
+
+#logoutbtn{
+    -fx-background-color:  #F0610A;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-cursor: wait;
+
+}
+#inpane{
+    -fx-cursor: hand;
+}
+#txtUserName,#txtPassowrd,#txtemail,#txtpwd,#txtCpwd{
+    -fx-background-color: white; /* Background color */
+    -fx-background-radius: 25px; /* Background radius */
+    -fx-border-color: black; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 25px; /* Border radius */
+    -fx-padding: 5px; /* Padding inside the text field */
+    -fx-font-size: 14px; /* Font size */
+    -fx-font-color: black; /* Font color */
+    -fx-text-fill: black; /* Text fill */
+    -fx-text-alignment: center; /* Text alignment */
+}
+ #lgnpane,#sgnpane,#btnsign{
+     -fx-background-color:  #F0610A;
+     -fx-font-family: Ubuntu;
+     -fx-background-radius: 10px;
+     -fx-border-radius: 10px;
+     -fx-border-color: black;
+     -fx-padding: 5px;
+     -fx-border-width: 1px;
+     -fx-cursor: hand;
+     -fx-border-style: solid;
+     -fx-font-color: black;
+ }
+ #lgnpane:hover,#sgnpane:hover,#btnsign:hover{
+     -fx-background-color:linear-gradient(#ffb000, #FFB099); ;
+ }
+
+ #savpane,#dltpane,#updatepane, #clearpane,#rppane,#rppane1,#btnChangePassword,#btnAddFuel,#btnAddFuelTank{
+     -fx-cursor: hand;
+     -fx-border-color: white;
+     -fx-border-style: solid;
+     -fx-border-width: 1px;
+     -fx-border-radius: 5px;
+     -fx-padding: 5px;
+     -fx-background-color: linear-gradient(#ffb000, #FFB099);
+     -fx-font-family: Ubuntu;
+ }
+ #savpane1,#dltpane1,#updatepane1,#clearpane1,#mailpane,#rppane3,#btnBack,#btnAddFuelTank,#btnAddFuel{
+     -fx-cursor: hand;
+     -fx-border-color: white;
+     -fx-border-style: solid;
+     -fx-border-width: 1px;
+     -fx-border-radius: 5px;
+     -fx-padding: 5px;
+     -fx-background-color: linear-gradient(#ffb000, #FFB099);
+ }
+ #savpane:hover,#dltpane:hover,#updatepane:hover,#clearpane:hover, #logoutbtn:hover,#rppane :hover,#mailpane:hover,#rppane1:hover{
+     -fx-background-color:  #F0610A;
+ }
+ #savpane1:hover,#dltpane1:hover,#updatepane1:hover,#clearpane1:hover,#rppane3:hover,#btnBack:hover,#btnChangePassword:hover,#btnAddFuel:hover,#btnAddFuelTank:hover{
+     -fx-background-color:  #F0610A;
+ }
+
+ #dashpane1,#orpane,#fuelpane1 ,#empane ,#paypane,#propane,#suppane,#ordpane {
+
+     -fx-background-color:#F0610A;
+     -fx-background-radius: 10px;
+     -fx-border-radius: 10px;
+     -fx-border-color: transparent;
+     -fx-cursor: hand;
+     -fx-font-color: bLACK;
+
+ }
+
+ #placepane{
+     -fx-cursor: hand;
+     -fx-border-color: white;
+     -fx-border-style: solid;
+     -fx-border-width: 1px;
+     -fx-border-radius: 15px;
+     -fx-padding: 5px;
+     -fx-background-color: linear-gradient(#fed968, #ff936a);}
+
+#txtLADiesel,#txtLSDiesel,#txtLADiesel,#txtXMDiesel,#txtLP92,#txtXP95,#txtXPEuro3,#txtPassword,#txtRePassword,#txtOTP{
+    -fx-background-color: black; /* Background color */
+    -fx-border-color: black; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-padding: 5px; /* Padding inside the text field */
+   -fx-font-size: 20px; /* Font size */
+}
+#txtDate1{
+    -fx-background-color: linear-gradient(#ffb000, #FFB099) ; /* Background color */
+
+}
+
+.table-view .column-header {
+    -fx-background-color: #fdedd0;
+    -fx-font-size:13;
+-fx-font-family: Ubuntu;-text-fill: white}
+
+.table-view {
+    -fx-background-radius: 9px;
+    -fx-border-radius: 9px;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+.table-row-cell:selected{
+    -fx-background-color:#F5AB1FFF;
+}
+table-row-cell:selected.table-cell{
+    -fx-text-fill: black !important;
+}
+.text-field{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 17;
+    -fx-border-color: rgba(128, 64, 0, 0) rgba(255, 255, 0, 0) rgb(245, 171, 31) rgba(245, 171, 31, 0);
+}
+
+#cmbSupName,#cmbFuelType,#cmbSupEmail,#cmbSupId,#cmbOrderId,#dpDate,#dpTankDate,#cmbTankType,#cmbAdminEmail,#cmbTankQty,#dpEndDate,#dpStartDate{
+    -fx-background-color: transparent;
+-fx-font-size: 15;-fx-text-fill-: black;
+    -fx-border-color: rgba(128, 64, 0, 0) rgba(255, 255, 0, 0) rgb(245, 171, 31) rgba(245, 171, 31, 0);
+}
+#userName{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+#userName:hover{
+    -fx-text-fill: black;
+}
+#namepane1{
+-fx-background-color: black;
+}
+#namepane1:hover{
+        -fx-background-color: linear-gradient(#fed968, #ff936a);}
+#namepane2{
+-fx-text-fill: black;
+}
+#namepane2:hover{
+    -fx-background-color: linear-gradient(#fed968, #ff936a);}

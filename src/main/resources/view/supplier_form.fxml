@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="suplypane" prefHeight="600.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.SupplierFormController">
+   <children>
+      <Label layoutX="406.0" layoutY="21.0" text="Manage Supplier">
+         <font>
+            <Font name="Dyuthi Regular" size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="84.0" layoutY="204.0" />
+      <Pane layoutX="85.0" layoutY="87.0" prefHeight="211.0" prefWidth="868.0" style="-fx-background-color: fdedd0; -fx-background-radius: 15;">
+         <children>
+            <Label layoutX="23.0" layoutY="8.0" text="Supplier Id :">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtSupId" layoutX="188.0" onAction="#txtSupplierIdOnAction" prefHeight="35.0" prefWidth="234.0" stylesheets="@../asserts/stylesheet/style.css" />
+            <Label layoutX="22.0" layoutY="51.0" text="Company Name :">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="447.0" layoutY="7.0" text="E-mail :">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="446.0" layoutY="44.0" text="Address :">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="444.0" layoutY="81.0" text="Contact no:">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtEmail" layoutX="559.0" layoutY="-2.0" prefHeight="35.0" prefWidth="234.0" stylesheets="@../asserts/stylesheet/style.css" />
+            <TextField fx:id="txtAddress" layoutX="559.0" layoutY="37.0" prefHeight="35.0" prefWidth="234.0" stylesheets="@../asserts/stylesheet/style.css" />
+            <TextField fx:id="txtContact" layoutX="559.0" layoutY="72.0" prefHeight="35.0" prefWidth="234.0" stylesheets="@../asserts/stylesheet/style.css" />
+            <JFXButton fx:id="dltpane" buttonType="RAISED" layoutX="228.0" layoutY="129.0" onAction="#btnDeleteOnAction" prefHeight="43.0" prefWidth="111.0" stylesheets="@../asserts/stylesheet/style.css" text="DELETE">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="20.0">
+                     <image>
+                        <Image url="@../asserts/icons/delete-30.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="clearpane" buttonType="RAISED" layoutX="382.0" layoutY="129.0" onAction="#btnClearOnAction" prefHeight="43.0" prefWidth="111.0" stylesheets="@../asserts/stylesheet/style.css" text="CLEAR">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../asserts/icons/clear-30.png" />
+                     </image>
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="updatepane" buttonType="RAISED" layoutX="531.0" layoutY="129.0" onAction="#btnOnUpdateAction" prefHeight="43.0" prefWidth="111.0" stylesheets="@../asserts/stylesheet/style.css" text="UPDATE">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="28.0">
+                     <image>
+                        <Image url="@../asserts/icons/update-.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="savpane" buttonType="RAISED" layoutX="76.0" layoutY="129.0" onAction="#btnSaveOnAction" prefHeight="43.0" prefWidth="111.0" stylesheets="@../asserts/stylesheet/style.css" text="SAVE">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../asserts/icons/save-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.1315789520740509" green="0.028021441772580147" blue="0.028021441772580147" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </JFXButton>
+            <TextField fx:id="txtSupName" layoutX="189.0" layoutY="40.0" onAction="#txtSupplierIdOnAction" prefHeight="35.0" prefWidth="234.0" stylesheets="@../asserts/stylesheet/style.css" />
+            <JFXButton fx:id="mailpane" buttonType="RAISED" layoutX="676.0" layoutY="129.0" onAction="#sendMailOnAction" prefHeight="44.0" prefWidth="138.0" stylesheets="@../asserts/stylesheet/style.css" text="     SEND MAIL">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="685.0" layoutY="140.0">
+               <image>
+                  <Image url="@../asserts/icons/icons8-mail-30.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <TableView fx:id="tblSupplier" layoutX="86.0" layoutY="309.0" prefHeight="266.0" prefWidth="848.0" stylesheets="@../asserts/stylesheet/style.css">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="101.0" text="Supplier Id" />
+          <TableColumn fx:id="colName" prefWidth="180.0" text="Name" />
+            <TableColumn fx:id="colEmail" prefWidth="248.0" text="E-mail" />
+            <TableColumn fx:id="colAddress" prefWidth="131.0" text="Address" />
+            <TableColumn fx:id="colContact" prefWidth="187.0" text="Contact no" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="201.0" fitWidth="214.0" layoutX="824.0" layoutY="-5.0" opacity="0.33">
+         <image>
+            <Image url="@../asserts/images/empnew-fotor-bg-remover-20231217191548.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

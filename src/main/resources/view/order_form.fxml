@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="orderpane" prefHeight="600.0" prefWidth="1045.0" style="-fx-background-radius: 50;" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.OrderFormController">
+   <children>
+      <Pane layoutX="65.0" layoutY="74.0" prefHeight="228.0" prefWidth="919.0" style="-fx-background-color: fdedd0; -fx-background-radius: 15;">
+         <children>
+            <Label layoutX="16.0" layoutY="18.0" prefHeight="44.0" prefWidth="125.0" text="Order Id  :">
+               <font>
+                  <Font name="Dyuthi Regular" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="63.0" prefHeight="44.0" prefWidth="159.0" text="Fuel Type  :">
+               <font>
+                  <Font name="Dyuthi Regular" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="112.0" text="Date  :">
+               <font>
+                  <Font name="Dyuthi Regular" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="436.0" layoutY="25.0" text="Tank Quantity :">
+               <font>
+                  <Font name="Dyuthi Regular" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="440.0" layoutY="71.0" text="Price  :">
+               <font>
+                  <Font name="Dyuthi Regular" size="21.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtId" layoutX="141.0" layoutY="14.0" onMouseClicked="#txtOrderIdOnAction" prefHeight="35.0" prefWidth="258.0" />
+            <ComboBox fx:id="cmbFuelType" layoutX="141.0" layoutY="64.0" prefHeight="30.0" prefWidth="258.0" />
+            <DatePicker fx:id="dpDate" layoutX="141.0" layoutY="101.0" prefHeight="37.0" prefWidth="258.0" />
+            <TextField fx:id="txtPrice" layoutX="596.0" layoutY="66.0" prefHeight="35.0" prefWidth="258.0" />
+            <Label layoutX="148.0" layoutY="173.0" text="Place the order ">
+               <font>
+                  <Font name="Dyuthi Regular" size="21.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="savpane" buttonType="RAISED" layoutX="312.0" layoutY="165.0" onAction="#btnSaveOnAction" prefHeight="43.0" prefWidth="113.0" text="CONFIRM">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../asserts/icons/icons8-confirm-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="updatepane" buttonType="RAISED" layoutX="461.0" layoutY="164.0" onAction="#btnUpdateOnAction" prefHeight="43.0" prefWidth="113.0" stylesheets="@../asserts/stylesheet/style.css" text="UPDATE">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="28.0">
+                     <image>
+                        <Image url="@../asserts/icons/update-.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="dltpane" buttonType="RAISED" layoutX="607.0" layoutY="165.0" onAction="#btnDeleteOnAction" prefHeight="43.0" prefWidth="113.0" text="DELETE">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="20.0">
+                     <image>
+                        <Image url="@../asserts/icons/delete-30.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="clearpane" buttonType="RAISED" layoutX="752.0" layoutY="165.0" onAction="#btnClearOnAction" prefHeight="43.0" prefWidth="113.0" text="CLEAR">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../asserts/icons/clear-30.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <ComboBox fx:id="cmbTankQty" layoutX="598.0" layoutY="27.0" prefHeight="26.0" prefWidth="258.0" />
+            <ImageView fitHeight="281.0" fitWidth="322.0" layoutX="-26.0" layoutY="35.0" opacity="0.19">
+               <image>
+                  <Image url="@../asserts/images/oilbouswer-fotor-bg-remover-2023121719163.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <TableView fx:id="tblOrder" layoutX="54.0" layoutY="319.0" prefHeight="256.0" prefWidth="935.0" style="-fx-background-radius: 15; -fx-background-color: trasparent;">
+         <columns>
+            <TableColumn fx:id="colId" prefWidth="114.0" text="Order Id" />
+            <TableColumn fx:id="colType" prefWidth="175.0" text="Fuel type" />
+            <TableColumn fx:id="colDate" prefWidth="159.0" text="Date" />
+            <TableColumn fx:id="colQty" prefWidth="145.0" text="Tank qty" />
+            <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="176.0" text="Price" />
+            <TableColumn fx:id="colStatus" minWidth="0.0" prefWidth="165.0" text="status" />
+         </columns>
+      </TableView>
+      <Label layoutX="403.0" layoutY="18.0" text="Manage Orders" textFill="#110a0a">
+         <font>
+            <Font name="Dyuthi Regular" size="28.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

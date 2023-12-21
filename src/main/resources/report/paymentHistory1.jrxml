@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="paymenthistorytemp" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="820b8e5d-b77f-4160-8a44-d313a4c263ac">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FuelBeeAdapter"/>
+	<queryString language="SQL">
+		<![CDATA[select * from Payment]]>
+	</queryString>
+	<field name="pay_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="pay_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="pay_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<field name="sup_email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sup_email"/>
+		<property name="com.jaspersoft.studio.field.label" value="sup_email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<field name="order_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="order_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="order_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<field name="method" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="method"/>
+		<property name="com.jaspersoft.studio.field.label" value="method"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<field name="amount" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="amount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<field name="date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date"/>
+		<property name="com.jaspersoft.studio.field.label" value="date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Payment"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="148" splitType="Stretch">
+			<staticText>
+				<reportElement x="274" y="9" width="100" height="30" uuid="f7dfce48-08dc-41e7-8a33-3bb7fb1d3a33"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fuel Bee]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="116" width="100" height="19" uuid="b21a6fe1-8015-428e-8b29-795089ba5837"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[payment Report]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="450" y="118" width="100" height="30" uuid="a3e3908e-86f9-4aa8-89d4-ad88dbeb23f2"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="117" width="100" height="24" uuid="49ce504d-735a-4502-a3e2-783b5e944d21"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Date : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="31" width="100" height="24" uuid="fc027fc0-e0d1-4074-80d3-8c4f62a13287"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Galle Road,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="45" width="100" height="24" uuid="71d85e89-d49b-414e-ae21-4a9dde9b209b"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Panadura,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="58" width="100" height="24" uuid="b03908ae-ec48-439c-a492-7121a1c9e372"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[12500.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="8" y="134" width="543" height="1" uuid="bec8dbb4-b795-4e06-bd8d-146ff9c4907f"/>
+			</rectangle>
+			<image>
+				<reportElement x="149" y="2" width="135" height="76" uuid="2ba74f94-58a8-47d7-bf4e-0924b400a0c8"/>
+				<imageExpression><![CDATA["/home/kitty99/IdeaProjects/project_fuel_bee/src/main/resources/asserts/icons/large_fuelbee.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="8" y="0" width="95" height="30" uuid="a54fd86e-4908-4a32-8f9f-cbcaa26b9149">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c77755b3-2ca8-46f9-93e9-2c1c6292e67a"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[pay_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="0" width="92" height="30" uuid="8ff994be-6b25-4283-a33d-8cd9127df855">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="21acb409-0ff4-45bd-8dcc-032f8d0daf83"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[sup_email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="0" width="92" height="30" uuid="06e64e41-7d2d-4aa8-b0e8-4b47b9a618f1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2110ee78-0dff-4cf4-9446-d791ad291061"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[order_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="0" width="92" height="30" uuid="e3e5e8dc-e22c-463f-b048-f7619f46b4a5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca6ae536-f853-412b-8bf4-14c8bd93d1ae"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[method]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="0" width="92" height="30" uuid="7c598f12-cbbd-43a1-94cd-5fcaff917542">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2377cb59-6b3a-402a-9af4-5f9bd9609123"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="471" y="0" width="92" height="30" uuid="c826e3fb-d6fe-4e39-a0e6-244788806ba4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d742811-b4c2-43ce-a53a-036b588e1268"/>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="8" y="0" width="95" height="30" uuid="ffa840ee-bad3-4e60-bdf4-70e0f60d5a9b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c77755b3-2ca8-46f9-93e9-2c1c6292e67a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{pay_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="0" width="92" height="30" uuid="f044c17c-3482-4bf9-972b-0da01634d375">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="21acb409-0ff4-45bd-8dcc-032f8d0daf83"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{sup_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="0" width="92" height="30" uuid="6b96b6ad-bb64-4259-a499-6dc89a02319b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2110ee78-0dff-4cf4-9446-d791ad291061"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="287" y="0" width="92" height="30" uuid="ce14d9f0-6c81-4db4-bfe7-c26782bb1c23">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca6ae536-f853-412b-8bf4-14c8bd93d1ae"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{method}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="92" height="30" uuid="d0de5896-105a-4908-80b8-ee8034244729">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2377cb59-6b3a-402a-9af4-5f9bd9609123"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="471" y="0" width="92" height="30" uuid="4cce2884-a700-4259-bb1c-d0f0649ce0e4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d742811-b4c2-43ce-a53a-036b588e1268"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement x="231" y="37" width="100" height="20" uuid="fc1e1891-0182-424d-a347-32f47fbda783"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[All Right Reserved.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

@@ -1,0 +1,127 @@
+CREATE DATABASE FuelBee;
+USE FuelBee;
+CREATE TABLE Admin(
+
+email VARCHAR (200) PRIMARY KEY,
+password varbinary (255)NOT NULL,
+user_name VARCHAR(100)NOT NULL,
+type VARCHAR(20)
+);
+----------------------------------------------------------
+
+CREATE TABLE Employee(
+emp_id VARCHAR (200) PRIMARY KEY,
+first_name VARCHAR (50)NOT NULL,
+last_name VARCHAR (50)NOT NULL,
+address VARCHAR(100)NOT NULL,
+age int (3),
+salary decimal (10,2),
+role VARCHAR(20),
+email VARCHAR (200),
+FOREIGN KEY(email)REFERENCES Admin(email) on update cascade on delete cascade
+);
+----------------------------------------------------
+
+CREATE TABLE Tank(
+tank_id VARCHAR (200) PRIMARY KEY,
+type ENUM ('Lanka Auto Diesel','Lanka Super Diesel (LSD)','Xtra Mile Diesel','Lanka Petrol 92','Xtra Premium 95','Xtra Premium Euro 3'),
+qty int (100)NOT NULL,
+remaining_fuel_in_tank int(100),
+capacity_of_waste int(100),
+date date
+);
+----------------------------------------------------
+
+CREATE TABLE Fuel(
+fuel_id VARCHAR (200) PRIMARY KEY,
+type  ENUM ('Lanka Auto Diesel','Lanka Super Diesel (LSD)','Xtra Mile Diesel','Lanka Petrol 92','Xtra Premium 95','Xtra Premium Euro 3'),
+qty int (100)NOT NULL,
+price double (10,2)
+);
+-----------------------------------------------------
+
+CREATE TABLE Machine(
+machine_id VARCHAR (200)PRIMARY KEY,
+fuel_id VARCHAR (200),
+type  ENUM ('Lanka Auto Diesel','Lanka Super Diesel (LSD)','Xtra Mile Diesel','Lanka Petrol 92','Xtra Premium 95','Xtra Premium Euro 3'),
+availability ENUM('YES','NO'),
+start_fuel_amount int(100),
+day_end_fuel_amount int(100),
+date date,
+FOREIGN KEY(fuel_id)REFERENCES Fuel(fuel_id) on update cascade on delete cascade
+);
+-----------------------------------------------------
+
+CREATE TABLE Orders(
+    order_id VARCHAR (200) PRIMARY KEY,
+    email VARCHAR (200),
+    type  ENUM ('Lanka Auto Diesel','Lanka Super Diesel (LSD)','Xtra Mile Diesel','Lanka Petrol 92','Xtra Premium 95','Xtra Premium Euro 3'),
+    date date NOT NULL,
+    tank_qty int (100),
+    price double (10,2),
+    status ENUM ('PAID','NOT PAID'),
+    FOREIGN KEY(email)REFERENCES Admin (email)on update cascade on delete cascade
+     );
+----------------------------------------------------
+
+CREATE TABLE Supplier(
+sup_id VARCHAR (200),
+name VARCHAR (100),
+fuel_type  ENUM ('Lanka Auto Diesel','Lanka Super Diesel (LSD)','Xtra Mile Diesel','Lanka Petrol 92','Xtra Premium 95','Xtra Premium Euro 3'),
+contact_number int (15),
+address varchar(100),
+sup_email varchar(200) Primary key
+);
+--------------------------------------------------------------
+
+
+CREATE TABLE Payment(
+pay_id VARCHAR (200) PRIMARY KEY,
+email VARCHAR (200),
+sup_email VARCHAR (200),
+order_id VARCHAR (200),
+method ENUM ('cash','card','Cheque'),
+amount decimal (10,2)NOT NULL,
+date date NOT NULL,
+status VARCHAR (60) NOT NULL,
+FOREIGN KEY(email)REFERENCES Admin (email) on update cascade on delete cascade,
+FOREIGN KEY(sup_email)REFERENCES Supplier(sup_email) on update cascade on delete cascade,
+FOREIGN KEY(order_id)REFERENCES Orders(order_id) on update cascade on delete cascade
+);
+----------------------------------------------------------------------------
+
+CREATE TABLE Employee_Machine_detail(
+emp_id VARCHAR (200),
+machine_id VARCHAR (200),
+FOREIGN KEY(emp_id)REFERENCES Employee (emp_id) on update cascade on delete cascade,
+FOREIGN KEY(machine_id)REFERENCES Machine(machine_id) on update cascade on delete cascade
+);
+---------------------------------------------------------------------------------
+
+CREATE TABLE Orders_Fuel_detail(
+fuel_id VARCHAR (200),
+order_id VARCHAR (200),
+fuel_qty int (10),
+FOREIGN KEY(fuel_id)REFERENCES Fuel (fuel_id) on update cascade on delete cascade,
+FOREIGN KEY(order_id)REFERENCES Orders(order_id) on update cascade on delete cascade
+);
+---------------------------------------------------------------------------------------------
+
+CREATE TABLE Fuel_Supplier_detail(
+fuel_id VARCHAR (200),
+sup_email VARCHAR (200),
+FOREIGN KEY(fuel_id)REFERENCES Fuel (fuel_id) on update cascade on delete cascade,
+FOREIGN KEY(sup_email)REFERENCES Supplier(sup_email) on update cascade on delete cascade
+);
+
+CREATE TABLE Income (
+income_id varchar (100),
+amount double (10,2),
+dat date
+);
+
+CREATE TABLE Outcome (
+outcome_id varchar (100),
+amount double (10,2),
+dat date
+);

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="changePain" prefHeight="600.0" prefWidth="1045.0" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.PaymentFormController">
+   <children>
+      <TableView fx:id="tblPayments" layoutX="28.0" layoutY="313.0" prefHeight="242.0" prefWidth="1000.0" stylesheets="@../asserts/stylesheet/style.css">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="86.0" text="Pay ID" />
+          <TableColumn fx:id="colAdmin" prefWidth="134.0" text="ADMIN" />
+            <TableColumn fx:id="colOrderId" prefWidth="143.0" text="Order Id" />
+            <TableColumn fx:id="colMethod" prefWidth="197.0" text="Method" />
+            <TableColumn fx:id="colAmount" prefWidth="146.0" text="Amount LKR" />
+            <TableColumn fx:id="colDate" prefWidth="149.0" text="Date" />
+            <TableColumn fx:id="colStatus" prefWidth="232.0" text="Status" />
+        </columns>
+      </TableView>
+      <Text fill="#131414" layoutX="387.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Payments" wrappingWidth="355.0">
+         <font>
+            <Font name="Dyuthi Regular" size="29.0" />
+         </font>
+      </Text>
+      <Pane layoutX="37.0" layoutY="64.0" prefHeight="242.0" prefWidth="988.0" style="-fx-background-color: fdedd0; -fx-background-radius: 15;">
+         <children>
+            <Text layoutX="18.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Id :" wrappingWidth="137.7294921875">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="576.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email  :" wrappingWidth="125.99999999999989">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="578.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Method :" wrappingWidth="118.7294921875">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="20.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount :" wrappingWidth="118.7294921875">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="578.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :" wrappingWidth="125.99999999999989">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="20.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status : " wrappingWidth="137.7294921875">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="577.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order ID :" wrappingWidth="125.99999999999989">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="17.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier email :" wrappingWidth="186.9999999999999">
+               <font>
+                  <Font name="Dyuthi Regular" size="22.0" />
+               </font>
+            </Text>
+            <DatePicker fx:id="dpDate" layoutX="729.0" layoutY="81.0" prefHeight="37.0" prefWidth="230.0" />
+            <ComboBox fx:id="cmbAdminEmail" layoutX="728.0" layoutY="10.0" prefHeight="26.0" prefWidth="230.0" />
+            <TextField fx:id="txtPayId" layoutX="182.0" layoutY="15.0" onMouseClicked="#txtPayIdOnAction" prefHeight="35.0" prefWidth="230.0" />
+            <TextField fx:id="txtStatus" layoutX="181.0" layoutY="129.0" prefHeight="35.0" prefWidth="230.0" />
+            <ComboBox fx:id="cmbOrderId" layoutX="730.0" layoutY="124.0" prefHeight="26.0" prefWidth="230.0" />
+            <ComboBox fx:id="cmbSupEmail" layoutX="182.0" layoutY="60.0" prefHeight="24.0" prefWidth="230.0" />
+            <JFXButton fx:id="dltpane" buttonType="RAISED" layoutX="315.0" layoutY="179.0" onAction="#btnDeleteOnAction" prefHeight="43.0" prefWidth="111.0" text="DELETE">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="20.0">
+                     <image>
+                        <Image url="@../asserts/icons/delete-30.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="clearpane" buttonType="RAISED" layoutX="449.0" layoutY="179.0" onAction="#btnClearOnAction" prefHeight="43.0" prefWidth="111.0" text="CLEAR">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../asserts/icons/clear-30.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="updatepane" buttonType="RAISED" layoutX="582.0" layoutY="179.0" onAction="#btnOnUpdateAction" prefHeight="43.0" prefWidth="111.0" stylesheets="@../asserts/stylesheet/style.css" text="UPDATE">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="28.0">
+                     <image>
+                        <Image url="@../asserts/icons/update-.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="savpane" buttonType="RAISED" layoutX="179.0" layoutY="179.0" onAction="#btnSaveOnAction" prefHeight="43.0" prefWidth="111.0" text="PAY">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../asserts/icons/icons8-dollar-30.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <Button fx:id="rppane" layoutX="713.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnReportOnAction" prefHeight="43.0" prefWidth="138.0" stylesheets="@../asserts/stylesheet/style.css" text="View Report">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../asserts/icons/repo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <TextField fx:id="txtMethod" layoutX="728.0" layoutY="45.0" prefHeight="35.0" prefWidth="230.0" />
+            <TextField fx:id="txtAmount" layoutX="178.0" layoutY="91.0" prefHeight="35.0" prefWidth="230.0" />
+            <ImageView fitHeight="133.0" fitWidth="187.0" layoutX="411.0" layoutY="38.0" opacity="0.36">
+               <image>
+                  <Image url="@../asserts/icons/pay2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportFinance" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e25be5d4-b38f-4966-9a2d-255c0f4b648c">
+	<parameter name="incomeList" class="java.util.List"/>
+	<parameter name="addressList" class="java.util.List"/>
+	<parameter name="outcomeList" class="java.util.List"/>
+	<parameter name="outcomeAmountList" class="java.util.List"/>
+	<parameter name="tolIncome" class="java.lang.String"/>
+	<parameter name="tolOutcome" class="java.lang.String"/>
+	<parameter name="finalTotal" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="income" class="java.lang.String"/>
+	<variable name="incomeId" class="java.lang.String" resetType="None"/>
+	<group name="Group1">
+		<groupHeader>
+			<band height="46">
+				<staticText>
+					<reportElement x="20" y="15" width="100" height="30" uuid="c49c3404-adfb-4c6f-aed3-93589deea54f"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Incomes ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="279" y="15" width="100" height="30" uuid="beb66279-aa65-4d0c-b9cf-40df7db56bca"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Outcomes]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="8" y="-11" width="543" height="1" uuid="e4310de6-ad2c-4de6-93d5-e98c151428d1"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="182"/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupFooter>
+			<band height="184">
+				<staticText>
+					<reportElement x="58" y="7" width="100" height="30" uuid="418809b0-e28a-4c7f-8b0e-8a658c18ac18"/>
+					<textElement textAlignment="Right">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Total Income  :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="160" y="7" width="100" height="30" uuid="afcc88f9-02ad-4c87-9e42-559e1a937ec7"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{tolIncome}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="339" y="7" width="110" height="30" uuid="71122af3-60e4-419d-bf9e-33a9ab73f9d4"/>
+					<textElement textAlignment="Right">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Total Outcome  :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="451" y="7" width="112" height="30" uuid="0dabe530-122d-405d-a983-7f27eb76f65c"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{tolOutcome}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="138" y="52" width="158" height="30" uuid="c2e77b38-318b-4bfa-8d11-f967dbd1cc02"/>
+					<textElement textAlignment="Right">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Profit / Loss = ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="299" y="52" width="108" height="30" uuid="e77880ad-62c9-4bc0-a2bd-26811b8da3fb"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{finalTotal}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="112" splitType="Stretch">
+			<staticText>
+				<reportElement x="179" y="92" width="100" height="20" uuid="07301a31-df7a-47ec-b4a4-90a3c539236e"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Finance Report  :]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="284" y="92" width="100" height="20" uuid="be4da850-3f1a-4f34-a939-b76b7aec1e57"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="9" width="100" height="30" uuid="acdffc47-1f99-40a9-b081-8365c1cf8d2b"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fuel Bee]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="31" width="100" height="24" uuid="069ebea6-a6e3-468c-80cc-5757bc983458"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Galle Road,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="59" width="100" height="24" uuid="2a12274a-717d-4a4b-891d-0191b68e1ad0"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[12500.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="45" width="100" height="24" uuid="a5e65491-cbbd-40eb-9e2f-a97763f64b63"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Panadura,]]></text>
+			</staticText>
+			<image>
+				<reportElement x="191" y="13" width="109" height="51" uuid="b05a2865-afcd-4ea8-bdb4-fed3cc6e8280"/>
+				<imageExpression><![CDATA["/home/kitty99/IdeaProjects/project_fuel_bee/src/main/resources/asserts/icons/large_fuelbee.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="14" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="169" splitType="Stretch">
+			<textField textAdjust="StretchHeight">
+				<reportElement x="2" y="9" width="168" height="160" uuid="bcc69559-fdc6-42f2-bc74-40e52fb11812"/>
+				<textFieldExpression><![CDATA[$P{incomeList}.stream().collect(java.util.stream.Collectors.joining("\n"))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="8" width="100" height="161" uuid="3f2a2078-3163-4dc6-9c4a-70747c10a220"/>
+				<textFieldExpression><![CDATA[$P{addressList}.stream().collect(java.util.stream.Collectors.joining("\n"))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="10" width="172" height="159" uuid="087aa4c2-9846-4965-94ab-46708696030d"/>
+				<textFieldExpression><![CDATA[$P{outcomeList}.stream().collect(java.util.stream.Collectors.joining("\n"))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="461" y="10" width="100" height="159" uuid="81114aab-9f87-4947-8ac7-357e2969d4bf"/>
+				<textFieldExpression><![CDATA[$P{outcomeAmountList}.stream().collect(java.util.stream.Collectors.joining("\n"))]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement x="220" y="84" width="100" height="15" uuid="da3bb7bc-d700-4292-ad4f-63bc15553641"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[All Right Reserved.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>
