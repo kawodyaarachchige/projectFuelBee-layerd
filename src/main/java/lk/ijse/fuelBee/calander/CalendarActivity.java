@@ -11,6 +11,7 @@ public class CalendarActivity {
         this.date = date;
         this.clientName = clientName;
         this.serviceNo = serviceNo;
+
     }
 
     public ZonedDateTime getDate() {
