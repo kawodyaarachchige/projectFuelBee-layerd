@@ -152,8 +152,8 @@ public class ProfitFormController {
         if(dpStartDate.getValue()!=null && dpEndDate.getValue()!=null){
             java.util.Date startDate = Date.valueOf(dpStartDate.getValue());
             java.util.Date endDate = Date.valueOf(dpEndDate.getValue());
-            allIncomes = ProfitModel.getAllIncomes(startDate, endDate);
-            allOutcomes = ProfitModel.getAllOutcomes(startDate, endDate);
+            allIncomes = ProfitModel.getAllIncomesByDate(startDate, endDate);
+            allOutcomes = ProfitModel.getAllOutcomesByDate(startDate, endDate);
         }else{
             allIncomes = ProfitModel.getAllIncomes();
             allOutcomes = ProfitModel.getAllOutcomes();

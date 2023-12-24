@@ -1,6 +1,7 @@
 package lk.ijse.fuelBee.model;
 
 import lk.ijse.fuelBee.controller.ProfitFormController;
+import lk.ijse.fuelBee.dao.MachineDAOImpl;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.MachineDto;
 import lk.ijse.fuelBee.dto.PaymentDto;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MachineModel {
-    public static boolean saveMachine(MachineDto machineDto) throws SQLException {
+    /*public static boolean saveMachine(MachineDto machineDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "INSERT INTO Machine VALUES(?,?,?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -29,9 +30,9 @@ public class MachineModel {
         }else{
             return false;
         }
-    }
+    }*/
 
-    public static boolean deleteMachine(String id) throws SQLException {
+  /*  public static boolean deleteMachine(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="DELETE FROM Machine WHERE machine_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -42,9 +43,9 @@ public class MachineModel {
         }else{
             return false;
         }
-    }
+    }*/
 
-    public static boolean updateMachine(MachineDto machineDto) throws SQLException {
+   /* public static boolean updateMachine(MachineDto machineDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="UPDATE Machine SET machine_id=?,fuel_id=?,type=?,availability=?,start_fuel_amount=?,day_end_fuel_amount=?,date=? WHERE machine_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -62,36 +63,22 @@ public class MachineModel {
         }else{
             return false;
         }
-    }
+    }*/
 
     public static ArrayList<MachineDto> getAllMachine() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Machine";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet rst = pstm.executeQuery();
-
-        ArrayList<MachineDto> machines = new ArrayList<>();
-        while(rst.next()){
-            machines.add(new MachineDto(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3),
-                    rst.getString(4),
-                    rst.getInt(5),
-                    rst.getInt(6),
-                    rst.getDate(7)
-            ));
-        }return machines;
+        MachineDAOImpl machineDAO = new MachineDAOImpl();
+        ArrayList<MachineDto> allMachines = machineDAO.getAllMachines();
+        if(allMachines!=null){
+            return allMachines;
+        }else{
+            return null;
+        }
     }
 
     public static boolean changeDayEndFuelByWaste(String id,int waste) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="UPDATE Machine SET day_end_fuel_amount=day_end_fuel_amount-? WHERE fuel_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setInt(1,waste);
-        pstm.setString(2,id);
-
-        if(pstm.executeUpdate()>0){
+        MachineDAOImpl machineDAO = new MachineDAOImpl();
+        boolean isChanged = machineDAO.changeDayEndFuelByWaste(id, waste);
+        if(isChanged){
             return true;
         }else{
             return false;
@@ -99,37 +86,23 @@ public class MachineModel {
     }
 
     public static boolean checkDayEndAmounts(String id,int amount) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Machine WHERE fuel_id=? AND day_end_fuel_amount = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, id);
-        pstm.setInt(2, amount);
-
-        ResultSet rst = pstm.executeQuery();
-        while (rst.next()) {
+        MachineDAOImpl machineDAO = new MachineDAOImpl();
+        boolean checked = machineDAO.checkDayEndAmounts(id, amount);
+        if (checked){
             return true;
+        }else{
+            return false;
         }
-        return false;
     }
 
     public static ArrayList<MachineDto> getCapacityLowFuels() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="SELECT * FROM Machine WHERE day_end_fuel_amount < 1000";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet rst = pstm.executeQuery();
-        ArrayList<MachineDto> lowFuelMachines = new ArrayList<>();
-        while (rst.next()){
-           lowFuelMachines.add(new MachineDto(
-                   rst.getString(1),
-                   rst.getString(2),
-                   rst.getString(3),
-                   rst.getString(4),
-                   rst.getInt(5),
-                   rst.getInt(6),
-                   rst.getDate(7)
-           ));
+        MachineDAOImpl machineDAO = new MachineDAOImpl();
+        ArrayList<MachineDto> capacityLowFuels = machineDAO.getCapacityLowFuels();
+        if (capacityLowFuels!=null){
+            return capacityLowFuels;
+        }else{
+            return null;
         }
-        return lowFuelMachines;
     }
 
     public static boolean confirmMachineUsage(MachineDto machineDto) throws SQLException {
@@ -249,24 +222,13 @@ public class MachineModel {
         }
     }
     public static MachineDto searchMachine(String id) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Machine WHERE machine_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, id);
-        ResultSet rst = pstm.executeQuery();
-        if(rst.next()){
-            return new MachineDto(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3),
-                    rst.getString(4),
-                    rst.getInt(5),
-                    rst.getInt(6),
-                    rst.getDate(7)
-            );
+        MachineDAOImpl machineDAO = new MachineDAOImpl();
+        MachineDto machineDto = machineDAO.searchMachine(id);
+        if(machineDto!=null){
+            return machineDto;
         }else{
             return null;
         }
     }
-
+       
 }
