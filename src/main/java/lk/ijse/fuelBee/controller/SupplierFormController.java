@@ -8,9 +8,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.fuelBee.Mail;
+import lk.ijse.fuelBee.dao.custom.SupplierDAO;
+import lk.ijse.fuelBee.dao.impl.SupplierDAOImpl;
 import lk.ijse.fuelBee.dto.SupplierDto;
 import lk.ijse.fuelBee.dto.tm.SupplierTm;
-import lk.ijse.fuelBee.model.SupplierModel;
 import lk.ijse.fuelBee.qr.QRGenerator;
 
 import java.io.File;
@@ -30,27 +31,23 @@ public class SupplierFormController {
     public TableColumn<?,?> colEmail;
     public TableColumn<?,?> colAddress;
     public TableColumn<?,?> colContact;
-    public TableColumn<?,?> colOption;
-    public TextField txtFuelType;
-    public ComboBox cmbSupName;
     public int numOfSuppliers;
 
     public static String newId;
+
+    SupplierDAO supplierDAO = new SupplierDAOImpl();;
     public void initialize() throws SQLException {
         loadAllSuppliers();
         setCellValueFactory();
-       // setSupplierNames();
 
         tblSupplier.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
                 SupplierTm selectedSupplier = tblSupplier.getItems().get(newValue.intValue());
                 txtSupId.setText(selectedSupplier.getSupId());
                 txtSupName.setText(selectedSupplier.getName());
-                //txtName.setText(selectedSupplier.getName());
                 txtEmail.setText(selectedSupplier.getSup_email());
                 txtAddress.setText(selectedSupplier.getAddress());
                 txtContact.setText(String.valueOf(selectedSupplier.getContact()));
-                //txtFuelType.setText(selectedSupplier.getFuelType());
             }
         });
     }
@@ -64,7 +61,7 @@ public class SupplierFormController {
 
         SupplierDto supplierDto = new SupplierDto(supId, name, fuelType, Integer.parseInt(contact), address, email);
 
-        boolean isSaved = SupplierModel.saveSupplier(supplierDto);
+        boolean isSaved =supplierDAO.saveSupplier(supplierDto);
         if (isSaved) {
 
             newId = supId;
@@ -98,7 +95,7 @@ public class SupplierFormController {
     public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException {
         String id = txtSupId.getText();
 
-        boolean isDeleted = SupplierModel.deleteSupplier(id);
+        boolean isDeleted = supplierDAO.deleteSupplier(id);
         if (isDeleted) {
             new Alert(Alert.AlertType.CONFIRMATION, "Supplier Deleted").show();
             clearFields();
@@ -116,7 +113,7 @@ public class SupplierFormController {
 
     public void loadAllSuppliers() throws SQLException {
         ObservableList<SupplierTm> obList = FXCollections.observableArrayList();
-        ArrayList<SupplierDto> allSuppliers = SupplierModel.getAllSuppliers();
+        ArrayList<SupplierDto> allSuppliers = supplierDAO.getAllSuppliers();
 
         for (SupplierDto supplierDto : allSuppliers) {
             obList.add(new SupplierTm(
@@ -139,7 +136,6 @@ public class SupplierFormController {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("sup_email"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
-        //colOption.setCellValueFactory(new PropertyValueFactory<>("option"));
     }
 
     public void clearFields(){
@@ -148,7 +144,6 @@ public class SupplierFormController {
         txtSupName.clear();
         txtEmail.clear();
         txtContact.clear();
-       // txtFuelType.clear();
     }
 
     public void txtSupplierIdOnAction(MouseEvent mouseEvent) {
@@ -164,7 +159,7 @@ public class SupplierFormController {
         String fuelType = "Lanka Petrol 92";
 
         SupplierDto supplierDto = new SupplierDto(id, name, fuelType, Integer.parseInt(contact), address, email);
-        boolean isUpdated = SupplierModel.updateSupplier(supplierDto);
+        boolean isUpdated = supplierDAO.updateSupplier(supplierDto);
         if (isUpdated) {
             new Alert(Alert.AlertType.CONFIRMATION, "Supplier Updated").show();
             clearFields();

@@ -9,8 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lk.ijse.fuelBee.dao.custom.AdminDAO;
+import lk.ijse.fuelBee.dao.impl.AdminDAOImpl;
 import lk.ijse.fuelBee.dto.AdminDto;
-import lk.ijse.fuelBee.model.AdminModel;
 import lk.ijse.fuelBee.regex.regexPatterns;
 
 import java.io.IOException;
@@ -25,9 +26,11 @@ public class ForgetPasswordFormController {
     public String tempUserName=LoginFormController.tempUserName;
     public Button btnBack;
 
-    public void btnChangePasswordOnAction(ActionEvent actionEvent) throws SQLException, IOException {
+    AdminDAO adminDAO = new AdminDAOImpl();
+
+    public void btnChangePasswordOnAction(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         System.out.println("BUTTON CLICKED");
-        AdminDto admin = AdminModel.getAdmin(tempUserName);
+        AdminDto admin = adminDAO.getAdmin(tempUserName);
         if(admin == null){
             System.out.println("bye");
             new Alert(Alert.AlertType.ERROR, "User not found | redirecting..", ButtonType.OK).showAndWait();
@@ -42,7 +45,7 @@ public class ForgetPasswordFormController {
                 boolean isPasswordValid = regexPatterns.isPasswordValid(txtPassword.getText());
                 if(isPasswordValid){
                     if(txtPassword.getText().equals(txtRePassword.getText())){
-                        final boolean isPasswordChanged = AdminModel.updateAdmin(admin.getEmail(), txtPassword.getText());
+                        final boolean isPasswordChanged = adminDAO.updateAdmin(admin.getEmail(), txtPassword.getText());
                         if(isPasswordChanged){
                             new Alert(Alert.AlertType.INFORMATION, "Password Changed | You will be redirected to Login Form", ButtonType.OK).showAndWait();
                             Parent load = FXMLLoader.load(getClass().getResource("/view/login_form.fxml"));

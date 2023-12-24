@@ -9,10 +9,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.fuelBee.dao.custom.EmployeeDAO;
+import lk.ijse.fuelBee.dao.impl.EmployeeDAOImpl;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.EmployeeDto;
 import lk.ijse.fuelBee.dto.tm.EmployeeTm;
-import lk.ijse.fuelBee.model.EmployeeModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -43,6 +44,8 @@ public class EmployeeFormController {
     public TableColumn<?,?> colOption;
     public TextField txtEmpId1;
 
+    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+
     public void initialize() throws SQLException {
         loadAllEmployees();
         setCellValueFactory();
@@ -71,10 +74,9 @@ public class EmployeeFormController {
         double salary = Double.parseDouble(txtEmployeeSalary.getText());
         int age = Integer.parseInt(txtEmployeeAge.getText());
         String email = "projectfuelbee@gmail.com";
-
         EmployeeDto employeeDto = new EmployeeDto(empId, firstName, lastName, address, age, salary, jobTitle, email);
-        boolean isSaved = EmployeeModel.saveEmployee(employeeDto);
-
+        try {
+            boolean isSaved = employeeDAO.saveEmployee(employeeDto);
         if(isSaved){
             new Alert(Alert.AlertType.CONFIRMATION, "Employee Saved").show();
             clearFields();
@@ -82,12 +84,15 @@ public class EmployeeFormController {
         }else{
             new Alert(Alert.AlertType.ERROR, "Employee Not Saved").show();
         }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String empId =txtEmpId1.getText();
         try{
-            boolean isDeleted = EmployeeModel.deleteEmployee(empId);
+            boolean isDeleted = employeeDAO.deleteEmployee(empId);
             if(isDeleted){
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee Deleted").show();
                 clearFields();
@@ -117,7 +122,7 @@ public class EmployeeFormController {
 
         EmployeeDto employeeDto = new EmployeeDto(empId, firstName, lastName, address, age, salary, jobTitle, email);
         try{
-            boolean isUpdated = EmployeeModel.updateEmployee(employeeDto);
+            boolean isUpdated = employeeDAO.updateEmployee(employeeDto);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee Updated").show();
                 clearFields();
@@ -149,7 +154,7 @@ public class EmployeeFormController {
     }
     public void loadAllEmployees() throws SQLException {
         ObservableList<EmployeeTm> obList = FXCollections.observableArrayList();
-        ArrayList<EmployeeDto> allEmployees = EmployeeModel.getAllEmployees();
+        ArrayList<EmployeeDto> allEmployees = employeeDAO.getAllEmployees();
 
         for(EmployeeDto dto : allEmployees){
             obList.add(new EmployeeTm(dto.getId(), dto.getFirstName(), dto.getLastName(), dto.getAddress(), dto.getAge(), dto.getSalary(), dto.getJobTitle(), dto.getEmail()));

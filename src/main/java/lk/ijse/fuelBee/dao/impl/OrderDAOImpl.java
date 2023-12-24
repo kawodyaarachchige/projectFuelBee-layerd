@@ -1,5 +1,6 @@
-package lk.ijse.fuelBee.dao;
+package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.custom.OrderDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 
 import java.sql.Connection;
@@ -10,7 +11,8 @@ import java.util.ArrayList;
 
 import lk.ijse.fuelBee.dto.OrderDto;
 
-public class OrderDAOImpl {
+public class OrderDAOImpl implements OrderDAO {
+   @Override
     public boolean saveOrder(OrderDto orderDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
 
@@ -32,6 +34,7 @@ public class OrderDAOImpl {
             return false;
         }
     }
+   @Override
     public boolean deleteOrder(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="DELETE FROM Orders WHERE order_id=?";
@@ -44,6 +47,7 @@ public class OrderDAOImpl {
             return false;
         }
     }
+    @Override
     public boolean updateOrder(OrderDto orderDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="UPDATE Orders SET email=?,type=?,date=?,tank_qty=?,price=?,status=? WHERE order_id=?";
@@ -61,6 +65,7 @@ public class OrderDAOImpl {
             return false;
         }
     }
+   @Override
     public ArrayList<OrderDto> getAllOrders() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="select * from Orders";
@@ -80,6 +85,7 @@ public class OrderDAOImpl {
             ));
         }return orders;
     }
+   @Override
     public int getOrderCount() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="select count(*) from Orders";
@@ -91,6 +97,7 @@ public class OrderDAOImpl {
         }return 0;
 
     }
+   @Override
     public OrderDto getOrderDetails(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="select * from Orders where order_id=?";

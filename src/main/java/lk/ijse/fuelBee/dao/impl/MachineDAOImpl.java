@@ -1,5 +1,6 @@
-package lk.ijse.fuelBee.dao;
+package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.custom.MachineDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.MachineDto;
 
@@ -9,7 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MachineDAOImpl {
+public class MachineDAOImpl implements MachineDAO {
+   @Override
     public ArrayList<MachineDto> getAllMachines() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Machine";
@@ -29,7 +31,8 @@ public class MachineDAOImpl {
             ));
         }return machines;
     }
-    public boolean changeDayEndFuelByWaste(String id,int waste) throws SQLException {
+   @Override
+   public boolean changeDayEndFuelByWaste(String id,int waste) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="UPDATE Machine SET day_end_fuel_amount=day_end_fuel_amount-? WHERE fuel_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -42,6 +45,7 @@ public class MachineDAOImpl {
             return false;
         }
     }
+    @Override
     public boolean checkDayEndAmounts(String id,int amount) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Machine WHERE fuel_id=? AND day_end_fuel_amount = ?";
@@ -55,6 +59,7 @@ public class MachineDAOImpl {
         }
         return false;
     }
+    @Override
     public ArrayList<MachineDto> getCapacityLowFuels() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="SELECT * FROM Machine WHERE day_end_fuel_amount < 1000";
@@ -74,6 +79,7 @@ public class MachineDAOImpl {
         }
         return lowFuelMachines;
     }
+   @Override
     public MachineDto searchMachine(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Machine WHERE machine_id=?";

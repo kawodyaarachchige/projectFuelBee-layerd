@@ -4,21 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import lk.ijse.fuelBee.db.Dbconnection;
+import lk.ijse.fuelBee.dao.custom.IncomeDAO;
+import lk.ijse.fuelBee.dao.custom.OutcomeDAO;
+import lk.ijse.fuelBee.dao.impl.IncomeDAOImpl;
+import lk.ijse.fuelBee.dao.impl.OutcomeDAOImpl;
 import lk.ijse.fuelBee.dto.IncomeDto;
 import lk.ijse.fuelBee.dto.OutcomeDto;
 import lk.ijse.fuelBee.dto.tm.IncomeTm;
 import lk.ijse.fuelBee.dto.tm.OutcomeTm;
-import lk.ijse.fuelBee.model.ProfitModel;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
@@ -27,10 +25,8 @@ import java.io.InputStream;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class ProfitFormController {
@@ -45,6 +41,9 @@ public class ProfitFormController {
     public TableColumn<?,?> colOutcomeDate;
     public DatePicker dpStartDate;
     public DatePicker dpEndDate;
+
+    IncomeDAO incomeDAO = new IncomeDAOImpl();
+    OutcomeDAO outcomeDAO = new OutcomeDAOImpl();
 
 
     public void initialize() throws SQLException {
@@ -84,7 +83,7 @@ public class ProfitFormController {
 
     public void setAllOutcome() throws SQLException {
         ObservableList<OutcomeTm> obList1 = FXCollections.observableArrayList();
-        ArrayList<OutcomeDto> allOutcomes = ProfitModel.getAllOutcomes();
+        ArrayList<OutcomeDto> allOutcomes = outcomeDAO.getAllOutcomes();
 
         for (OutcomeDto outcomeDto : allOutcomes) {
             if (outcomeDto != null) {
@@ -107,7 +106,7 @@ public class ProfitFormController {
 
     public void setAllIncome() throws SQLException {
         ObservableList<IncomeTm> obList = FXCollections.observableArrayList();
-        ArrayList<IncomeDto> allIncomes = ProfitModel.getAllIncomes();
+        ArrayList<IncomeDto> allIncomes =incomeDAO.getAllIncomes();
 
         for (IncomeDto incomeDto : allIncomes) {
             obList.add(new IncomeTm(
@@ -119,25 +118,6 @@ public class ProfitFormController {
         tblIncome.setItems(obList);
         tblIncome.refresh();
     }
-
-
-
-
-   /* public void btnReportOnAction(ActionEvent actionEvent) throws JRException, SQLException {
-        InputStream resourceAsStream = getClass().getResourceAsStream("/report/profitCalcReport.jrxml");
-        JasperDesign load = JRXmlLoader.load(resourceAsStream);
-        JasperReport jasperReport = JasperCompileManager.compileReport(load);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(
-                jasperReport,
-                null,
-                Dbconnection.getInstance().getConnection());
-        JasperViewer.viewReport(jasperPrint, false);
-    }*/
-
-
-
-
-
     public void btnProfitReportOnAction(ActionEvent actionEvent) throws JRException, SQLException {
 
         Double totalIncome = 0.0;
@@ -152,11 +132,11 @@ public class ProfitFormController {
         if(dpStartDate.getValue()!=null && dpEndDate.getValue()!=null){
             java.util.Date startDate = Date.valueOf(dpStartDate.getValue());
             java.util.Date endDate = Date.valueOf(dpEndDate.getValue());
-            allIncomes = ProfitModel.getAllIncomesByDate(startDate, endDate);
-            allOutcomes = ProfitModel.getAllOutcomesByDate(startDate, endDate);
+            allIncomes = incomeDAO.getAllIncomesByDate(startDate, endDate);
+            allOutcomes = outcomeDAO.getAllOutcomesByDate(startDate, endDate);
         }else{
-            allIncomes = ProfitModel.getAllIncomes();
-            allOutcomes = ProfitModel.getAllOutcomes();
+            allIncomes = incomeDAO.getAllIncomes();
+            allOutcomes = outcomeDAO.getAllOutcomes();
         }
 
         for (IncomeDto dto : allIncomes) {

@@ -1,5 +1,6 @@
-package lk.ijse.fuelBee.dao;
+package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.custom.IncomeDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.IncomeDto;
 
@@ -10,8 +11,9 @@ import java.util.Map;
 import java.util.Calendar;
 ;
 
-public class IncomeDAOImpl {
-    public static ArrayList<IncomeDto> getAllIncomes() throws SQLException {
+public class IncomeDAOImpl implements IncomeDAO {
+   @Override
+    public  ArrayList<IncomeDto> getAllIncomes() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Income";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -23,7 +25,8 @@ public class IncomeDAOImpl {
         }
         return incomes;
     }
-    public static ArrayList<IncomeDto> getAllIncomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException {
+    @Override
+    public  ArrayList<IncomeDto> getAllIncomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Income WHERE date BETWEEN ? AND ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -36,7 +39,8 @@ public class IncomeDAOImpl {
         }
         return incomes;
     }
-    public static Map<String, Double> getMonthlyIncomesTotal() throws SQLException {
+    @Override
+    public  Map<String, Double> getMonthlyIncomesTotal() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Income";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -50,7 +54,8 @@ public class IncomeDAOImpl {
         }
         return monthlyTotals;
     }
-    private static String getMonthFromDate(Date date) {
+    @Override
+    public   String getMonthFromDate(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int month = cal.get(Calendar.MONTH) + 1;

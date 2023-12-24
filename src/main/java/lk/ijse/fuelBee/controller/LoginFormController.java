@@ -14,12 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lk.ijse.fuelBee.Mail;
+import lk.ijse.fuelBee.dao.custom.AdminDAO;
+import lk.ijse.fuelBee.dao.impl.AdminDAOImpl;
 import lk.ijse.fuelBee.dto.AdminDto;
-import lk.ijse.fuelBee.model.AdminModel;
-import lk.ijse.fuelBee.model.LoginModel;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -35,6 +34,8 @@ public class LoginFormController {
 
     public static int oneTimePassword;
 
+    AdminDAO adminDAO = new AdminDAOImpl();
+
     public void btnLoginOnAction(ActionEvent actionEvent) throws IOException {
         System.out.println("Login Clicked");
         String userName = txtUserName.getText();
@@ -42,7 +43,7 @@ public class LoginFormController {
 
         if(!userName.isEmpty() || !password.isEmpty()){
                     try {
-                        AdminDto admin = AdminModel.getAdmin(userName);
+                        AdminDto admin = adminDAO.getAdmin(userName);
 
                         if (admin != null) {
                             System.out.println(admin.getPassword());
@@ -96,19 +97,7 @@ public class LoginFormController {
         }
 
     public void txtForgetPasswordOnAction(MouseEvent mouseEvent) {
-        /*try {
 
-            Parent load = FXMLLoader.load(getClass().getResource("/view/forgetPassword_form.fxml"));
-            Scene scene1 = new Scene(load);
-            Stage stage1 = (Stage) txtForgetPassword.getScene().getWindow();
-            stage1.setScene(scene1);
-            stage1.setTitle("Change Password Form");
-            stage1.centerOnScreen();
-
-            new SlideInUp(load).play();
-        } catch (IOException e) {
-            e.printStackTrace();
-        };*/
         if(!txtUserName.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");

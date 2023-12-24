@@ -1,13 +1,15 @@
-package lk.ijse.fuelBee.dao;
+package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.custom.TankDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.TankDto;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class TankDAOImpl {
-    public static boolean saveTank(TankDto tankDto) throws SQLException {
+public class TankDAOImpl implements TankDAO {
+    @Override
+    public  boolean saveTank(TankDto tankDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "INSERT INTO Tank VALUES(?,?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -24,7 +26,8 @@ public class TankDAOImpl {
             return false;
         }
     }
-    public static boolean deleteTank(String id) throws SQLException {
+   @Override
+    public  boolean deleteTank(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "DELETE FROM Tank WHERE tank_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -36,7 +39,8 @@ public class TankDAOImpl {
             return false;
         }
     }
-    public static boolean updateTank(TankDto tankDto) throws SQLException {
+  @Override
+    public  boolean updateTank(TankDto tankDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "UPDATE Tank SET type=?,qty=?,remaining_fuel_in_tank=?,capacity_of_waste=?,date=? WHERE tank_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -52,7 +56,8 @@ public class TankDAOImpl {
             return false;
         }
     }
-    public static ArrayList<TankDto> getAllTank() throws SQLException {
+    @Override
+    public ArrayList<TankDto> getAllTank() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Tank";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -71,7 +76,8 @@ public class TankDAOImpl {
         }
         return tanks;
     }
-    public static TankDto searchTank(String id) throws SQLException {
+   @Override
+    public TankDto searchTank(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Tank WHERE tank_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);

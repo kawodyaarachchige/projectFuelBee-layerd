@@ -4,22 +4,20 @@ import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import lk.ijse.fuelBee.dto.FuelDto;
+import lk.ijse.fuelBee.dao.custom.FuelDAO;
+import lk.ijse.fuelBee.dao.custom.MachineDAO;
+import lk.ijse.fuelBee.dao.impl.FuelDAOImpl;
+import lk.ijse.fuelBee.dao.impl.MachineDAOImpl;
 import lk.ijse.fuelBee.dto.FuelTypeDto;
 import lk.ijse.fuelBee.dto.MachineDto;
 import lk.ijse.fuelBee.model.FuelModel;
 import lk.ijse.fuelBee.model.MachineModel;
 
-import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -27,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-public class ManageFuelDetailsFormController {
+public class ManageFuelMachineDetailsFormController {
 
     public JFXButton backpane;
     public TextField txtMachineId;
@@ -38,13 +36,16 @@ public class ManageFuelDetailsFormController {
     public TextField txtEndFuel;
     public TextField txtSearchMachineId;
 
+    FuelDAO fuelDAO = new FuelDAOImpl();
+    MachineDAO machineDAO = new MachineDAOImpl();
+
     public void initialize() throws SQLException {
         loadAllFuelType();
     }
 
     public void loadAllFuelType() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<FuelTypeDto> allFuelType = FuelModel.getAllFuelType();
+        ArrayList<FuelTypeDto> allFuelType = fuelDAO.getAllFuelType();
         for (FuelTypeDto fuelTypeDto : allFuelType) {
             obList.add(fuelTypeDto.getFuelType());
         }
@@ -78,7 +79,7 @@ public class ManageFuelDetailsFormController {
         String availability = txtAvailability.getText();
         String startFuel = txtStartFuel.getText();
         String endFuel = txtEndFuel.getText();
-        String fuelId = FuelModel.getFuelIdByName(cmbFuelType.getValue().toString());
+        String fuelId = fuelDAO.getFuelIdByName(cmbFuelType.getValue().toString());
 
         MachineDto machineDto = new MachineDto(
                 machineId,
@@ -105,7 +106,7 @@ public class ManageFuelDetailsFormController {
         String availability = txtAvailability.getText();
         String startFuel = txtStartFuel.getText();
         String endFuel = txtEndFuel.getText();
-        String fuelId = FuelModel.getFuelIdByName(type);
+        String fuelId = fuelDAO.getFuelIdByName(type);
 
 
         MachineDto machineDto = new MachineDto(
@@ -131,14 +132,6 @@ public class ManageFuelDetailsFormController {
         }
     }
 
-    public void btnBackOnAction(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/managefuel_form.fxml"));
-        Scene scene1=new Scene(root);
-        Stage stage1=(Stage)backpane.getScene().getWindow();
-        stage1.setScene(scene1);
-        stage1.setTitle("Add fuel");
-        stage1.centerOnScreen();
-    }
     public static String generateId(String prefix) {
         long timestamp = System.currentTimeMillis();
         SimpleDateFormat dateFormat = new SimpleDateFormat("YYmmddHHmmss");
@@ -157,7 +150,7 @@ public class ManageFuelDetailsFormController {
     }
 
     public void btnSearchMachineIdOnAction(ActionEvent actionEvent) throws SQLException {
-        MachineDto machineDto = MachineModel.searchMachine(txtSearchMachineId.getText());
+        MachineDto machineDto = machineDAO.searchMachine(txtSearchMachineId.getText());
         if(machineDto != null){
             txtMachineId.setText(machineDto.getMachineId());
             txtAvailability.setText(machineDto.getAvailability());

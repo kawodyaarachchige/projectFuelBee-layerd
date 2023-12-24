@@ -7,27 +7,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import lk.ijse.fuelBee.db.Dbconnection;
+import lk.ijse.fuelBee.dao.custom.FuelDAO;
+import lk.ijse.fuelBee.dao.custom.OrderDAO;
+import lk.ijse.fuelBee.dao.impl.FuelDAOImpl;
+import lk.ijse.fuelBee.dao.impl.OrderDAOImpl;
 import lk.ijse.fuelBee.dto.FuelTypeDto;
 import lk.ijse.fuelBee.dto.OrderDto;
-import lk.ijse.fuelBee.dto.SupplierDto;
-import lk.ijse.fuelBee.dto.tm.EmployeeTm;
 import lk.ijse.fuelBee.dto.tm.OrderTm;
-import lk.ijse.fuelBee.dto.tm.SupplierTm;
-import lk.ijse.fuelBee.model.FuelModel;
-import lk.ijse.fuelBee.model.OrderModel;
-import lk.ijse.fuelBee.model.SupplierModel;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
-
-import static lk.ijse.fuelBee.model.FuelModel.*;
 
 public class OrderFormController {
     @FXML
@@ -51,6 +43,10 @@ public class OrderFormController {
     public TableColumn colStatus;
     public ComboBox cmbTankQty;
 
+    OrderDAO orderDAO = new OrderDAOImpl();
+
+    FuelDAO fuelDAO = new FuelDAOImpl();
+
 
     public void initialize() throws SQLException {
         cmbTankQty.getItems().addAll(6000,12000,18000,35000);
@@ -58,7 +54,7 @@ public class OrderFormController {
             if(!(cmbFuelType.getValue() ==null)){
                 try {
                     int selectedValue = (int) cmbTankQty.getValue();
-                    Double fuelPrice =getFuelPriceByName(cmbFuelType.getValue().toString());
+                    Double fuelPrice =fuelDAO.getFuelPriceByName(cmbFuelType.getValue().toString());
                     double price = selectedValue * fuelPrice;
                     txtPrice.setText(String.valueOf(price));
                 } catch (SQLException e) {
@@ -72,37 +68,31 @@ public class OrderFormController {
 
         loadAllOrders();
         setCellValueFactory();
-        //getAllSuppliers();
         getAllFuelTypes();
 
         tblOrder.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.intValue() >= 0) {
                 OrderTm selectedOrder = tblOrder.getItems().get(newValue.intValue());
                 txtId.setText(selectedOrder.getOrderId());
-                //cmbFuelType.setValue(selectedOrder.getFuelType());
-                //txtType.setText(selectedOrder.getType());
                 txtPrice.setText(String.valueOf(selectedOrder.getPrice()));
                 cmbTankQty.setValue(selectedOrder.getTankQty());
                 dpDate.setValue(selectedOrder.getDate().toLocalDate());
                 cmbFuelType.setValue(selectedOrder.getType());
-                //cmbSupId.getItems(String.valueOf(selectedOrder.getSupplierId()));
             }
         });
     }
     public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException {
         String orderId=txtId.getText();
         String email="projectfuelbee@gmail.com";
-        //String type=txtType.getText();
         String type = cmbFuelType.getValue().toString();
         Date date = Date.valueOf(dpDate.getValue());
-        //String date=txtDate.getText();
         double price=Double.parseDouble(txtPrice.getText());
         int qty= (int) cmbTankQty.getValue();
         String status="NOT PAID";
 
 
         OrderDto orderDto = new OrderDto(orderId, email, type, date, qty, price, status);
-        boolean isSaved = OrderModel.saveOrder(orderDto);
+        boolean isSaved =orderDAO.saveOrder(orderDto);
         if (isSaved) {
             new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
             loadAllOrders();
@@ -115,7 +105,7 @@ public class OrderFormController {
 
     public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException {
         String orderId=txtId.getText();
-        boolean isDeleted = OrderModel.deleteOrder(orderId);
+        boolean isDeleted = orderDAO.deleteOrder(orderId);
         if (isDeleted) {
             new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully").show();
             clearFields();
@@ -132,16 +122,14 @@ public class OrderFormController {
     public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException {
         String orderId=txtId.getText();
         String email="projectfuelbee@gmail.com";
-        //String type=txtType.getText();
         String type = cmbFuelType.getValue().toString();
         Date date = Date.valueOf(dpDate.getValue());
-        //String date=txtDate.getText();
         double price=Double.parseDouble(txtPrice.getText());
         int qty= (int) cmbTankQty.getValue();
         String status="NOT PAID";
 
         OrderDto orderDto = new OrderDto(orderId, email, type, date, qty, price, status);
-        boolean isUpdated = OrderModel.updateOrder(orderDto);
+        boolean isUpdated = orderDAO.updateOrder(orderDto);
         if (isUpdated) {
             new Alert(Alert.AlertType.INFORMATION, "Updated Successfully").show();
             loadAllOrders();
@@ -152,9 +140,7 @@ public class OrderFormController {
     }
     public void clearFields(){
         txtId.clear();
-        //txtType.clear();
         dpDate.setValue(null);
-        //txtDate.clear();
         txtPrice.clear();
         cmbFuelType.setValue(null);
         cmbTankQty.setValue(null);
@@ -162,7 +148,7 @@ public class OrderFormController {
 
     public void loadAllOrders() throws SQLException {
         ObservableList<OrderTm> obList = FXCollections.observableArrayList();
-        ArrayList<OrderDto> allOrders = OrderModel.getAllOrders();
+        ArrayList<OrderDto> allOrders = orderDAO.getAllOrders();
 
         for (OrderDto orderDto : allOrders) {
             obList.add(new OrderTm(orderDto.getOrderId(), orderDto.getEmail(), orderDto.getType(), orderDto.getDate(), orderDto.getTankQty(), orderDto.getPrice(), orderDto.getStatus()));
@@ -170,21 +156,11 @@ public class OrderFormController {
         tblOrder.setItems(obList);
         tblOrder.refresh();
     }
-
-    /*public void getAllSuppliers() throws SQLException {
-        ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<SupplierDto> allSuppliers = SupplierModel.getAllSuppliers();
-        for (SupplierDto supplier : allSuppliers) {
-                obList.add(supplier.getSupId());
-        }
-        cmbSupId.setItems(obList);
-    }*/
     public void setCellValueFactory(){
         colId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("tankQty"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        //colSupId.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
@@ -203,7 +179,7 @@ public class OrderFormController {
     }
     public void getAllFuelTypes() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<FuelTypeDto> allFuelType = getAllFuelType();
+        ArrayList<FuelTypeDto> allFuelType = fuelDAO.getAllFuelType();
         for (FuelTypeDto fuelType : allFuelType) {
             obList.add(fuelType.getFuelType());
         }

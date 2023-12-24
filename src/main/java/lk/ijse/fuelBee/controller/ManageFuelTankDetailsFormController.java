@@ -8,17 +8,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
+import lk.ijse.fuelBee.dao.custom.FuelDAO;
+import lk.ijse.fuelBee.dao.custom.MachineDAO;
+import lk.ijse.fuelBee.dao.custom.TankDAO;
+import lk.ijse.fuelBee.dao.impl.FuelDAOImpl;
+import lk.ijse.fuelBee.dao.impl.MachineDAOImpl;
+import lk.ijse.fuelBee.dao.impl.TankDAOImpl;
 import lk.ijse.fuelBee.dto.FuelTypeDto;
 import lk.ijse.fuelBee.dto.TankDto;
-import lk.ijse.fuelBee.model.FuelModel;
-import lk.ijse.fuelBee.model.MachineModel;
-import lk.ijse.fuelBee.model.TankModel;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -32,6 +33,11 @@ public class ManageFuelTankDetailsFormController {
     public TextField txtTankRemainingFuel;
     public TextField txtTankWaste;
     public TextField txtSearchFuelTank;
+    FuelDAO fuelDAO = new FuelDAOImpl();
+
+    TankDAO tankDAO = new TankDAOImpl();
+
+    MachineDAO machineDAO = new MachineDAOImpl();
 
     public void initialize() throws SQLException {
         loadAllFuelType();
@@ -57,7 +63,7 @@ public class ManageFuelTankDetailsFormController {
                     capacityOfWaste,
                     date
             );
-            boolean isRemainingFuelMatched = MachineModel.checkDayEndAmounts(FuelModel.getFuelIdByName(fuelType),Integer.parseInt(txtTankRemainingFuel.getText()));
+            boolean isRemainingFuelMatched = machineDAO.checkDayEndAmounts(fuelDAO.getFuelIdByName(fuelType),Integer.parseInt(txtTankRemainingFuel.getText()));
             if(!isRemainingFuelMatched){
                 new Alert(Alert.AlertType.ERROR,"Remaining Fuel Amount Not Matched | Check the Machine Table again").show();
                 return;
@@ -66,9 +72,9 @@ public class ManageFuelTankDetailsFormController {
             if(!isMachineIdValidated){
                 new Alert(Alert.AlertType.ERROR,"Invalid Tank Id").show();
             }else {
-                String FuelId = FuelModel.getFuelIdByName(fuelType);
-                boolean isWasteAmountReduced = MachineModel.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
-                boolean isSaved = TankModel.saveTank(tankDto);
+                String FuelId = fuelDAO.getFuelIdByName(fuelType);
+                boolean isWasteAmountReduced = machineDAO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
+                boolean isSaved = tankDAO.saveTank(tankDto);
                 if (isSaved) {
                     new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
                     /*getAllMachines();
@@ -82,7 +88,7 @@ public class ManageFuelTankDetailsFormController {
 
     public void btnTankDeleteOnAction(ActionEvent actionEvent) throws SQLException {
         String tankId = txtTankId.getText();
-        boolean isDeleted = TankModel.deleteTank(tankId);
+        boolean isDeleted = tankDAO.deleteTank(tankId);
         if(isDeleted){
             new Alert(Alert.AlertType.INFORMATION,"Deleted Successfully").show();
             //getAllMachines();
@@ -117,9 +123,9 @@ public class ManageFuelTankDetailsFormController {
                 date
         );
 
-        String FuelId = FuelModel.getFuelIdByName(fuelType);
-        boolean isWasteAmountReduced = MachineModel.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
-        boolean isUpdated = TankModel.updateTank(tankDto);
+        String FuelId = fuelDAO.getFuelIdByName(fuelType);
+        boolean isWasteAmountReduced = machineDAO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
+        boolean isUpdated = tankDAO.updateTank(tankDto);
         if(isUpdated){
             new Alert(Alert.AlertType.INFORMATION,"Updated Successfully").show();
             clearTankFields();
@@ -146,7 +152,7 @@ public class ManageFuelTankDetailsFormController {
     }
     public void loadAllFuelType() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<FuelTypeDto> allFuelType = FuelModel.getAllFuelType();
+        ArrayList<FuelTypeDto> allFuelType = fuelDAO.getAllFuelType();
         for (FuelTypeDto fuelTypeDto : allFuelType) {
             obList.add(fuelTypeDto.getFuelType());
         }
@@ -154,14 +160,13 @@ public class ManageFuelTankDetailsFormController {
     }
 
     public void btnSearchFuelTankOnAction(ActionEvent actionEvent) throws SQLException {
-        TankDto tankDto = TankModel.searchTank(txtSearchFuelTank.getText());
+        TankDto tankDto = tankDAO.searchTank(txtSearchFuelTank.getText());
         if (tankDto != null) {
             txtTankId.setText(tankDto.getTankId());
             cmbTankType.setValue(tankDto.getFuelType());
             txtTankQty.setText(String.valueOf(tankDto.getQty()));
             txtTankRemainingFuel.setText(String.valueOf(tankDto.getRemainingFuel()));
             txtTankWaste.setText(String.valueOf(tankDto.getCapacityOfWaste()));
-            //dpTankDate.setValue(LocalDate.parse(tankDto.getDate().toLocaleString()));
         }else{
             txtSearchFuelTank.setText("Not Found");
         }

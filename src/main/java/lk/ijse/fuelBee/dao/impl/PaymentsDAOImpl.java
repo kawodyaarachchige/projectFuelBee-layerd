@@ -1,5 +1,6 @@
-package lk.ijse.fuelBee.dao;
+package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.custom.PaymentsDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.PaymentDto;
 
@@ -9,7 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class PaymentsDAOImpl {
+public class PaymentsDAOImpl implements PaymentsDAO {
+   @Override
     public boolean updatePayment(PaymentDto paymentDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "UPDATE Payment SET email=?, sup_email=?, method=?, amount=?, date=?, status=?,order_id=? WHERE pay_id=?";
@@ -30,6 +32,7 @@ public class PaymentsDAOImpl {
             return false;
         }
     }
+    @Override
     public ArrayList<PaymentDto> getAllPayments() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Payment";

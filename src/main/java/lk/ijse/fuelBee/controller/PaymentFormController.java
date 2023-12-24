@@ -6,19 +6,22 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import lk.ijse.fuelBee.Mail;
+import lk.ijse.fuelBee.dao.custom.AdminDAO;
+import lk.ijse.fuelBee.dao.custom.OrderDAO;
+import lk.ijse.fuelBee.dao.custom.PaymentsDAO;
+import lk.ijse.fuelBee.dao.custom.SupplierDAO;
+import lk.ijse.fuelBee.dao.impl.AdminDAOImpl;
+import lk.ijse.fuelBee.dao.impl.OrderDAOImpl;
+import lk.ijse.fuelBee.dao.impl.PaymentsDAOImpl;
+import lk.ijse.fuelBee.dao.impl.SupplierDAOImpl;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.AdminDto;
 import lk.ijse.fuelBee.dto.OrderDto;
 import lk.ijse.fuelBee.dto.PaymentDto;
 import lk.ijse.fuelBee.dto.SupplierDto;
-import lk.ijse.fuelBee.dto.tm.EmployeeTm;
 import lk.ijse.fuelBee.dto.tm.PaymentTm;
-import lk.ijse.fuelBee.model.AdminModel;
-import lk.ijse.fuelBee.model.OrderModel;
 import lk.ijse.fuelBee.model.PaymentModel;
-import lk.ijse.fuelBee.model.SupplierModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -35,8 +38,6 @@ import java.util.Random;
 
 public class PaymentFormController {
     public TextField txtPayId;
-    
-    //public TextField txtAmount;
 
     public DatePicker dpDate;
     public TextField txtStatus;
@@ -44,7 +45,6 @@ public class PaymentFormController {
     public TableView<PaymentTm> tblPayments;
     public TableColumn<?,?> colId;
     public TableColumn<?,?> colAdmin;
-    //public TableColumn<?,?> colSupplier;
     public TableColumn<?,?> colMethod;
     public TableColumn<?,?> colAmount;
     public TableColumn<?,?> colDate;
@@ -53,11 +53,16 @@ public class PaymentFormController {
     public ComboBox cmbOrderId;
 
     public ComboBox cmbSupEmail;
-    public Text txtAmount1;
+
     public TextField txtMethod;
     public TextField txtAmount;
+     PaymentsDAO paymentsDAO = new PaymentsDAOImpl();
 
-    public void initialize() throws SQLException {
+     OrderDAO orderDAO = new OrderDAOImpl();
+     AdminDAO adminDAO = new AdminDAOImpl();
+     SupplierDAO supplierDAO = new SupplierDAOImpl();
+
+    public void initialize() throws SQLException, ClassNotFoundException {
         getAllSuppliers();
         getAllOrderId();
         getAllAdminEmail();
@@ -67,7 +72,7 @@ public class PaymentFormController {
         cmbOrderId.setOnAction(event -> {
             try {
                 if (cmbOrderId.getSelectionModel().getSelectedItem() != null) {
-                    OrderDto orderDetails = OrderModel.getOrderDetails(cmbOrderId.getSelectionModel().getSelectedItem().toString());
+                    OrderDto orderDetails = orderDAO.getOrderDetails(cmbOrderId.getSelectionModel().getSelectedItem().toString());
 
                     if (orderDetails != null) {
                         txtAmount.setText(String.valueOf(orderDetails.getPrice()));
@@ -89,7 +94,6 @@ public class PaymentFormController {
                 txtPayId.setText(selectedPayment.getPaymentId());
                 txtMethod.setText(selectedPayment.getMethod());
                 txtAmount.setText(String.valueOf(selectedPayment.getAmount()));
-                //dpDate.setValue(LocalDate.parse(selectedPayment.getDate().toString()));
                 txtStatus.setText(selectedPayment.getStatus());
                 cmbOrderId.setValue(selectedPayment.getOrderId());
                 cmbSupEmail.setValue(selectedPayment.getSup_email());
@@ -140,7 +144,7 @@ public class PaymentFormController {
 
         PaymentDto paymentDtoDto = new PaymentDto(payId,email,supEmail,orderId, method, amount, date, status);
         try {
-            boolean isUpdated = PaymentModel.updatePayment(paymentDtoDto);
+            boolean isUpdated = paymentsDAO.updatePayment(paymentDtoDto);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Payment Updated").show();
                 getAllPayments();
@@ -201,7 +205,7 @@ public class PaymentFormController {
     }
     public void getAllSuppliers() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<SupplierDto> allSuppliers = SupplierModel.getAllSuppliers();
+        ArrayList<SupplierDto> allSuppliers = supplierDAO.getAllSuppliers();
         for (SupplierDto supplierDto : allSuppliers) {
             obList.add(supplierDto.getSup_email());
         }
@@ -210,7 +214,7 @@ public class PaymentFormController {
 
     public void getAllOrderId() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<OrderDto> allOrders = OrderModel.getAllOrders();
+        ArrayList<OrderDto> allOrders = orderDAO.getAllOrders();
         for (OrderDto orderDto : allOrders) {
             if(orderDto.getStatus().equals("NOT PAID")){
                 obList.add(orderDto.getOrderId());
@@ -218,9 +222,9 @@ public class PaymentFormController {
         }
         cmbOrderId.setItems(obList);
     }
-    public void getAllAdminEmail() throws SQLException {
+    public void getAllAdminEmail() throws SQLException, ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<AdminDto> allAdmins = AdminModel.getAllAdmins();
+        ArrayList<AdminDto> allAdmins = adminDAO.getAllAdmins();
         for (AdminDto adminDto : allAdmins) {
             obList.add(adminDto.getEmail());
         }
@@ -228,7 +232,7 @@ public class PaymentFormController {
     }
     public void getAllPayments() throws SQLException {
         ObservableList<PaymentTm> obList = FXCollections.observableArrayList();
-        ArrayList<PaymentDto> allPayments = PaymentModel.getAllPayments();
+        ArrayList<PaymentDto> allPayments = paymentsDAO.getAllPayments();
         for (PaymentDto paymentDto : allPayments) {
             obList.add(new PaymentTm(
                     paymentDto.getPaymentId(),

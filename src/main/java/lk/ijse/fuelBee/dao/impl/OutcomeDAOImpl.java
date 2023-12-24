@@ -1,5 +1,6 @@
-package lk.ijse.fuelBee.dao;
+package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.custom.OutcomeDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.OutcomeDto;
 
@@ -9,8 +10,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OutcomeDAOImpl {
-    public static ArrayList<OutcomeDto> getAllOutcomes() throws SQLException {
+public class OutcomeDAOImpl implements OutcomeDAO {
+    @Override
+    public  ArrayList<OutcomeDto> getAllOutcomes() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Outcome";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -22,7 +24,8 @@ public class OutcomeDAOImpl {
         }
         return outcomes;
     }
-    public static ArrayList<OutcomeDto> getAllOutcomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException {
+    @Override
+    public  ArrayList<OutcomeDto> getAllOutcomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Outcome WHERE date BETWEEN ? AND ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -35,7 +38,8 @@ public class OutcomeDAOImpl {
         }
         return outcomes;
     }
-    public static Map<String, Double> getMonthlyOutcomesTotal() throws SQLException {
+    @Override
+    public Map<String, Double> getMonthlyOutcomesTotal() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Outcome";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -49,7 +53,8 @@ public class OutcomeDAOImpl {
         }
         return monthlyTotals;
     }
-    private static String getMonthFromDate(Date date) {
+  @Override
+    public  String getMonthFromDate(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int month = cal.get(Calendar.MONTH) + 1;

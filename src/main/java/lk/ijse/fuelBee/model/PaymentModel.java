@@ -1,67 +1,15 @@
 package lk.ijse.fuelBee.model;
 
-import lk.ijse.fuelBee.controller.ProfitFormController;
-import lk.ijse.fuelBee.dao.PaymentsDAOImpl;
+import lk.ijse.fuelBee.dao.impl.PaymentsDAOImpl;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.PaymentDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PaymentModel {
-   /* public static boolean savePayment(PaymentDto paymentDto) throws SQLException {
-       Connection connection = Dbconnection.getInstance().getConnection();
-       String sql = "INSERT INTO Payment VALUES(?,?,?,?,?,?,?,?)";
-       PreparedStatement pstm = connection.prepareStatement(sql);
-       pstm.setString(1, paymentDto.getPaymentId());
-       pstm.setString(2, paymentDto.getEmail());
-       pstm.setString(3, paymentDto.getSup_email());
-       pstm.setString(4, paymentDto.getMethod());
-       pstm.setDouble(5, paymentDto.getAmount());
-       pstm.setDate(6, new java.sql.Date(paymentDto.getDate().getTime()));
-       pstm.setString(7, paymentDto.getStatus());
-       pstm.setString(8, paymentDto.getOrderId());
-
-       int isSaved = pstm.executeUpdate();
-       if (isSaved > 0) {
-           return true;
-       }else{
-           return false;
-       }
-    }*/
-    public static boolean updatePayment(PaymentDto paymentDto) throws SQLException {
-        PaymentsDAOImpl paymentsDAO = new PaymentsDAOImpl();
-        boolean updated = paymentsDAO.updatePayment(paymentDto);
-        if(updated){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    public static ArrayList<PaymentDto> getAllPayments() throws SQLException {
-        PaymentsDAOImpl paymentsDAO = new PaymentsDAOImpl();
-        ArrayList<PaymentDto> allPayments = paymentsDAO.getAllPayments();
-        if(allPayments!=null){
-            return allPayments;
-        }else{
-            return null;
-        }
-    }
-    /*public static boolean deletePayment(String id) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="DELETE FROM Payment WHERE pay_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,id);
-        int isDeleted = pstm.executeUpdate();
-        if(isDeleted>0){
-            return true;
-        }else{
-            return false;
-        }
-    }*/
 
     public static boolean confirmPayment(PaymentDto paymentDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();

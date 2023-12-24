@@ -2,7 +2,6 @@ package lk.ijse.fuelBee.controller;
 
 import animatefx.animation.FadeIn;
 import animatefx.animation.SlideInDown;
-import animatefx.animation.SlideInUp;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +12,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.fuelBee.dao.custom.AdminDAO;
+import lk.ijse.fuelBee.dao.impl.AdminDAOImpl;
 import lk.ijse.fuelBee.dto.AdminDto;
-import lk.ijse.fuelBee.model.AdminModel;
 import lk.ijse.fuelBee.regex.regexPatterns;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.regex.Pattern;
 
 public class SignupFormController {
     public TextField txtemail;
@@ -29,8 +28,10 @@ public class SignupFormController {
     public TextField txtUserName;
     public AnchorPane mainpain;
 
+    AdminDAO adminDAO = new AdminDAOImpl();
 
-    public void btnSignUpOnAction(ActionEvent actionEvent) throws SQLException, IOException {
+
+    public void btnSignUpOnAction(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         String userName = txtUserName.getText();
         String email = txtemail.getText();
         String pwd = txtpwd.getText();
@@ -52,7 +53,7 @@ public class SignupFormController {
                     return;
                 }else{
                     AdminDto adminDto = new AdminDto(email, pwd, userName, type);
-                    boolean isSaved = AdminModel.saveAdmin(adminDto);
+                    boolean isSaved = adminDAO.saveAdmin(adminDto);
 
                     if (isSaved) {
                         clearFields();

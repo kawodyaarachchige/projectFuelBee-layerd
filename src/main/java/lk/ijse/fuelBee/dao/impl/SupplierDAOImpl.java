@@ -1,5 +1,6 @@
-package lk.ijse.fuelBee.dao;
+package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.custom.SupplierDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.SupplierDto;
 
@@ -9,8 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class SupplierDAOImpl {
-    public static ArrayList<SupplierDto> getAllSuppliers() throws SQLException {
+public class SupplierDAOImpl implements SupplierDAO {
+   @Override
+    public ArrayList<SupplierDto> getAllSuppliers() throws SQLException {
         ArrayList<SupplierDto> allSuppliers = new ArrayList<>();
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Supplier";
@@ -22,7 +24,8 @@ public class SupplierDAOImpl {
         }
         return allSuppliers;
     }
-    public static boolean saveSupplier(SupplierDto supplierDto) throws SQLException {
+    @Override
+    public boolean saveSupplier(SupplierDto supplierDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
 
         String sql = "INSERT INTO Supplier VALUES(?,?,?,?,?,?) ";
@@ -41,7 +44,8 @@ public class SupplierDAOImpl {
             return false;
         }
     }
-    public static boolean deleteSupplier(String id) throws SQLException {
+   @Override
+    public boolean deleteSupplier(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="DELETE FROM Supplier WHERE sup_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -53,7 +57,8 @@ public class SupplierDAOImpl {
             return false;
         }
     }
-    public static boolean updateSupplier(SupplierDto supplierDto) throws SQLException {
+    @Override
+    public boolean updateSupplier(SupplierDto supplierDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="UPDATE Supplier SET name=?,fuel_type=?,contact_number=?,address=?,sup_email=? WHERE sup_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);

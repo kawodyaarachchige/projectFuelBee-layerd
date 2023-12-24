@@ -8,31 +8,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.fuelBee.dto.FuelDto;
-import lk.ijse.fuelBee.dto.FuelTypeDto;
+import lk.ijse.fuelBee.dao.custom.MachineDAO;
+import lk.ijse.fuelBee.dao.custom.TankDAO;
+import lk.ijse.fuelBee.dao.impl.MachineDAOImpl;
+import lk.ijse.fuelBee.dao.impl.TankDAOImpl;
 import lk.ijse.fuelBee.dto.MachineDto;
 import lk.ijse.fuelBee.dto.TankDto;
-import lk.ijse.fuelBee.dto.tm.EmployeeTm;
 import lk.ijse.fuelBee.dto.tm.MachineTm;
 import lk.ijse.fuelBee.dto.tm.TankTm;
-import lk.ijse.fuelBee.model.FuelModel;
-import lk.ijse.fuelBee.model.MachineModel;
-import lk.ijse.fuelBee.model.TankModel;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Random;
-import java.util.regex.Pattern;
 
 public class ManagefuelFormController {
     public TextField txtMachineId;
@@ -55,23 +46,20 @@ public class ManagefuelFormController {
     public TableColumn<?, ?> colTQty;
     public TableColumn<?, ?> colTRemainingFuel;
     public TableColumn<?, ?> colWasteFuel;
-    public DatePicker dpDate;
-    public TextField txtTankId;
-    public TextField txtTankQty;
-    public TextField txtTankRemainingFuel;
-    public TextField txtTankWaste;
-    public DatePicker dpTankDate;
-    public ComboBox cmbTankType;
     public AnchorPane fuelpane;
     public Button btnAddFuel;
     public Button btnAddFuelTank;
+
+     MachineDAO machineDAO = new MachineDAOImpl();
+     TankDAO tankDAO = new TankDAOImpl();
+
 
     public void initialize() throws SQLException, IOException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
         loadAllMachines();
         getAllMachines();
         setCellValueFactory();
 
-        ArrayList<MachineDto> capacityLowFuels = MachineModel.getCapacityLowFuels();
+        ArrayList<MachineDto> capacityLowFuels = machineDAO.getCapacityLowFuels();
         if (!capacityLowFuels.isEmpty()) {
 
             ArrayList<String> fuelTypes = new ArrayList<>();
@@ -88,7 +76,7 @@ public class ManagefuelFormController {
 
     public void loadAllMachines() throws SQLException {
         ObservableList<MachineTm> obList = FXCollections.observableArrayList();
-        ArrayList<MachineDto> allMachine = MachineModel.getAllMachine();
+        ArrayList<MachineDto> allMachine = machineDAO.getAllMachines();
 
         for (MachineDto machineDto : allMachine) {
             obList.add(new MachineTm(
@@ -106,7 +94,7 @@ public class ManagefuelFormController {
     }
     public void getAllMachines() throws SQLException {
         ObservableList<TankTm> obList = FXCollections.observableArrayList();
-        ArrayList<TankDto> allTank = TankModel.getAllTank();
+        ArrayList<TankDto> allTank = tankDAO.getAllTank();
         for(TankDto tankDto : allTank){
             obList.add(new TankTm(
                     tankDto.getTankId(),

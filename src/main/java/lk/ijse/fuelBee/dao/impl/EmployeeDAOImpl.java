@@ -1,5 +1,6 @@
-package lk.ijse.fuelBee.dao;
+package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.custom.EmployeeDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.EmployeeDto;
 
@@ -9,7 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class EmployeeDAOImpl {
+public class EmployeeDAOImpl implements EmployeeDAO {
+   @Override
     public boolean saveEmployee(EmployeeDto dto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="insert into Employee values(?,?,?,?,?,?,?,?)";
@@ -29,6 +31,7 @@ public class EmployeeDAOImpl {
             return false;
         }
     }
+   @Override
     public boolean deleteEmployee(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="DELETE FROM Employee WHERE emp_id=?";
@@ -41,6 +44,7 @@ public class EmployeeDAOImpl {
             return false;
         }
     }
+    @Override
     public boolean updateEmployee(EmployeeDto dto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="update Employee set first_name=?,last_name=?,address=?,age=?,salary=?,role=?,email=? where emp_id=?";
@@ -60,6 +64,7 @@ public class EmployeeDAOImpl {
             return false;
         }
     }
+    @Override
     public ArrayList<EmployeeDto> getAllEmployees() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="select * from Employee";
@@ -80,6 +85,7 @@ public class EmployeeDAOImpl {
             ));
         }return list;
     }
+   @Override
     public int getEmployeeCount() throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql="select count(*) from Employee";

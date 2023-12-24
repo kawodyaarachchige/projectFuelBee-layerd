@@ -1,7 +1,5 @@
 package lk.ijse.fuelBee.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
@@ -9,15 +7,12 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import lk.ijse.fuelBee.dto.OrderDto;
-import lk.ijse.fuelBee.model.FuelModel;
-import lk.ijse.fuelBee.model.OrderModel;
-import lk.ijse.fuelBee.model.ProfitModel;
+import lk.ijse.fuelBee.dao.custom.*;
+import lk.ijse.fuelBee.dao.impl.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -35,9 +30,19 @@ public class DashBoardDetailsFormController {
     public AnchorPane clanderpane;
     public BarChart barChart;
 
+    FuelDAO fuelDAO = new FuelDAOImpl();
+
+    OrderDAO orderDAO = new OrderDAOImpl();
+
+    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+
+    OutcomeDAO outcomeDAO = new OutcomeDAOImpl();;
+
+    IncomeDAO incomeDAO = new IncomeDAOImpl();;
+
     public void initialize() throws SQLException, IOException {
         populateBarChart();
-        ArrayList<Double> fuelPrices = FuelModel.getFuelPrices();
+        ArrayList<Double> fuelPrices = fuelDAO.getFuelPrices();
         txtLADiesel.setText(String.valueOf(fuelPrices.get(0)));
         txtLSDiesel.setText(String.valueOf(fuelPrices.get(1)));
         txtXMDiesel.setText(String.valueOf(fuelPrices.get(2)));
@@ -45,8 +50,8 @@ public class DashBoardDetailsFormController {
         txtXP95.setText(String.valueOf(fuelPrices.get(4)));
         txtXPEuro3.setText(String.valueOf(fuelPrices.get(5)));
        //txtDate1.setText(LocalDate.now().toString());
-        txtOrderCount.setText(String.valueOf(OrderModel.getOrderCount()));
-        txtEmpCount.setText(String.valueOf(OrderModel.getEmployeeCount()));
+        txtOrderCount.setText(String.valueOf(orderDAO.getOrderCount()));
+        txtEmpCount.setText(String.valueOf(employeeDAO.getEmployeeCount()));
 
         URL resource = getClass().getResource("/view/Calender.fxml");
         assert resource != null;
@@ -56,8 +61,8 @@ public class DashBoardDetailsFormController {
 
     }
     private void populateBarChart() throws SQLException {
-        Map<String, Double> monthlyIncomes = ProfitModel.getMonthlyIncomesTotal();
-        Map<String, Double> monthlyOutcomes = ProfitModel.getMonthlyOutcomesTotal();
+        Map<String, Double> monthlyIncomes = incomeDAO.getMonthlyIncomesTotal();
+        Map<String, Double> monthlyOutcomes = outcomeDAO.getMonthlyOutcomesTotal();
 
         XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
         incomeSeries.setName("Income");
