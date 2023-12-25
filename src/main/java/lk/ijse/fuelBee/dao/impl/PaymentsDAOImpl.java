@@ -1,5 +1,6 @@
 package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.PaymentsDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.PaymentDto;
@@ -12,34 +13,14 @@ import java.util.ArrayList;
 
 public class PaymentsDAOImpl implements PaymentsDAO {
    @Override
-    public boolean updatePayment(PaymentDto paymentDto) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "UPDATE Payment SET email=?, sup_email=?, method=?, amount=?, date=?, status=?,order_id=? WHERE pay_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, paymentDto.getEmail());
-        pstm.setString(2, paymentDto.getSup_email());
-        pstm.setString(3, paymentDto.getMethod());
-        pstm.setDouble(4, paymentDto.getAmount());
-        pstm.setDate(5, new java.sql.Date(paymentDto.getDate().getTime()));
-        pstm.setString(6, paymentDto.getStatus());
-        pstm.setString(7, paymentDto.getOrderId());
-        pstm.setString(8, paymentDto.getPaymentId());
+    public boolean updatePayment(PaymentDto paymentDto) throws SQLException, ClassNotFoundException {
+       return SQLUtil.execute("UPDATE Payment SET email=?, sup_email=?, method=?, amount=?, date=?, status=?,order_id=? WHERE pay_id=?", paymentDto.getEmail(), paymentDto.getSup_email(), paymentDto.getMethod(), paymentDto.getAmount(), paymentDto.getDate(), paymentDto.getStatus(), paymentDto.getOrderId(), paymentDto.getPaymentId());
 
-        int isUpdated = pstm.executeUpdate();
-        if (isUpdated > 0) {
-            return true;
-        }else{
-            return false;
-        }
     }
     @Override
-    public ArrayList<PaymentDto> getAllPayments() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Payment";
-        PreparedStatement pstm = connection.prepareStatement(sql);
+    public ArrayList<PaymentDto> getAllPayments() throws SQLException, ClassNotFoundException {
+        ResultSet rs = SQLUtil.execute("SELECT * FROM Payment");
         ArrayList<PaymentDto> payments = new ArrayList<>();
-        ResultSet rs = pstm.executeQuery(sql);
-
         while(rs.next()){
             payments.add(new PaymentDto(
                     rs.getString(1),

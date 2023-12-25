@@ -6,13 +6,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface OrderDAO {
-    boolean saveOrder(OrderDto orderDto) throws SQLException;
+    boolean saveOrder(OrderDto orderDto) throws SQLException, ClassNotFoundException;
 
-    boolean deleteOrder(String id) throws SQLException;
+    boolean deleteOrder(String id) throws SQLException, ClassNotFoundException;
 
-    boolean updateOrder(OrderDto orderDto) throws SQLException;
-    ArrayList<OrderDto> getAllOrders() throws SQLException;
-    int getOrderCount() throws SQLException;
+    boolean updateOrder(OrderDto orderDto) throws SQLException, ClassNotFoundException;
+    ArrayList<OrderDto> getAllOrders() throws SQLException, ClassNotFoundException;
+    int getOrderCount() throws SQLException, ClassNotFoundException;
 
-    OrderDto getOrderDetails(String id) throws SQLException;
+    OrderDto getOrderDetails(String id) throws SQLException, ClassNotFoundException;
 }

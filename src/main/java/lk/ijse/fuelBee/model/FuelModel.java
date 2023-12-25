@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class FuelModel {
 
-    public static Double getFuelPriceByName(String name) throws SQLException {
+    public static Double getFuelPriceByName(String name) throws SQLException, ClassNotFoundException {
         FuelDAOImpl fuelDAO = new FuelDAOImpl();
         Double fuelPriceByName = fuelDAO.getFuelPriceByName(name);
         if (fuelPriceByName != null) {

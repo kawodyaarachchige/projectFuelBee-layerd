@@ -83,7 +83,12 @@ public class ProfitFormController {
 
     public void setAllOutcome() throws SQLException {
         ObservableList<OutcomeTm> obList1 = FXCollections.observableArrayList();
-        ArrayList<OutcomeDto> allOutcomes = outcomeDAO.getAllOutcomes();
+        ArrayList<OutcomeDto> allOutcomes = null;
+        try {
+            allOutcomes = outcomeDAO.getAllOutcomes();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         for (OutcomeDto outcomeDto : allOutcomes) {
             if (outcomeDto != null) {
@@ -106,7 +111,12 @@ public class ProfitFormController {
 
     public void setAllIncome() throws SQLException {
         ObservableList<IncomeTm> obList = FXCollections.observableArrayList();
-        ArrayList<IncomeDto> allIncomes =incomeDAO.getAllIncomes();
+        ArrayList<IncomeDto> allIncomes = null;
+        try {
+            allIncomes = incomeDAO.getAllIncomes();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         for (IncomeDto incomeDto : allIncomes) {
             obList.add(new IncomeTm(
@@ -132,11 +142,27 @@ public class ProfitFormController {
         if(dpStartDate.getValue()!=null && dpEndDate.getValue()!=null){
             java.util.Date startDate = Date.valueOf(dpStartDate.getValue());
             java.util.Date endDate = Date.valueOf(dpEndDate.getValue());
-            allIncomes = incomeDAO.getAllIncomesByDate(startDate, endDate);
-            allOutcomes = outcomeDAO.getAllOutcomesByDate(startDate, endDate);
+            try {
+                allIncomes = incomeDAO.getAllIncomesByDate(startDate, endDate);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                allOutcomes = outcomeDAO.getAllOutcomesByDate(startDate, endDate);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }else{
-            allIncomes = incomeDAO.getAllIncomes();
-            allOutcomes = outcomeDAO.getAllOutcomes();
+            try {
+                allIncomes = incomeDAO.getAllIncomes();
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                allOutcomes = outcomeDAO.getAllOutcomes();
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         for (IncomeDto dto : allIncomes) {

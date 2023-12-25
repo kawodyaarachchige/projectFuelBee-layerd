@@ -154,7 +154,12 @@ public class EmployeeFormController {
     }
     public void loadAllEmployees() throws SQLException {
         ObservableList<EmployeeTm> obList = FXCollections.observableArrayList();
-        ArrayList<EmployeeDto> allEmployees = employeeDAO.getAllEmployees();
+        ArrayList<EmployeeDto> allEmployees = null;
+        try {
+            allEmployees = employeeDAO.getAllEmployees();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         for(EmployeeDto dto : allEmployees){
             obList.add(new EmployeeTm(dto.getId(), dto.getFirstName(), dto.getLastName(), dto.getAddress(), dto.getAge(), dto.getSalary(), dto.getJobTitle(), dto.getEmail()));

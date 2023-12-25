@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface FuelDAO {
-    ArrayList<FuelTypeDto> getAllFuelType() throws SQLException;
+    ArrayList<FuelTypeDto> getAllFuelType() throws SQLException, ClassNotFoundException;
 
-    String getFuelIdByName(String name) throws SQLException;
+    String getFuelIdByName(String name) throws SQLException, ClassNotFoundException;
 
-    Double getFuelPriceByName(String name) throws SQLException;
+    Double getFuelPriceByName(String name) throws SQLException, ClassNotFoundException;
 
-    ArrayList<Double> getFuelPrices() throws SQLException;
+    ArrayList<Double> getFuelPrices() throws SQLException, ClassNotFoundException;
 }

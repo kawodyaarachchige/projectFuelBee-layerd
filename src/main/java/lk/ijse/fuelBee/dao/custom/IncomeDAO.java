@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public interface IncomeDAO {
-    ArrayList<IncomeDto> getAllIncomes() throws SQLException;
-    ArrayList<IncomeDto> getAllIncomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException;
-    Map<String, Double> getMonthlyIncomesTotal() throws SQLException;
+    ArrayList<IncomeDto> getAllIncomes() throws SQLException, ClassNotFoundException;
+    ArrayList<IncomeDto> getAllIncomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException, ClassNotFoundException;
+    Map<String, Double> getMonthlyIncomesTotal() throws SQLException, ClassNotFoundException;
     String getMonthFromDate(Date date);
 
 

@@ -144,7 +144,12 @@ public class PaymentFormController {
 
         PaymentDto paymentDtoDto = new PaymentDto(payId,email,supEmail,orderId, method, amount, date, status);
         try {
-            boolean isUpdated = paymentsDAO.updatePayment(paymentDtoDto);
+            boolean isUpdated = false;
+            try {
+                isUpdated = paymentsDAO.updatePayment(paymentDtoDto);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Payment Updated").show();
                 getAllPayments();
@@ -205,7 +210,12 @@ public class PaymentFormController {
     }
     public void getAllSuppliers() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<SupplierDto> allSuppliers = supplierDAO.getAllSuppliers();
+        ArrayList<SupplierDto> allSuppliers = null;
+        try {
+            allSuppliers = supplierDAO.getAllSuppliers();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         for (SupplierDto supplierDto : allSuppliers) {
             obList.add(supplierDto.getSup_email());
         }
@@ -214,7 +224,12 @@ public class PaymentFormController {
 
     public void getAllOrderId() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<OrderDto> allOrders = orderDAO.getAllOrders();
+        ArrayList<OrderDto> allOrders = null;
+        try {
+            allOrders = orderDAO.getAllOrders();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         for (OrderDto orderDto : allOrders) {
             if(orderDto.getStatus().equals("NOT PAID")){
                 obList.add(orderDto.getOrderId());
@@ -232,7 +247,12 @@ public class PaymentFormController {
     }
     public void getAllPayments() throws SQLException {
         ObservableList<PaymentTm> obList = FXCollections.observableArrayList();
-        ArrayList<PaymentDto> allPayments = paymentsDAO.getAllPayments();
+        ArrayList<PaymentDto> allPayments = null;
+        try {
+            allPayments = paymentsDAO.getAllPayments();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         for (PaymentDto paymentDto : allPayments) {
             obList.add(new PaymentTm(
                     paymentDto.getPaymentId(),

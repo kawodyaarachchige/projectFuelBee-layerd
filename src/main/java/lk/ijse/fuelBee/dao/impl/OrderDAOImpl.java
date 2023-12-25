@@ -1,5 +1,6 @@
 package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.OrderDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 
@@ -13,64 +14,21 @@ import lk.ijse.fuelBee.dto.OrderDto;
 
 public class OrderDAOImpl implements OrderDAO {
    @Override
-    public boolean saveOrder(OrderDto orderDto) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-
-        String sql = "INSERT INTO Orders VALUES(?,?,?,?,?,?,?) ";
-
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, orderDto.getOrderId());
-        pstm.setString(2, orderDto.getEmail());
-        pstm.setString(3, orderDto.getType());
-        pstm.setDate(4, orderDto.getDate());
-        pstm.setInt(5, orderDto.getTankQty());
-        pstm.setDouble(6, orderDto.getPrice());
-        pstm.setString(7, orderDto.getStatus());
-
-
-        if (pstm.executeUpdate() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean saveOrder(OrderDto orderDto) throws SQLException, ClassNotFoundException {
+        return  SQLUtil.execute("INSERT INTO Orders VALUES(?,?,?,?,?,?,?)", orderDto.getOrderId(), orderDto.getEmail(), orderDto.getType(), orderDto.getDate(), orderDto.getTankQty(), orderDto.getPrice(), orderDto.getStatus());
     }
    @Override
-    public boolean deleteOrder(String id) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="DELETE FROM Orders WHERE order_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,id);
+    public boolean deleteOrder(String id) throws SQLException, ClassNotFoundException {
+       return  SQLUtil.execute("DELETE FROM Orders WHERE order_id=?", id);
 
-        if(pstm.executeUpdate()>0){
-            return true;
-        }else{
-            return false;
-        }
     }
     @Override
-    public boolean updateOrder(OrderDto orderDto) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="UPDATE Orders SET email=?,type=?,date=?,tank_qty=?,price=?,status=? WHERE order_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, orderDto.getEmail());
-        pstm.setString(2, orderDto.getType());
-        pstm.setDate(3, orderDto.getDate());
-        pstm.setInt(4, orderDto.getTankQty());
-        pstm.setDouble(5, orderDto.getPrice());
-        pstm.setString(6, orderDto.getStatus());
-        pstm.setString(7, orderDto.getOrderId());
-        if(pstm.executeUpdate()>0){
-            return true;
-        }else{
-            return false;
-        }
+    public boolean updateOrder(OrderDto orderDto) throws SQLException, ClassNotFoundException {
+       return SQLUtil.execute("UPDATE Orders SET email=?,type=?,date=?,tank_qty=?,price=?,status=? WHERE order_id=?", orderDto.getEmail(), orderDto.getType(), orderDto.getDate(), orderDto.getTankQty(), orderDto.getPrice(), orderDto.getStatus(), orderDto.getOrderId());
     }
    @Override
-    public ArrayList<OrderDto> getAllOrders() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="select * from Orders";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet rs=pstm.executeQuery();
+    public ArrayList<OrderDto> getAllOrders() throws SQLException, ClassNotFoundException {
+       ResultSet rs = SQLUtil.execute("SELECT * FROM Orders");
         ArrayList<OrderDto> orders = new ArrayList<>();
 
         while(rs.next()){
@@ -86,26 +44,17 @@ public class OrderDAOImpl implements OrderDAO {
         }return orders;
     }
    @Override
-    public int getOrderCount() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="select count(*) from Orders";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet rs=pstm.executeQuery();
-
+    public int getOrderCount() throws SQLException, ClassNotFoundException {
+       ResultSet rs = SQLUtil.execute("SELECT count(*) FROM Orders");
         while(rs.next()){
             return rs.getInt(1);
         }return 0;
 
     }
    @Override
-    public OrderDto getOrderDetails(String id) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="select * from Orders where order_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,id);
-        ResultSet rs=pstm.executeQuery();
+    public OrderDto getOrderDetails(String id) throws SQLException, ClassNotFoundException {
+       ResultSet rs  = SQLUtil.execute("SELECT * FROM Orders WHERE order_id=?", id);
         OrderDto order = new OrderDto();
-
         while(rs.next()){
             order.setOrderId(rs.getString(1));
             order.setEmail(rs.getString(2));

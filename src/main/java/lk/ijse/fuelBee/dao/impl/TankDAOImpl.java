@@ -1,5 +1,6 @@
 package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.TankDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.TankDto;
@@ -57,12 +58,8 @@ public class TankDAOImpl implements TankDAO {
         }
     }
     @Override
-    public ArrayList<TankDto> getAllTank() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Tank";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet rst = pstm.executeQuery();
-
+    public ArrayList<TankDto> getAllTank() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Tank");
         ArrayList<TankDto> tanks = new ArrayList<>();
         while (rst.next()) {
             tanks.add(new TankDto(
@@ -77,23 +74,8 @@ public class TankDAOImpl implements TankDAO {
         return tanks;
     }
    @Override
-    public TankDto searchTank(String id) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Tank WHERE tank_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, id);
-        ResultSet rst = pstm.executeQuery();
-        if(rst.next()){
-            return new TankDto(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getInt(3),
-                    rst.getInt(4),
-                    rst.getInt(5),
-                    rst.getDate(6)
-            );
-        }else{
-            return null;
-        }
+    public TankDto searchTank(String id) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("SELECT * FROM Tank WHERE tank_id=?", id);
+
     }
 }

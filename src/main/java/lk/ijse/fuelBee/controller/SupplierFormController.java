@@ -61,7 +61,12 @@ public class SupplierFormController {
 
         SupplierDto supplierDto = new SupplierDto(supId, name, fuelType, Integer.parseInt(contact), address, email);
 
-        boolean isSaved =supplierDAO.saveSupplier(supplierDto);
+        boolean isSaved = false;
+        try {
+            isSaved = supplierDAO.saveSupplier(supplierDto);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if (isSaved) {
 
             newId = supId;
@@ -95,7 +100,12 @@ public class SupplierFormController {
     public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException {
         String id = txtSupId.getText();
 
-        boolean isDeleted = supplierDAO.deleteSupplier(id);
+        boolean isDeleted = false;
+        try {
+            isDeleted = supplierDAO.deleteSupplier(id);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if (isDeleted) {
             new Alert(Alert.AlertType.CONFIRMATION, "Supplier Deleted").show();
             clearFields();
@@ -113,7 +123,12 @@ public class SupplierFormController {
 
     public void loadAllSuppliers() throws SQLException {
         ObservableList<SupplierTm> obList = FXCollections.observableArrayList();
-        ArrayList<SupplierDto> allSuppliers = supplierDAO.getAllSuppliers();
+        ArrayList<SupplierDto> allSuppliers = null;
+        try {
+            allSuppliers = supplierDAO.getAllSuppliers();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         for (SupplierDto supplierDto : allSuppliers) {
             obList.add(new SupplierTm(
@@ -159,7 +174,12 @@ public class SupplierFormController {
         String fuelType = "Lanka Petrol 92";
 
         SupplierDto supplierDto = new SupplierDto(id, name, fuelType, Integer.parseInt(contact), address, email);
-        boolean isUpdated = supplierDAO.updateSupplier(supplierDto);
+        boolean isUpdated = false;
+        try {
+            isUpdated = supplierDAO.updateSupplier(supplierDto);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if (isUpdated) {
             new Alert(Alert.AlertType.CONFIRMATION, "Supplier Updated").show();
             clearFields();

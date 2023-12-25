@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public interface OutcomeDAO {
-    ArrayList<OutcomeDto> getAllOutcomes() throws SQLException;
-    ArrayList<OutcomeDto> getAllOutcomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException;
+    ArrayList<OutcomeDto> getAllOutcomes() throws SQLException, ClassNotFoundException;
+    ArrayList<OutcomeDto> getAllOutcomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException, ClassNotFoundException;
 
-    Map<String, Double> getMonthlyOutcomesTotal() throws SQLException;
+    Map<String, Double> getMonthlyOutcomesTotal() throws SQLException, ClassNotFoundException;
 
      String getMonthFromDate(Date date);
 }

@@ -54,7 +54,12 @@ public class OrderFormController {
             if(!(cmbFuelType.getValue() ==null)){
                 try {
                     int selectedValue = (int) cmbTankQty.getValue();
-                    Double fuelPrice =fuelDAO.getFuelPriceByName(cmbFuelType.getValue().toString());
+                    Double fuelPrice = null;
+                    try {
+                        fuelPrice = fuelDAO.getFuelPriceByName(cmbFuelType.getValue().toString());
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                     double price = selectedValue * fuelPrice;
                     txtPrice.setText(String.valueOf(price));
                 } catch (SQLException e) {
@@ -92,7 +97,12 @@ public class OrderFormController {
 
 
         OrderDto orderDto = new OrderDto(orderId, email, type, date, qty, price, status);
-        boolean isSaved =orderDAO.saveOrder(orderDto);
+        boolean isSaved = false;
+        try {
+            isSaved = orderDAO.saveOrder(orderDto);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if (isSaved) {
             new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
             loadAllOrders();
@@ -105,7 +115,12 @@ public class OrderFormController {
 
     public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException {
         String orderId=txtId.getText();
-        boolean isDeleted = orderDAO.deleteOrder(orderId);
+        boolean isDeleted = false;
+        try {
+            isDeleted = orderDAO.deleteOrder(orderId);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if (isDeleted) {
             new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully").show();
             clearFields();
@@ -129,7 +144,12 @@ public class OrderFormController {
         String status="NOT PAID";
 
         OrderDto orderDto = new OrderDto(orderId, email, type, date, qty, price, status);
-        boolean isUpdated = orderDAO.updateOrder(orderDto);
+        boolean isUpdated = false;
+        try {
+            isUpdated = orderDAO.updateOrder(orderDto);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if (isUpdated) {
             new Alert(Alert.AlertType.INFORMATION, "Updated Successfully").show();
             loadAllOrders();
@@ -148,7 +168,12 @@ public class OrderFormController {
 
     public void loadAllOrders() throws SQLException {
         ObservableList<OrderTm> obList = FXCollections.observableArrayList();
-        ArrayList<OrderDto> allOrders = orderDAO.getAllOrders();
+        ArrayList<OrderDto> allOrders = null;
+        try {
+            allOrders = orderDAO.getAllOrders();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         for (OrderDto orderDto : allOrders) {
             obList.add(new OrderTm(orderDto.getOrderId(), orderDto.getEmail(), orderDto.getType(), orderDto.getDate(), orderDto.getTankQty(), orderDto.getPrice(), orderDto.getStatus()));
@@ -179,7 +204,12 @@ public class OrderFormController {
     }
     public void getAllFuelTypes() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<FuelTypeDto> allFuelType = fuelDAO.getAllFuelType();
+        ArrayList<FuelTypeDto> allFuelType = null;
+        try {
+            allFuelType = fuelDAO.getAllFuelType();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         for (FuelTypeDto fuelType : allFuelType) {
             obList.add(fuelType.getFuelType());
         }

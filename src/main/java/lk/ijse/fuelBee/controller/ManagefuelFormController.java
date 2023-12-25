@@ -76,7 +76,12 @@ public class ManagefuelFormController {
 
     public void loadAllMachines() throws SQLException {
         ObservableList<MachineTm> obList = FXCollections.observableArrayList();
-        ArrayList<MachineDto> allMachine = machineDAO.getAllMachines();
+        ArrayList<MachineDto> allMachine = null;
+        try {
+            allMachine = machineDAO.getAllMachines();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         for (MachineDto machineDto : allMachine) {
             obList.add(new MachineTm(
@@ -94,7 +99,12 @@ public class ManagefuelFormController {
     }
     public void getAllMachines() throws SQLException {
         ObservableList<TankTm> obList = FXCollections.observableArrayList();
-        ArrayList<TankDto> allTank = tankDAO.getAllTank();
+        ArrayList<TankDto> allTank = null;
+        try {
+            allTank = tankDAO.getAllTank();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         for(TankDto tankDto : allTank){
             obList.add(new TankTm(
                     tankDto.getTankId(),

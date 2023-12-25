@@ -63,8 +63,13 @@ public class ManageFuelTankDetailsFormController {
                     capacityOfWaste,
                     date
             );
-            boolean isRemainingFuelMatched = machineDAO.checkDayEndAmounts(fuelDAO.getFuelIdByName(fuelType),Integer.parseInt(txtTankRemainingFuel.getText()));
-            if(!isRemainingFuelMatched){
+        boolean isRemainingFuelMatched = false;
+        try {
+            isRemainingFuelMatched = machineDAO.checkDayEndAmounts(fuelDAO.getFuelIdByName(fuelType),Integer.parseInt(txtTankRemainingFuel.getText()));
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if(!isRemainingFuelMatched){
                 new Alert(Alert.AlertType.ERROR,"Remaining Fuel Amount Not Matched | Check the Machine Table again").show();
                 return;
             }
@@ -72,8 +77,17 @@ public class ManageFuelTankDetailsFormController {
             if(!isMachineIdValidated){
                 new Alert(Alert.AlertType.ERROR,"Invalid Tank Id").show();
             }else {
-                String FuelId = fuelDAO.getFuelIdByName(fuelType);
-                boolean isWasteAmountReduced = machineDAO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
+                String FuelId = null;
+                try {
+                    FuelId = fuelDAO.getFuelIdByName(fuelType);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    boolean isWasteAmountReduced = machineDAO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 boolean isSaved = tankDAO.saveTank(tankDto);
                 if (isSaved) {
                     new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
@@ -123,8 +137,17 @@ public class ManageFuelTankDetailsFormController {
                 date
         );
 
-        String FuelId = fuelDAO.getFuelIdByName(fuelType);
-        boolean isWasteAmountReduced = machineDAO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
+        String FuelId = null;
+        try {
+            FuelId = fuelDAO.getFuelIdByName(fuelType);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            boolean isWasteAmountReduced = machineDAO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         boolean isUpdated = tankDAO.updateTank(tankDto);
         if(isUpdated){
             new Alert(Alert.AlertType.INFORMATION,"Updated Successfully").show();
@@ -152,7 +175,12 @@ public class ManageFuelTankDetailsFormController {
     }
     public void loadAllFuelType() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<FuelTypeDto> allFuelType = fuelDAO.getAllFuelType();
+        ArrayList<FuelTypeDto> allFuelType = null;
+        try {
+            allFuelType = fuelDAO.getAllFuelType();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         for (FuelTypeDto fuelTypeDto : allFuelType) {
             obList.add(fuelTypeDto.getFuelType());
         }
@@ -160,7 +188,12 @@ public class ManageFuelTankDetailsFormController {
     }
 
     public void btnSearchFuelTankOnAction(ActionEvent actionEvent) throws SQLException {
-        TankDto tankDto = tankDAO.searchTank(txtSearchFuelTank.getText());
+        TankDto tankDto = null;
+        try {
+            tankDto = tankDAO.searchTank(txtSearchFuelTank.getText());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if (tankDto != null) {
             txtTankId.setText(tankDto.getTankId());
             cmbTankType.setValue(tankDto.getFuelType());

@@ -1,5 +1,6 @@
 package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.EmployeeDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.EmployeeDto;
@@ -12,65 +13,23 @@ import java.util.ArrayList;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
    @Override
-    public boolean saveEmployee(EmployeeDto dto) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="insert into Employee values(?,?,?,?,?,?,?,?)";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,dto.getId());
-        pstm.setString(2,dto.getFirstName());
-        pstm.setString(3,dto.getLastName());
-        pstm.setString(4,dto.getAddress());
-        pstm.setInt(5,dto.getAge());
-        pstm.setDouble(6,dto.getSalary());
-        pstm.setString(7,dto.getJobTitle());
-        pstm.setString(8,dto.getEmail());
+    public boolean saveEmployee(EmployeeDto dto) throws SQLException, ClassNotFoundException {
+       return SQLUtil.execute("INSERT INTO Employee VALUES(?,?,?,?,?,?,?,?)",dto.getId(),dto.getFirstName(),dto.getLastName(),dto.getAddress(),dto.getAge(),dto.getSalary(),dto.getJobTitle(),dto.getEmail());
 
-        if(pstm.executeUpdate()>0){
-            return true;
-        }else {
-            return false;
-        }
     }
    @Override
-    public boolean deleteEmployee(String id) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="DELETE FROM Employee WHERE emp_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,id);
+    public boolean deleteEmployee(String id) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("DELETE FROM Employee WHERE emp_id=?",id);
 
-        if(pstm.executeUpdate()>0){
-            return true;
-        }else{
-            return false;
-        }
     }
     @Override
-    public boolean updateEmployee(EmployeeDto dto) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="update Employee set first_name=?,last_name=?,address=?,age=?,salary=?,role=?,email=? where emp_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1,dto.getFirstName());
-        pstm.setString(2,dto.getLastName());
-        pstm.setString(3,dto.getAddress());
-        pstm.setInt(4,dto.getAge());
-        pstm.setDouble(5,dto.getSalary());
-        pstm.setString(6,dto.getJobTitle());
-        pstm.setString(7,dto.getEmail());
-        pstm.setString(8,dto.getId());
+    public boolean updateEmployee(EmployeeDto dto) throws SQLException, ClassNotFoundException {
+       return SQLUtil.execute("update Employee set first_name=?,last_name=?,address=?,age=?,salary=?,role=?,email=? where emp_id=?",dto.getFirstName(),dto.getLastName(),dto.getAddress(),dto.getAge(),dto.getSalary(),dto.getJobTitle(),dto.getEmail(),dto.getId());
 
-        if(pstm.executeUpdate()>0){
-            return true;
-        }else{
-            return false;
-        }
     }
     @Override
-    public ArrayList<EmployeeDto> getAllEmployees() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="select * from Employee";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet resultSet=pstm.executeQuery();
-
+    public ArrayList<EmployeeDto> getAllEmployees() throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM Employee");
         ArrayList<EmployeeDto> list=new ArrayList<>();
         while (resultSet.next()){
             list.add(new EmployeeDto(
@@ -86,12 +45,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }return list;
     }
    @Override
-    public int getEmployeeCount() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="select count(*) from Employee";
+    public int getEmployeeCount() throws SQLException, ClassNotFoundException {
+       ResultSet rs = SQLUtil.execute("select count(*) from Employee");
         try {
-            PreparedStatement pstm = connection.prepareStatement(sql);
-            ResultSet rs=pstm.executeQuery();
             while(rs.next()){
                 return rs.getInt(1);
             }

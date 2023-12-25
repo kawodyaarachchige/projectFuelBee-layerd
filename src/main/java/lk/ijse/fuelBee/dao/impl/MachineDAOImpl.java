@@ -1,5 +1,6 @@
 package lk.ijse.fuelBee.dao.impl;
 
+import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.MachineDAO;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.MachineDto;
@@ -12,13 +13,9 @@ import java.util.ArrayList;
 
 public class MachineDAOImpl implements MachineDAO {
    @Override
-    public ArrayList<MachineDto> getAllMachines() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Machine";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet rst = pstm.executeQuery();
-
-        ArrayList<MachineDto> machines = new ArrayList<>();
+    public ArrayList<MachineDto> getAllMachines() throws SQLException, ClassNotFoundException {
+       ResultSet rst = SQLUtil.execute("SELECT * FROM Machine");
+       ArrayList<MachineDto> machines = new ArrayList<>();
         while(rst.next()){
             machines.add(new MachineDto(
                     rst.getString(1),
@@ -32,39 +29,21 @@ public class MachineDAOImpl implements MachineDAO {
         }return machines;
     }
    @Override
-   public boolean changeDayEndFuelByWaste(String id,int waste) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="UPDATE Machine SET day_end_fuel_amount=day_end_fuel_amount-? WHERE fuel_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setInt(1,waste);
-        pstm.setString(2,id);
+   public boolean changeDayEndFuelByWaste(String id,int waste) throws SQLException, ClassNotFoundException {
+       return  SQLUtil.execute("UPDATE Machine SET day_end_fuel_amount=day_end_fuel_amount-? WHERE fuel_id=?", waste, id);
 
-        if(pstm.executeUpdate()>0){
-            return true;
-        }else{
-            return false;
-        }
     }
     @Override
-    public boolean checkDayEndAmounts(String id,int amount) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Machine WHERE fuel_id=? AND day_end_fuel_amount = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, id);
-        pstm.setInt(2, amount);
-
-        ResultSet rst = pstm.executeQuery();
+    public boolean checkDayEndAmounts(String id,int amount) throws SQLException, ClassNotFoundException {
+       ResultSet rst= SQLUtil.execute("SELECT * FROM Machine WHERE fuel_id=? AND day_end_fuel_amount = ?", id, amount);
         while (rst.next()) {
             return true;
         }
         return false;
     }
     @Override
-    public ArrayList<MachineDto> getCapacityLowFuels() throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql="SELECT * FROM Machine WHERE day_end_fuel_amount < 1000";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet rst = pstm.executeQuery();
+    public ArrayList<MachineDto> getCapacityLowFuels() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Machine WHERE day_end_fuel_amount < 1000");
         ArrayList<MachineDto> lowFuelMachines = new ArrayList<>();
         while (rst.next()){
             lowFuelMachines.add(new MachineDto(
@@ -80,12 +59,8 @@ public class MachineDAOImpl implements MachineDAO {
         return lowFuelMachines;
     }
    @Override
-    public MachineDto searchMachine(String id) throws SQLException {
-        Connection connection = Dbconnection.getInstance().getConnection();
-        String sql = "SELECT * FROM Machine WHERE machine_id=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, id);
-        ResultSet rst = pstm.executeQuery();
+    public MachineDto searchMachine(String id) throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Machine WHERE machine_id=?", id);
         if(rst.next()){
             return new MachineDto(
                     rst.getString(1),

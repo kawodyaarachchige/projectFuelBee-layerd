@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public interface EmployeeDAO {
 
-    boolean saveEmployee(EmployeeDto dto) throws SQLException;
-    boolean deleteEmployee(String id) throws SQLException;
+    boolean saveEmployee(EmployeeDto dto) throws SQLException, ClassNotFoundException;
+    boolean deleteEmployee(String id) throws SQLException, ClassNotFoundException;
 
-    boolean updateEmployee(EmployeeDto dto) throws SQLException;
-    ArrayList<EmployeeDto> getAllEmployees() throws SQLException;
-    int getEmployeeCount() throws SQLException;
+    boolean updateEmployee(EmployeeDto dto) throws SQLException, ClassNotFoundException;
+    ArrayList<EmployeeDto> getAllEmployees() throws SQLException, ClassNotFoundException;
+    int getEmployeeCount() throws SQLException, ClassNotFoundException;
 
 }

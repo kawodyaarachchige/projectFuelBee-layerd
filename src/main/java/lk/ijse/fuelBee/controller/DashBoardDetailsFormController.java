@@ -42,7 +42,12 @@ public class DashBoardDetailsFormController {
 
     public void initialize() throws SQLException, IOException {
         populateBarChart();
-        ArrayList<Double> fuelPrices = fuelDAO.getFuelPrices();
+        ArrayList<Double> fuelPrices = null;
+        try {
+            fuelPrices = fuelDAO.getFuelPrices();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         txtLADiesel.setText(String.valueOf(fuelPrices.get(0)));
         txtLSDiesel.setText(String.valueOf(fuelPrices.get(1)));
         txtXMDiesel.setText(String.valueOf(fuelPrices.get(2)));
@@ -50,8 +55,16 @@ public class DashBoardDetailsFormController {
         txtXP95.setText(String.valueOf(fuelPrices.get(4)));
         txtXPEuro3.setText(String.valueOf(fuelPrices.get(5)));
        //txtDate1.setText(LocalDate.now().toString());
-        txtOrderCount.setText(String.valueOf(orderDAO.getOrderCount()));
-        txtEmpCount.setText(String.valueOf(employeeDAO.getEmployeeCount()));
+        try {
+            txtOrderCount.setText(String.valueOf(orderDAO.getOrderCount()));
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            txtEmpCount.setText(String.valueOf(employeeDAO.getEmployeeCount()));
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         URL resource = getClass().getResource("/view/Calender.fxml");
         assert resource != null;
@@ -61,8 +74,18 @@ public class DashBoardDetailsFormController {
 
     }
     private void populateBarChart() throws SQLException {
-        Map<String, Double> monthlyIncomes = incomeDAO.getMonthlyIncomesTotal();
-        Map<String, Double> monthlyOutcomes = outcomeDAO.getMonthlyOutcomesTotal();
+        Map<String, Double> monthlyIncomes = null;
+        try {
+            monthlyIncomes = incomeDAO.getMonthlyIncomesTotal();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Map<String, Double> monthlyOutcomes = null;
+        try {
+            monthlyOutcomes = outcomeDAO.getMonthlyOutcomesTotal();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
         incomeSeries.setName("Income");

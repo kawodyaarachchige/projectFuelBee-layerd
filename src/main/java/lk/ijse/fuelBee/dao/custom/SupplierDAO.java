@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface SupplierDAO {
-    ArrayList<SupplierDto> getAllSuppliers() throws SQLException;
-    boolean saveSupplier(SupplierDto supplierDto) throws SQLException;
-    boolean deleteSupplier(String id) throws SQLException;
+    ArrayList<SupplierDto> getAllSuppliers() throws SQLException, ClassNotFoundException;
+    boolean saveSupplier(SupplierDto supplierDto) throws SQLException, ClassNotFoundException;
+    boolean deleteSupplier(String id) throws SQLException, ClassNotFoundException;
 
-    boolean updateSupplier(SupplierDto supplierDto) throws SQLException;
+    boolean updateSupplier(SupplierDto supplierDto) throws SQLException, ClassNotFoundException;
 }

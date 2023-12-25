@@ -45,7 +45,12 @@ public class ManageFuelMachineDetailsFormController {
 
     public void loadAllFuelType() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<FuelTypeDto> allFuelType = fuelDAO.getAllFuelType();
+        ArrayList<FuelTypeDto> allFuelType = null;
+        try {
+            allFuelType = fuelDAO.getAllFuelType();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         for (FuelTypeDto fuelTypeDto : allFuelType) {
             obList.add(fuelTypeDto.getFuelType());
         }
@@ -79,7 +84,12 @@ public class ManageFuelMachineDetailsFormController {
         String availability = txtAvailability.getText();
         String startFuel = txtStartFuel.getText();
         String endFuel = txtEndFuel.getText();
-        String fuelId = fuelDAO.getFuelIdByName(cmbFuelType.getValue().toString());
+        String fuelId = null;
+        try {
+            fuelId = fuelDAO.getFuelIdByName(cmbFuelType.getValue().toString());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         MachineDto machineDto = new MachineDto(
                 machineId,
@@ -106,7 +116,12 @@ public class ManageFuelMachineDetailsFormController {
         String availability = txtAvailability.getText();
         String startFuel = txtStartFuel.getText();
         String endFuel = txtEndFuel.getText();
-        String fuelId = fuelDAO.getFuelIdByName(type);
+        String fuelId = null;
+        try {
+            fuelId = fuelDAO.getFuelIdByName(type);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
 
         MachineDto machineDto = new MachineDto(
@@ -150,7 +165,12 @@ public class ManageFuelMachineDetailsFormController {
     }
 
     public void btnSearchMachineIdOnAction(ActionEvent actionEvent) throws SQLException {
-        MachineDto machineDto = machineDAO.searchMachine(txtSearchMachineId.getText());
+        MachineDto machineDto = null;
+        try {
+            machineDto = machineDAO.searchMachine(txtSearchMachineId.getText());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if(machineDto != null){
             txtMachineId.setText(machineDto.getMachineId());
             txtAvailability.setText(machineDto.getAvailability());
