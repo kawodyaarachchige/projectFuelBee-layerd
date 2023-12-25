@@ -99,7 +99,7 @@ public class OrderFormController {
         OrderDto orderDto = new OrderDto(orderId, email, type, date, qty, price, status);
         boolean isSaved = false;
         try {
-            isSaved = orderDAO.saveOrder(orderDto);
+            isSaved = orderDAO.save(orderDto);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -117,7 +117,7 @@ public class OrderFormController {
         String orderId=txtId.getText();
         boolean isDeleted = false;
         try {
-            isDeleted = orderDAO.deleteOrder(orderId);
+            isDeleted = orderDAO.delete(orderId);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -146,7 +146,7 @@ public class OrderFormController {
         OrderDto orderDto = new OrderDto(orderId, email, type, date, qty, price, status);
         boolean isUpdated = false;
         try {
-            isUpdated = orderDAO.updateOrder(orderDto);
+            isUpdated = orderDAO.update(orderDto);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -170,7 +170,7 @@ public class OrderFormController {
         ObservableList<OrderTm> obList = FXCollections.observableArrayList();
         ArrayList<OrderDto> allOrders = null;
         try {
-            allOrders = orderDAO.getAllOrders();
+            allOrders = orderDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -206,7 +206,7 @@ public class OrderFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
         ArrayList<FuelTypeDto> allFuelType = null;
         try {
-            allFuelType = fuelDAO.getAllFuelType();
+            allFuelType = fuelDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

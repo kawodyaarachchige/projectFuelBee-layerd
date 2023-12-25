@@ -53,7 +53,7 @@ public class SignupFormController {
                     return;
                 }else{
                     AdminDto adminDto = new AdminDto(email, pwd, userName, type);
-                    boolean isSaved = adminDAO.saveAdmin(adminDto);
+                    boolean isSaved = adminDAO.save(adminDto);
 
                     if (isSaved) {
                         clearFields();

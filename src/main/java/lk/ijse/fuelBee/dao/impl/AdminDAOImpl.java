@@ -2,11 +2,8 @@ package lk.ijse.fuelBee.dao.impl;
 
 import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.AdminDAO;
-import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.AdminDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,7 +24,7 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 @Override
-    public ArrayList<AdminDto> getAllAdmins() throws SQLException, ClassNotFoundException {
+    public ArrayList<AdminDto> getAll() throws SQLException, ClassNotFoundException {
     ResultSet rs = SQLUtil.execute("SELECT email, CONVERT(AES_DECRYPT(password, 'fuelBee') USING utf8) AS decrypted_password, user_name, type FROM Admin");
          ArrayList<AdminDto> adminDto = new ArrayList<>();
          while (rs.next()) {
@@ -41,12 +38,33 @@ public class AdminDAOImpl implements AdminDAO {
         return adminDto;
     }
     @Override
-    public boolean saveAdmin(AdminDto adminDto) throws SQLException, ClassNotFoundException {
+    public boolean save(AdminDto adminDto) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("INSERT INTO Admin VALUES(?,AES_ENCRYPT(?,'fuelBee'),?,?,) ,adminDto.getEmail(),adminDto.getPassword(),adminDto.getUsername(),adminDto.getType()");
 
     }
+
     @Override
-    public boolean updateAdmin(String email,String password) throws SQLException, ClassNotFoundException {
+    public boolean update(AdminDto dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public AdminDto search(String id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public AdminDto get(String id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean updateAdmin(String email, String password) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("UPDATE Admin SET password=AES_ENCRYPT(?, 'fuelBee') WHERE email=?",password,email);
     }
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TankDAOImpl implements TankDAO {
     @Override
-    public  boolean saveTank(TankDto tankDto) throws SQLException {
+    public  boolean save(TankDto tankDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "INSERT INTO Tank VALUES(?,?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -28,7 +28,7 @@ public class TankDAOImpl implements TankDAO {
         }
     }
    @Override
-    public  boolean deleteTank(String id) throws SQLException {
+    public  boolean delete(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "DELETE FROM Tank WHERE tank_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -41,7 +41,7 @@ public class TankDAOImpl implements TankDAO {
         }
     }
   @Override
-    public  boolean updateTank(TankDto tankDto) throws SQLException {
+    public  boolean update(TankDto tankDto) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         String sql = "UPDATE Tank SET type=?,qty=?,remaining_fuel_in_tank=?,capacity_of_waste=?,date=? WHERE tank_id=?";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class TankDAOImpl implements TankDAO {
         }
     }
     @Override
-    public ArrayList<TankDto> getAllTank() throws SQLException, ClassNotFoundException {
+    public ArrayList<TankDto> getAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM Tank");
         ArrayList<TankDto> tanks = new ArrayList<>();
         while (rst.next()) {
@@ -74,7 +74,7 @@ public class TankDAOImpl implements TankDAO {
         return tanks;
     }
    @Override
-    public TankDto searchTank(String id) throws SQLException, ClassNotFoundException {
+    public TankDto search(String id) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("SELECT * FROM Tank WHERE tank_id=?", id);
 
     }

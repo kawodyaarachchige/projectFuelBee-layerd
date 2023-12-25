@@ -88,7 +88,7 @@ public class ManageFuelTankDetailsFormController {
                 } catch (ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-                boolean isSaved = tankDAO.saveTank(tankDto);
+                boolean isSaved = tankDAO.save(tankDto);
                 if (isSaved) {
                     new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
                     /*getAllMachines();
@@ -102,7 +102,7 @@ public class ManageFuelTankDetailsFormController {
 
     public void btnTankDeleteOnAction(ActionEvent actionEvent) throws SQLException {
         String tankId = txtTankId.getText();
-        boolean isDeleted = tankDAO.deleteTank(tankId);
+        boolean isDeleted = tankDAO.delete(tankId);
         if(isDeleted){
             new Alert(Alert.AlertType.INFORMATION,"Deleted Successfully").show();
             //getAllMachines();
@@ -148,7 +148,7 @@ public class ManageFuelTankDetailsFormController {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        boolean isUpdated = tankDAO.updateTank(tankDto);
+        boolean isUpdated = tankDAO.update(tankDto);
         if(isUpdated){
             new Alert(Alert.AlertType.INFORMATION,"Updated Successfully").show();
             clearTankFields();
@@ -177,7 +177,7 @@ public class ManageFuelTankDetailsFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
         ArrayList<FuelTypeDto> allFuelType = null;
         try {
-            allFuelType = fuelDAO.getAllFuelType();
+            allFuelType = fuelDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -190,7 +190,7 @@ public class ManageFuelTankDetailsFormController {
     public void btnSearchFuelTankOnAction(ActionEvent actionEvent) throws SQLException {
         TankDto tankDto = null;
         try {
-            tankDto = tankDAO.searchTank(txtSearchFuelTank.getText());
+            tankDto = tankDAO.search(txtSearchFuelTank.getText());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

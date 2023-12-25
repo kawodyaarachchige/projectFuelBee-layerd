@@ -76,7 +76,7 @@ public class EmployeeFormController {
         String email = "projectfuelbee@gmail.com";
         EmployeeDto employeeDto = new EmployeeDto(empId, firstName, lastName, address, age, salary, jobTitle, email);
         try {
-            boolean isSaved = employeeDAO.saveEmployee(employeeDto);
+            boolean isSaved = employeeDAO.save(employeeDto);
         if(isSaved){
             new Alert(Alert.AlertType.CONFIRMATION, "Employee Saved").show();
             clearFields();
@@ -92,7 +92,7 @@ public class EmployeeFormController {
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String empId =txtEmpId1.getText();
         try{
-            boolean isDeleted = employeeDAO.deleteEmployee(empId);
+            boolean isDeleted = employeeDAO.delete(empId);
             if(isDeleted){
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee Deleted").show();
                 clearFields();
@@ -122,7 +122,7 @@ public class EmployeeFormController {
 
         EmployeeDto employeeDto = new EmployeeDto(empId, firstName, lastName, address, age, salary, jobTitle, email);
         try{
-            boolean isUpdated = employeeDAO.updateEmployee(employeeDto);
+            boolean isUpdated = employeeDAO.update(employeeDto);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee Updated").show();
                 clearFields();
@@ -156,7 +156,7 @@ public class EmployeeFormController {
         ObservableList<EmployeeTm> obList = FXCollections.observableArrayList();
         ArrayList<EmployeeDto> allEmployees = null;
         try {
-            allEmployees = employeeDAO.getAllEmployees();
+            allEmployees = employeeDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

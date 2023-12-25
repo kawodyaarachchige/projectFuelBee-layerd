@@ -7,21 +7,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.fuelBee.Mail;
-import lk.ijse.fuelBee.dao.custom.AdminDAO;
-import lk.ijse.fuelBee.dao.custom.OrderDAO;
-import lk.ijse.fuelBee.dao.custom.PaymentsDAO;
-import lk.ijse.fuelBee.dao.custom.SupplierDAO;
-import lk.ijse.fuelBee.dao.impl.AdminDAOImpl;
-import lk.ijse.fuelBee.dao.impl.OrderDAOImpl;
-import lk.ijse.fuelBee.dao.impl.PaymentsDAOImpl;
-import lk.ijse.fuelBee.dao.impl.SupplierDAOImpl;
+import lk.ijse.fuelBee.dao.custom.*;
+import lk.ijse.fuelBee.dao.impl.*;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.AdminDto;
 import lk.ijse.fuelBee.dto.OrderDto;
 import lk.ijse.fuelBee.dto.PaymentDto;
 import lk.ijse.fuelBee.dto.SupplierDto;
 import lk.ijse.fuelBee.dto.tm.PaymentTm;
-import lk.ijse.fuelBee.model.PaymentModel;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -61,6 +54,8 @@ public class PaymentFormController {
      OrderDAO orderDAO = new OrderDAOImpl();
      AdminDAO adminDAO = new AdminDAOImpl();
      SupplierDAO supplierDAO = new SupplierDAOImpl();
+
+     OutcomeDAO outcomeDAO = new OutcomeDAOImpl();
 
     public void initialize() throws SQLException, ClassNotFoundException {
         getAllSuppliers();
@@ -115,7 +110,7 @@ public class PaymentFormController {
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String payId = txtPayId.getText();
         try {
-            boolean isDeleted = PaymentModel.deleteOutcome(payId);
+            boolean isDeleted =outcomeDAO.deleteOutcome(payId);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Payment Deleted").show();
                 getAllPayments();
@@ -146,7 +141,7 @@ public class PaymentFormController {
         try {
             boolean isUpdated = false;
             try {
-                isUpdated = paymentsDAO.updatePayment(paymentDtoDto);
+                isUpdated = paymentsDAO.update(paymentDtoDto);
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -177,7 +172,7 @@ public class PaymentFormController {
 
         PaymentDto paymentDtoDto = new PaymentDto(paymentId,email,supEmail,orderId,method, amount, date, status);
         try {
-            boolean isPaymentConfirmed = PaymentModel.confirmPayment(paymentDtoDto);
+            boolean isPaymentConfirmed = paymentsDAO.confirmPayment(paymentDtoDto);
             if (isPaymentConfirmed) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Payment Saved").show();
                 getAllPayments();
@@ -212,7 +207,7 @@ public class PaymentFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
         ArrayList<SupplierDto> allSuppliers = null;
         try {
-            allSuppliers = supplierDAO.getAllSuppliers();
+            allSuppliers = supplierDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -226,7 +221,7 @@ public class PaymentFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
         ArrayList<OrderDto> allOrders = null;
         try {
-            allOrders = orderDAO.getAllOrders();
+            allOrders = orderDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -239,7 +234,7 @@ public class PaymentFormController {
     }
     public void getAllAdminEmail() throws SQLException, ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<AdminDto> allAdmins = adminDAO.getAllAdmins();
+        ArrayList<AdminDto> allAdmins = adminDAO.getAll();
         for (AdminDto adminDto : allAdmins) {
             obList.add(adminDto.getEmail());
         }
@@ -249,7 +244,7 @@ public class PaymentFormController {
         ObservableList<PaymentTm> obList = FXCollections.observableArrayList();
         ArrayList<PaymentDto> allPayments = null;
         try {
-            allPayments = paymentsDAO.getAllPayments();
+            allPayments = paymentsDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

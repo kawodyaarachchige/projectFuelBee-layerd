@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class FuelDAOImpl implements FuelDAO {
    @Override
-    public ArrayList<FuelTypeDto> getAllFuelType() throws SQLException, ClassNotFoundException {
+    public ArrayList<FuelTypeDto> getAll() throws SQLException, ClassNotFoundException {
        ResultSet rst = SQLUtil.execute("SELECT * FROM Fuel");
         ArrayList<FuelTypeDto> fuelTypes = new ArrayList<>();
         while (rst.next()) {
@@ -27,7 +27,35 @@ public class FuelDAOImpl implements FuelDAO {
         return fuelTypes;
 
     }
-   @Override
+
+    @Override
+    public boolean save(FuelTypeDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(FuelTypeDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public FuelTypeDto search(String id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public FuelTypeDto get(String id) throws SQLException {
+        return null;
+    }
+
+
+
+    @Override
     public String getFuelIdByName(String name) throws SQLException, ClassNotFoundException {
        ResultSet rst = SQLUtil.execute("SELECT fuel_id FROM Fuel WHERE type=?", name);
         if(rst.next()){
@@ -37,6 +65,7 @@ public class FuelDAOImpl implements FuelDAO {
         }
 
     }
+
     @Override
     public Double getFuelPriceByName(String name) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT price FROM Fuel WHERE type=?", name);
@@ -46,7 +75,8 @@ public class FuelDAOImpl implements FuelDAO {
             return null;
         }
     }
-   @Override
+
+    @Override
     public ArrayList<Double> getFuelPrices() throws SQLException, ClassNotFoundException {
        ResultSet rst = SQLUtil.execute("SELECT price FROM Fuel");
        ArrayList<Double> prices = new ArrayList<>();

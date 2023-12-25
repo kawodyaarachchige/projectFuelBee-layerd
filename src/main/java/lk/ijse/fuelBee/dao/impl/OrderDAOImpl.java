@@ -14,20 +14,31 @@ import lk.ijse.fuelBee.dto.OrderDto;
 
 public class OrderDAOImpl implements OrderDAO {
    @Override
-    public boolean saveOrder(OrderDto orderDto) throws SQLException, ClassNotFoundException {
+    public boolean save(OrderDto orderDto) throws SQLException, ClassNotFoundException {
         return  SQLUtil.execute("INSERT INTO Orders VALUES(?,?,?,?,?,?,?)", orderDto.getOrderId(), orderDto.getEmail(), orderDto.getType(), orderDto.getDate(), orderDto.getTankQty(), orderDto.getPrice(), orderDto.getStatus());
     }
    @Override
-    public boolean deleteOrder(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
        return  SQLUtil.execute("DELETE FROM Orders WHERE order_id=?", id);
 
     }
+
     @Override
-    public boolean updateOrder(OrderDto orderDto) throws SQLException, ClassNotFoundException {
+    public OrderDto search(String id) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public OrderDto get(String id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean update(OrderDto orderDto) throws SQLException, ClassNotFoundException {
        return SQLUtil.execute("UPDATE Orders SET email=?,type=?,date=?,tank_qty=?,price=?,status=? WHERE order_id=?", orderDto.getEmail(), orderDto.getType(), orderDto.getDate(), orderDto.getTankQty(), orderDto.getPrice(), orderDto.getStatus(), orderDto.getOrderId());
     }
    @Override
-    public ArrayList<OrderDto> getAllOrders() throws SQLException, ClassNotFoundException {
+    public ArrayList<OrderDto> getAll() throws SQLException, ClassNotFoundException {
        ResultSet rs = SQLUtil.execute("SELECT * FROM Orders");
         ArrayList<OrderDto> orders = new ArrayList<>();
 

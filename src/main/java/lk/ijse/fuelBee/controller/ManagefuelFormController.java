@@ -78,7 +78,7 @@ public class ManagefuelFormController {
         ObservableList<MachineTm> obList = FXCollections.observableArrayList();
         ArrayList<MachineDto> allMachine = null;
         try {
-            allMachine = machineDAO.getAllMachines();
+            allMachine = machineDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -101,7 +101,7 @@ public class ManagefuelFormController {
         ObservableList<TankTm> obList = FXCollections.observableArrayList();
         ArrayList<TankDto> allTank = null;
         try {
-            allTank = tankDAO.getAllTank();
+            allTank = tankDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

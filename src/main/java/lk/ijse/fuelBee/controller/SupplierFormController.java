@@ -63,7 +63,7 @@ public class SupplierFormController {
 
         boolean isSaved = false;
         try {
-            isSaved = supplierDAO.saveSupplier(supplierDto);
+            isSaved = supplierDAO.save(supplierDto);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -102,7 +102,7 @@ public class SupplierFormController {
 
         boolean isDeleted = false;
         try {
-            isDeleted = supplierDAO.deleteSupplier(id);
+            isDeleted = supplierDAO.delete(id);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -125,7 +125,7 @@ public class SupplierFormController {
         ObservableList<SupplierTm> obList = FXCollections.observableArrayList();
         ArrayList<SupplierDto> allSuppliers = null;
         try {
-            allSuppliers = supplierDAO.getAllSuppliers();
+            allSuppliers = supplierDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -176,7 +176,7 @@ public class SupplierFormController {
         SupplierDto supplierDto = new SupplierDto(id, name, fuelType, Integer.parseInt(contact), address, email);
         boolean isUpdated = false;
         try {
-            isUpdated = supplierDAO.updateSupplier(supplierDto);
+            isUpdated = supplierDAO.update(supplierDto);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

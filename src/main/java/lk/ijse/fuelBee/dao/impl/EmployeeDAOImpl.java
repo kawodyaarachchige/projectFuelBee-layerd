@@ -13,22 +13,33 @@ import java.util.ArrayList;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
    @Override
-    public boolean saveEmployee(EmployeeDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(EmployeeDto dto) throws SQLException, ClassNotFoundException {
        return SQLUtil.execute("INSERT INTO Employee VALUES(?,?,?,?,?,?,?,?)",dto.getId(),dto.getFirstName(),dto.getLastName(),dto.getAddress(),dto.getAge(),dto.getSalary(),dto.getJobTitle(),dto.getEmail());
 
     }
    @Override
-    public boolean deleteEmployee(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("DELETE FROM Employee WHERE emp_id=?",id);
 
     }
+
     @Override
-    public boolean updateEmployee(EmployeeDto dto) throws SQLException, ClassNotFoundException {
+    public EmployeeDto search(String id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public EmployeeDto get(String id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean update(EmployeeDto dto) throws SQLException, ClassNotFoundException {
        return SQLUtil.execute("update Employee set first_name=?,last_name=?,address=?,age=?,salary=?,role=?,email=? where emp_id=?",dto.getFirstName(),dto.getLastName(),dto.getAddress(),dto.getAge(),dto.getSalary(),dto.getJobTitle(),dto.getEmail(),dto.getId());
 
     }
     @Override
-    public ArrayList<EmployeeDto> getAllEmployees() throws SQLException, ClassNotFoundException {
+    public ArrayList<EmployeeDto> getAll() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM Employee");
         ArrayList<EmployeeDto> list=new ArrayList<>();
         while (resultSet.next()){
@@ -44,7 +55,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             ));
         }return list;
     }
-   @Override
+
+
+
+    @Override
     public int getEmployeeCount() throws SQLException, ClassNotFoundException {
        ResultSet rs = SQLUtil.execute("select count(*) from Employee");
         try {

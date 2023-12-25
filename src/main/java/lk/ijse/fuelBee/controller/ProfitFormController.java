@@ -85,7 +85,7 @@ public class ProfitFormController {
         ObservableList<OutcomeTm> obList1 = FXCollections.observableArrayList();
         ArrayList<OutcomeDto> allOutcomes = null;
         try {
-            allOutcomes = outcomeDAO.getAllOutcomes();
+            allOutcomes = outcomeDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -113,7 +113,7 @@ public class ProfitFormController {
         ObservableList<IncomeTm> obList = FXCollections.observableArrayList();
         ArrayList<IncomeDto> allIncomes = null;
         try {
-            allIncomes = incomeDAO.getAllIncomes();
+            allIncomes = incomeDAO.getAll();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -154,12 +154,12 @@ public class ProfitFormController {
             }
         }else{
             try {
-                allIncomes = incomeDAO.getAllIncomes();
+                allIncomes = incomeDAO.getAll();
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
             try {
-                allOutcomes = outcomeDAO.getAllOutcomes();
+                allOutcomes = outcomeDAO.getAll();
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
