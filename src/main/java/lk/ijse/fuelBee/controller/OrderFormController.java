@@ -7,11 +7,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.fuelBee.bo.BOFactory;
+import lk.ijse.fuelBee.bo.custom.FuelBO;
+import lk.ijse.fuelBee.bo.custom.OrderBO;
 import lk.ijse.fuelBee.dao.custom.FuelDAO;
 import lk.ijse.fuelBee.dao.custom.OrderDAO;
-import lk.ijse.fuelBee.dao.impl.FuelDAOImpl;
-import lk.ijse.fuelBee.dao.impl.OrderDAOImpl;
-import lk.ijse.fuelBee.dto.FuelTypeDto;
+import lk.ijse.fuelBee.dao.custom.impl.FuelDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.OrderDAOImpl;
+import lk.ijse.fuelBee.dto.FuelDto;
 import lk.ijse.fuelBee.dto.OrderDto;
 import lk.ijse.fuelBee.dto.tm.OrderTm;
 
@@ -43,9 +46,9 @@ public class OrderFormController {
     public TableColumn colStatus;
     public ComboBox cmbTankQty;
 
-    OrderDAO orderDAO = new OrderDAOImpl();
+    OrderBO orderBO = (OrderBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.ORDER);
 
-    FuelDAO fuelDAO = new FuelDAOImpl();
+    FuelBO fuelBO = (FuelBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.FUEL);
 
 
     public void initialize() throws SQLException {
@@ -56,7 +59,7 @@ public class OrderFormController {
                     int selectedValue = (int) cmbTankQty.getValue();
                     Double fuelPrice = null;
                     try {
-                        fuelPrice = fuelDAO.getFuelPriceByName(cmbFuelType.getValue().toString());
+                        fuelPrice = fuelBO.getFuelPriceByName(cmbFuelType.getValue().toString());
                     } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
@@ -99,7 +102,7 @@ public class OrderFormController {
         OrderDto orderDto = new OrderDto(orderId, email, type, date, qty, price, status);
         boolean isSaved = false;
         try {
-            isSaved = orderDAO.save(orderDto);
+            isSaved = orderBO.saveOrder(orderDto);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -117,7 +120,7 @@ public class OrderFormController {
         String orderId=txtId.getText();
         boolean isDeleted = false;
         try {
-            isDeleted = orderDAO.delete(orderId);
+            isDeleted = orderBO.deleteOrder(orderId);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -146,7 +149,7 @@ public class OrderFormController {
         OrderDto orderDto = new OrderDto(orderId, email, type, date, qty, price, status);
         boolean isUpdated = false;
         try {
-            isUpdated = orderDAO.update(orderDto);
+            isUpdated = orderBO.updateOrder(orderDto);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -170,7 +173,7 @@ public class OrderFormController {
         ObservableList<OrderTm> obList = FXCollections.observableArrayList();
         ArrayList<OrderDto> allOrders = null;
         try {
-            allOrders = orderDAO.getAll();
+            allOrders = orderBO.getAllOrder();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -204,13 +207,13 @@ public class OrderFormController {
     }
     public void getAllFuelTypes() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<FuelTypeDto> allFuelType = null;
+        ArrayList<FuelDto> allFuelType = null;
         try {
-            allFuelType = fuelDAO.getAll();
+            allFuelType = fuelBO.getAllFuel();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        for (FuelTypeDto fuelType : allFuelType) {
+        for (FuelDto fuelType : allFuelType) {
             obList.add(fuelType.getFuelType());
         }
         cmbFuelType.setItems(obList);

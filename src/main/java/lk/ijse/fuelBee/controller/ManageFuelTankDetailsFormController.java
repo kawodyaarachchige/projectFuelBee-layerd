@@ -8,13 +8,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.fuelBee.bo.BOFactory;
+import lk.ijse.fuelBee.bo.custom.FuelBO;
+import lk.ijse.fuelBee.bo.custom.MachineBO;
+import lk.ijse.fuelBee.bo.custom.TankBO;
 import lk.ijse.fuelBee.dao.custom.FuelDAO;
 import lk.ijse.fuelBee.dao.custom.MachineDAO;
 import lk.ijse.fuelBee.dao.custom.TankDAO;
-import lk.ijse.fuelBee.dao.impl.FuelDAOImpl;
-import lk.ijse.fuelBee.dao.impl.MachineDAOImpl;
-import lk.ijse.fuelBee.dao.impl.TankDAOImpl;
-import lk.ijse.fuelBee.dto.FuelTypeDto;
+import lk.ijse.fuelBee.dao.custom.impl.FuelDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.MachineDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.TankDAOImpl;
+import lk.ijse.fuelBee.dto.FuelDto;
 import lk.ijse.fuelBee.dto.TankDto;
 
 import java.sql.Date;
@@ -33,11 +37,13 @@ public class ManageFuelTankDetailsFormController {
     public TextField txtTankRemainingFuel;
     public TextField txtTankWaste;
     public TextField txtSearchFuelTank;
-    FuelDAO fuelDAO = new FuelDAOImpl();
 
-    TankDAO tankDAO = new TankDAOImpl();
 
-    MachineDAO machineDAO = new MachineDAOImpl();
+
+    FuelBO fuelBO = (FuelBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.FUEL);
+
+    MachineBO machineBO = (MachineBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.MACHINE);
+    TankBO tankBO = (TankBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.TANK);
 
     public void initialize() throws SQLException {
         loadAllFuelType();
@@ -65,7 +71,7 @@ public class ManageFuelTankDetailsFormController {
             );
         boolean isRemainingFuelMatched = false;
         try {
-            isRemainingFuelMatched = machineDAO.checkDayEndAmounts(fuelDAO.getFuelIdByName(fuelType),Integer.parseInt(txtTankRemainingFuel.getText()));
+            isRemainingFuelMatched = machineBO.checkDayEndAmounts(fuelBO.getFuelIdByName(fuelType),Integer.parseInt(txtTankRemainingFuel.getText()));
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -79,16 +85,21 @@ public class ManageFuelTankDetailsFormController {
             }else {
                 String FuelId = null;
                 try {
-                    FuelId = fuelDAO.getFuelIdByName(fuelType);
+                    FuelId = fuelBO.getFuelIdByName(fuelType);
                 } catch (ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
                 try {
-                    boolean isWasteAmountReduced = machineDAO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
+                    boolean isWasteAmountReduced = machineBO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
                 } catch (ClassNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-                boolean isSaved = tankDAO.save(tankDto);
+                boolean isSaved = false;
+                try {
+                    isSaved = tankBO.saveTank(tankDto);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 if (isSaved) {
                     new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").show();
                     /*getAllMachines();
@@ -102,7 +113,12 @@ public class ManageFuelTankDetailsFormController {
 
     public void btnTankDeleteOnAction(ActionEvent actionEvent) throws SQLException {
         String tankId = txtTankId.getText();
-        boolean isDeleted = tankDAO.delete(tankId);
+        boolean isDeleted = false;
+        try {
+            isDeleted = tankBO.deleteTank(tankId);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if(isDeleted){
             new Alert(Alert.AlertType.INFORMATION,"Deleted Successfully").show();
             //getAllMachines();
@@ -139,16 +155,21 @@ public class ManageFuelTankDetailsFormController {
 
         String FuelId = null;
         try {
-            FuelId = fuelDAO.getFuelIdByName(fuelType);
+            FuelId = fuelBO.getFuelIdByName(fuelType);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         try {
-            boolean isWasteAmountReduced = machineDAO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
+            boolean isWasteAmountReduced = machineBO.changeDayEndFuelByWaste(FuelId, capacityOfWaste);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        boolean isUpdated = tankDAO.update(tankDto);
+        boolean isUpdated = false;
+        try {
+            isUpdated = tankBO.updateTank(tankDto);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         if(isUpdated){
             new Alert(Alert.AlertType.INFORMATION,"Updated Successfully").show();
             clearTankFields();
@@ -175,14 +196,14 @@ public class ManageFuelTankDetailsFormController {
     }
     public void loadAllFuelType() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<FuelTypeDto> allFuelType = null;
+        ArrayList<FuelDto> allFuelType = null;
         try {
-            allFuelType = fuelDAO.getAll();
+            allFuelType = fuelBO.getAllFuel();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        for (FuelTypeDto fuelTypeDto : allFuelType) {
-            obList.add(fuelTypeDto.getFuelType());
+        for (FuelDto fuelDto : allFuelType) {
+            obList.add(fuelDto.getFuelType());
         }
         cmbTankType.setItems(obList);
     }
@@ -190,7 +211,7 @@ public class ManageFuelTankDetailsFormController {
     public void btnSearchFuelTankOnAction(ActionEvent actionEvent) throws SQLException {
         TankDto tankDto = null;
         try {
-            tankDto = tankDAO.search(txtSearchFuelTank.getText());
+            tankDto = tankBO.searchTank(txtSearchFuelTank.getText());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

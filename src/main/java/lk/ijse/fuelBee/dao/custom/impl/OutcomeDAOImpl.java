@@ -1,9 +1,10 @@
-package lk.ijse.fuelBee.dao.impl;
+package lk.ijse.fuelBee.dao.custom.impl;
 
 import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.OutcomeDAO;
-import lk.ijse.fuelBee.db.Dbconnection;
-import lk.ijse.fuelBee.dto.OutcomeDto;
+import lk.ijse.fuelBee.dto.EmployeeDto;
+import lk.ijse.fuelBee.dto.MachineDto;
+import lk.ijse.fuelBee.entity.Outcome;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,53 +14,53 @@ import java.util.Map;
 
 public class OutcomeDAOImpl implements OutcomeDAO {
     @Override
-    public  ArrayList<OutcomeDto> getAll() throws SQLException, ClassNotFoundException {
+    public  ArrayList<Outcome> getAll() throws SQLException, ClassNotFoundException {
         ResultSet rs = SQLUtil.execute("SELECT * FROM Outcome");
-        ArrayList<OutcomeDto> outcomes = new ArrayList<>();
+        ArrayList<Outcome> outcomes = new ArrayList<>();
         while (rs.next()){
-            outcomes.add(new OutcomeDto(rs.getString(1), rs.getDouble(2), rs.getDate(3)));
+            outcomes.add(new Outcome(rs.getString(1), rs.getDouble(2), rs.getDate(3)));
         }
         return outcomes;
     }
 
     @Override
-    public boolean save(OutcomeDto dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean save(Outcome entity) throws SQLException, ClassNotFoundException {
+        return  SQLUtil.execute("INSERT INTO Outcome VALUES(?,?,?)",entity.getOutcomeId(),entity.getOutcomeAmount(),entity.getOutcomeDate());
     }
 
     @Override
-    public boolean update(OutcomeDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Outcome entity) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return  SQLUtil.execute("DELETE FROM Outcome WHERE outcome_id=?", id);
     }
 
     @Override
-    public OutcomeDto search(String id) throws SQLException, ClassNotFoundException {
+    public Outcome search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public OutcomeDto get(String id) throws SQLException {
+    public Outcome get(String id) throws SQLException {
         return null;
     }
 
     @Override
-    public  ArrayList<OutcomeDto> getAllOutcomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException, ClassNotFoundException {
+    public  ArrayList<Outcome> getAllByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException, ClassNotFoundException {
         ResultSet rs = SQLUtil.execute("SELECT * FROM Outcome WHERE date BETWEEN ? AND ?", startDate, endDate);
-        ArrayList<OutcomeDto> outcomes = new ArrayList<>();
+        ArrayList<Outcome> outcomes = new ArrayList<>();
         while(rs.next()){
-            outcomes.add(new OutcomeDto(rs.getString(1), rs.getDouble(2), rs.getDate(3)));
+            outcomes.add(new Outcome(rs.getString(1), rs.getDouble(2), rs.getDate(3)));
         }
         return outcomes;
     }
     @Override
     public Map<String, Double> getMonthlyOutcomesTotal() throws SQLException, ClassNotFoundException {
         ResultSet rs = SQLUtil.execute("SELECT * FROM Outcome");
-        ArrayList<OutcomeDto> outcomes = new ArrayList<>();
+        ArrayList<Outcome> outcomes = new ArrayList<>();
         Map<String, Double> monthlyTotals = new HashMap<>();
         while (rs.next()) {
             String month = getMonthFromDate(rs.getDate(3));
@@ -74,11 +75,12 @@ public class OutcomeDAOImpl implements OutcomeDAO {
         int month = cal.get(Calendar.MONTH) + 1;
         return String.format("%02d", month);
     }
-   @Override
+   /*@Override
     public  boolean deleteOutcome(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         try {
             connection.setAutoCommit(false);
+            //boolean isDeleted= outcomeDao.delete(id);
             boolean isDeleted = SQLUtil.execute("DELETE FROM Outcome WHERE outcome_id=?", id);
             boolean isDeleted2 = SQLUtil.execute("DELETE FROM Payment WHERE outcome_id=?", id);
             if ((isDeleted ) && (isDeleted2 )) {
@@ -96,5 +98,5 @@ public class OutcomeDAOImpl implements OutcomeDAO {
             connection.setAutoCommit(true);
         }
 
-    }
+    }*/
 }

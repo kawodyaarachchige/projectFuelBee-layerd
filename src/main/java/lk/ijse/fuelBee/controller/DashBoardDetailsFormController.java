@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import lk.ijse.fuelBee.dao.custom.*;
-import lk.ijse.fuelBee.dao.impl.*;
+import lk.ijse.fuelBee.dao.custom.impl.*;
 
 import java.io.IOException;
 import java.net.URL;

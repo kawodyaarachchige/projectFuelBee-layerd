@@ -12,8 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.fuelBee.bo.BOFactory;
+import lk.ijse.fuelBee.bo.custom.AdminBO;
 import lk.ijse.fuelBee.dao.custom.AdminDAO;
-import lk.ijse.fuelBee.dao.impl.AdminDAOImpl;
+
+import lk.ijse.fuelBee.dao.custom.impl.AdminDAOImpl;
 import lk.ijse.fuelBee.dto.AdminDto;
 import lk.ijse.fuelBee.regex.regexPatterns;
 
@@ -28,7 +31,7 @@ public class SignupFormController {
     public TextField txtUserName;
     public AnchorPane mainpain;
 
-    AdminDAO adminDAO = new AdminDAOImpl();
+    AdminBO adminBO = (AdminBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.ADMIN);
 
 
     public void btnSignUpOnAction(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
@@ -53,7 +56,7 @@ public class SignupFormController {
                     return;
                 }else{
                     AdminDto adminDto = new AdminDto(email, pwd, userName, type);
-                    boolean isSaved = adminDAO.save(adminDto);
+                    boolean isSaved = adminBO.saveAdmin(adminDto);
 
                     if (isSaved) {
                         clearFields();

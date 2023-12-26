@@ -9,14 +9,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.fuelBee.bo.BOFactory;
+import lk.ijse.fuelBee.bo.custom.FuelBO;
+import lk.ijse.fuelBee.bo.custom.IncomeBO;
+import lk.ijse.fuelBee.bo.custom.MachineBO;
 import lk.ijse.fuelBee.dao.custom.FuelDAO;
 import lk.ijse.fuelBee.dao.custom.IncomeDAO;
 import lk.ijse.fuelBee.dao.custom.MachineDAO;
-import lk.ijse.fuelBee.dao.impl.FuelDAOImpl;
-import lk.ijse.fuelBee.dao.impl.IncomeDAOImpl;
-import lk.ijse.fuelBee.dao.impl.MachineDAOImpl;
-import lk.ijse.fuelBee.dto.FuelTypeDto;
-import lk.ijse.fuelBee.dto.IncomeDto;
+import lk.ijse.fuelBee.dao.custom.impl.FuelDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.IncomeDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.MachineDAOImpl;
+import lk.ijse.fuelBee.dto.FuelDto;
 import lk.ijse.fuelBee.dto.MachineDto;
 
 import java.sql.Date;
@@ -27,6 +30,10 @@ import java.util.Random;
 import java.util.regex.Pattern;
 
 public class ManageFuelMachineDetailsFormController {
+    MachineBO machineBO = (MachineBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.MACHINE);
+    FuelBO fuelBO = (FuelBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.FUEL);
+
+    IncomeBO incomeBO =(IncomeBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.INCOME);
 
     public JFXButton backpane;
     public TextField txtMachineId;
@@ -37,10 +44,7 @@ public class ManageFuelMachineDetailsFormController {
     public TextField txtEndFuel;
     public TextField txtSearchMachineId;
 
-    FuelDAO fuelDAO = new FuelDAOImpl();
-    MachineDAO machineDAO = new MachineDAOImpl();
 
-    IncomeDAO incomeDAO = new IncomeDAOImpl();
 
     public void initialize() throws SQLException {
         loadAllFuelType();
@@ -48,14 +52,14 @@ public class ManageFuelMachineDetailsFormController {
 
     public void loadAllFuelType() throws SQLException {
         ObservableList<String> obList = FXCollections.observableArrayList();
-        ArrayList<FuelTypeDto> allFuelType = null;
+        ArrayList<FuelDto> allFuelType = null;
         try {
-            allFuelType = fuelDAO.getAll();
+            allFuelType = fuelBO.getAllFuel();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        for (FuelTypeDto fuelTypeDto : allFuelType) {
-            obList.add(fuelTypeDto.getFuelType());
+        for (FuelDto fuelDto : allFuelType) {
+            obList.add(fuelDto.getFuelType());
         }
         cmbFuelType.setItems(obList);
     }
@@ -64,9 +68,9 @@ public class ManageFuelMachineDetailsFormController {
         txtMachineId.setText(generateId("M"));
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String machineId = txtMachineId.getText();
-        boolean isDeleted =incomeDAO .deleteIncome(machineId);
+        boolean isDeleted =incomeBO.deleteIncome(machineId);
         if(isDeleted){
             new Alert(Alert.AlertType.INFORMATION,"Deleted Successfully").show();
             clearFields();
@@ -89,7 +93,7 @@ public class ManageFuelMachineDetailsFormController {
         String endFuel = txtEndFuel.getText();
         String fuelId = null;
         try {
-            fuelId = fuelDAO.getFuelIdByName(cmbFuelType.getValue().toString());
+            fuelId = fuelBO.getFuelIdByName(cmbFuelType.getValue().toString());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -103,7 +107,7 @@ public class ManageFuelMachineDetailsFormController {
                 Integer.parseInt(endFuel),
                 Date.valueOf(date)
         );
-        final boolean isUpdated = machineDAO.updateMachineSpecs(machineDto);
+        final boolean isUpdated = machineBO.updateMachineSpecs(machineDto);
         if(isUpdated){
             new Alert(Alert.AlertType.INFORMATION,"Updated Successfully").show();
             clearFields();
@@ -121,7 +125,7 @@ public class ManageFuelMachineDetailsFormController {
         String endFuel = txtEndFuel.getText();
         String fuelId = null;
         try {
-            fuelId = fuelDAO.getFuelIdByName(type);
+            fuelId = fuelBO.getFuelIdByName(type);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -140,7 +144,7 @@ public class ManageFuelMachineDetailsFormController {
         if(!isMachineIdValidated){
             new Alert(Alert.AlertType.ERROR,"Invalid Machine Id").show();
         }else{
-            boolean isSaved = machineDAO.confirmMachineUsage(machineDto);
+            boolean isSaved = machineBO.confirmMachineUsage(machineDto);
             if(isSaved){
                 new Alert(Alert.AlertType.INFORMATION,"Saved Successfully & Income source added").show();
                 clearFields();
@@ -170,7 +174,7 @@ public class ManageFuelMachineDetailsFormController {
     public void btnSearchMachineIdOnAction(ActionEvent actionEvent) throws SQLException {
         MachineDto machineDto = null;
         try {
-            machineDto = machineDAO.search(txtSearchMachineId.getText());
+            machineDto = machineBO.searchMachine(txtSearchMachineId.getText());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

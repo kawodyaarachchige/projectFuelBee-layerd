@@ -1,12 +1,11 @@
 package lk.ijse.fuelBee.dao.custom;
 
 import lk.ijse.fuelBee.dao.CrudDAO;
-import lk.ijse.fuelBee.dto.OrderDto;
+import lk.ijse.fuelBee.entity.Order;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public interface OrderDAO extends CrudDAO<OrderDto> {
+public interface OrderDAO extends CrudDAO<Order> {
    // boolean saveOrder(OrderDto orderDto) throws SQLException, ClassNotFoundException;
 
   //  boolean deleteOrder(String id) throws SQLException, ClassNotFoundException;
@@ -15,5 +14,6 @@ public interface OrderDAO extends CrudDAO<OrderDto> {
    // ArrayList<OrderDto> getAllOrders() throws SQLException, ClassNotFoundException;
     int getOrderCount() throws SQLException, ClassNotFoundException;
 
-    OrderDto getOrderDetails(String id) throws SQLException, ClassNotFoundException;
+    Order getOrderDetails(String id) throws SQLException, ClassNotFoundException;
+    boolean updateOrderStatus(String id, String status) throws SQLException, ClassNotFoundException;
 }

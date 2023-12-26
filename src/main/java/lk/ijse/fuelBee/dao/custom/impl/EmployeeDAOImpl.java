@@ -1,20 +1,19 @@
-package lk.ijse.fuelBee.dao.impl;
+package lk.ijse.fuelBee.dao.custom.impl;
 
 import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.EmployeeDAO;
-import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.EmployeeDto;
+import lk.ijse.fuelBee.dto.MachineDto;
+import lk.ijse.fuelBee.entity.Employee;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
    @Override
-    public boolean save(EmployeeDto dto) throws SQLException, ClassNotFoundException {
-       return SQLUtil.execute("INSERT INTO Employee VALUES(?,?,?,?,?,?,?,?)",dto.getId(),dto.getFirstName(),dto.getLastName(),dto.getAddress(),dto.getAge(),dto.getSalary(),dto.getJobTitle(),dto.getEmail());
+    public boolean save(Employee entity) throws SQLException, ClassNotFoundException {
+       return SQLUtil.execute("INSERT INTO Employee VALUES(?,?,?,?,?,?,?,?)",entity.getId(),entity.getFirstName(),entity.getLastName(),entity.getAddress(),entity.getAge(),entity.getSalary(),entity.getJobTitle(),entity.getEmail());
 
     }
    @Override
@@ -24,26 +23,26 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public EmployeeDto search(String id) throws SQLException {
+    public Employee search(String id) throws SQLException {
         return null;
     }
 
     @Override
-    public EmployeeDto get(String id) throws SQLException {
+    public Employee get(String id) throws SQLException {
         return null;
     }
 
     @Override
-    public boolean update(EmployeeDto dto) throws SQLException, ClassNotFoundException {
-       return SQLUtil.execute("update Employee set first_name=?,last_name=?,address=?,age=?,salary=?,role=?,email=? where emp_id=?",dto.getFirstName(),dto.getLastName(),dto.getAddress(),dto.getAge(),dto.getSalary(),dto.getJobTitle(),dto.getEmail(),dto.getId());
+    public boolean update(Employee entity) throws SQLException, ClassNotFoundException {
+       return SQLUtil.execute("update Employee set first_name=?,last_name=?,address=?,age=?,salary=?,role=?,email=? where emp_id=?",entity.getFirstName(),entity.getLastName(),entity.getAddress(),entity.getAge(),entity.getSalary(),entity.getJobTitle(),entity.getEmail(),entity.getId());
 
     }
     @Override
-    public ArrayList<EmployeeDto> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Employee> getAll() throws SQLException, ClassNotFoundException {
         ResultSet resultSet = SQLUtil.execute("SELECT * FROM Employee");
-        ArrayList<EmployeeDto> list=new ArrayList<>();
+        ArrayList<Employee> list=new ArrayList<>();
         while (resultSet.next()){
-            list.add(new EmployeeDto(
+            list.add(new Employee(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
@@ -55,9 +54,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             ));
         }return list;
     }
-
-
-
     @Override
     public int getEmployeeCount() throws SQLException, ClassNotFoundException {
        ResultSet rs = SQLUtil.execute("select count(*) from Employee");

@@ -1,9 +1,10 @@
-package lk.ijse.fuelBee.dao.impl;
+package lk.ijse.fuelBee.dao.custom.impl;
 
 import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.IncomeDAO;
-import lk.ijse.fuelBee.db.Dbconnection;
-import lk.ijse.fuelBee.dto.IncomeDto;
+import lk.ijse.fuelBee.dto.EmployeeDto;
+import lk.ijse.fuelBee.dto.MachineDto;
+import lk.ijse.fuelBee.entity.Income;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,23 +15,23 @@ import java.util.Calendar;
 
 public class IncomeDAOImpl implements IncomeDAO {
    @Override
-    public  ArrayList<IncomeDto> getAll() throws SQLException, ClassNotFoundException {
+    public  ArrayList<Income> getAll() throws SQLException, ClassNotFoundException {
        ResultSet rs = SQLUtil.execute("SELECT * FROM Income");
-       ArrayList<IncomeDto> incomes = new ArrayList<>();
+       ArrayList<Income> incomes = new ArrayList<>();
         while (rs.next()) {
-            incomes.add(new IncomeDto(rs.getString(1), rs.getDouble(2), rs.getDate(3)));
+            incomes.add(new Income(rs.getString(1), rs.getDouble(2), rs.getDate(3)));
         }
         return incomes;
     }
 
     @Override
-    public boolean save(IncomeDto dto) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("INSERT INTO Income VALUES(?,?,?)",dto.getIncomeId(),dto.getAmount(),dto.getDate());
+    public boolean save(Income entity) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("INSERT INTO Income VALUES(?,?,?)",entity.getIncomeId(),entity.getAmount(),entity.getDate());
     }
 
     @Override
-    public boolean update(IncomeDto dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean update(Income entity) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("UPDATE Income SET income_id=?,amount=?,date=? WHERE income_id=?", entity.getIncomeId(), entity.getAmount(), entity.getDate());
     }
 
     @Override
@@ -39,28 +40,28 @@ public class IncomeDAOImpl implements IncomeDAO {
     }
 
     @Override
-    public IncomeDto search(String id) throws SQLException {
+    public Income search(String id) throws SQLException {
         return null;
     }
 
     @Override
-    public IncomeDto get(String id) throws SQLException {
+    public Income get(String id) throws SQLException {
         return null;
     }
 
     @Override
-    public  ArrayList<IncomeDto> getAllIncomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException, ClassNotFoundException {
+    public ArrayList<Income> getAllIncomesByDate(java.util.Date startDate, java.util.Date endDate) throws SQLException, ClassNotFoundException {
         ResultSet rs = SQLUtil.execute("SELECT * FROM Income WHERE date BETWEEN ? AND ?", startDate, endDate);
-        ArrayList<IncomeDto> incomes = new ArrayList<>();
+        ArrayList<Income> incomes = new ArrayList<>();
         while (rs.next()) {
-            incomes.add(new IncomeDto(rs.getString(1), rs.getDouble(2), rs.getDate(3)));
+            incomes.add(new Income(rs.getString(1), rs.getDouble(2), rs.getDate(3)));
         }
         return incomes;
     }
     @Override
     public  Map<String, Double> getMonthlyIncomesTotal() throws SQLException, ClassNotFoundException {
         ResultSet rs  = SQLUtil.execute("SELECT * FROM Income");
-        ArrayList<IncomeDto> incomes = new ArrayList<>();
+       ArrayList<Income> incomes = new ArrayList<>();
         Map<String, Double> monthlyTotals = new HashMap<>();
         while (rs.next()) {
             String month = getMonthFromDate(rs.getDate(3));
@@ -75,7 +76,7 @@ public class IncomeDAOImpl implements IncomeDAO {
         int month = cal.get(Calendar.MONTH) + 1;
         return String.format("%02d", month);
     }
-    @Override
+    /*@Override
     public boolean deleteIncome(String id) throws SQLException {
         Connection connection = Dbconnection.getInstance().getConnection();
         try{
@@ -95,6 +96,6 @@ public class IncomeDAOImpl implements IncomeDAO {
         } finally {
             connection.setAutoCommit(true);
         }
-    }
+    }*/
 
 }

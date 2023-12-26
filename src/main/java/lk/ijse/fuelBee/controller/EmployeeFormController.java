@@ -9,8 +9,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.fuelBee.bo.BOFactory;
+import lk.ijse.fuelBee.bo.custom.EmployeeBO;
 import lk.ijse.fuelBee.dao.custom.EmployeeDAO;
-import lk.ijse.fuelBee.dao.impl.EmployeeDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.EmployeeDAOImpl;
 import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.EmployeeDto;
 import lk.ijse.fuelBee.dto.tm.EmployeeTm;
@@ -44,7 +46,7 @@ public class EmployeeFormController {
     public TableColumn<?,?> colOption;
     public TextField txtEmpId1;
 
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.EMPLOYEE);
 
     public void initialize() throws SQLException {
         loadAllEmployees();
@@ -76,7 +78,7 @@ public class EmployeeFormController {
         String email = "projectfuelbee@gmail.com";
         EmployeeDto employeeDto = new EmployeeDto(empId, firstName, lastName, address, age, salary, jobTitle, email);
         try {
-            boolean isSaved = employeeDAO.save(employeeDto);
+            boolean isSaved = employeeBO.saveEmployee(employeeDto);
         if(isSaved){
             new Alert(Alert.AlertType.CONFIRMATION, "Employee Saved").show();
             clearFields();
@@ -92,7 +94,7 @@ public class EmployeeFormController {
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         String empId =txtEmpId1.getText();
         try{
-            boolean isDeleted = employeeDAO.delete(empId);
+            boolean isDeleted = employeeBO.deleteEmployee(empId);
             if(isDeleted){
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee Deleted").show();
                 clearFields();
@@ -122,7 +124,7 @@ public class EmployeeFormController {
 
         EmployeeDto employeeDto = new EmployeeDto(empId, firstName, lastName, address, age, salary, jobTitle, email);
         try{
-            boolean isUpdated = employeeDAO.update(employeeDto);
+            boolean isUpdated = employeeBO.updateEmployee(employeeDto);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee Updated").show();
                 clearFields();
@@ -156,7 +158,7 @@ public class EmployeeFormController {
         ObservableList<EmployeeTm> obList = FXCollections.observableArrayList();
         ArrayList<EmployeeDto> allEmployees = null;
         try {
-            allEmployees = employeeDAO.getAll();
+            allEmployees = employeeBO.getAllEmployee();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

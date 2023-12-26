@@ -1,20 +1,22 @@
 package lk.ijse.fuelBee.dao.custom;
 
+import lk.ijse.fuelBee.dao.CrudDAO;
 import lk.ijse.fuelBee.dto.TankDto;
+import lk.ijse.fuelBee.entity.Tank;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface TankDAO {
-    boolean save(TankDto tankDto) throws SQLException;
+public interface TankDAO extends CrudDAO<Tank> {
+   // boolean save(Tank entity) throws SQLException, ClassNotFoundException;
 
-    boolean delete(String id) throws SQLException;
+  //  boolean delete(String id) throws SQLException, ClassNotFoundException;
 
-    boolean update(TankDto tankDto) throws SQLException;
+   // boolean update(Tank entity) throws SQLException, ClassNotFoundException;
 
-    ArrayList<TankDto> getAll() throws SQLException, ClassNotFoundException;
+  //  ArrayList<Tank> getAll() throws SQLException, ClassNotFoundException;
 
-    TankDto search(String id) throws SQLException, ClassNotFoundException;
+   // Tank search(String id) throws SQLException, ClassNotFoundException;
     // boolean saveTank(TankDto tankDto) throws SQLException;
   //  boolean deleteTank(String id) throws SQLException;
    // boolean updateTank(TankDto tankDto) throws SQLException;

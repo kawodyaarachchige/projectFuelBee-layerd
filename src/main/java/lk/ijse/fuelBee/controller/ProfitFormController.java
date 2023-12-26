@@ -8,10 +8,13 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.fuelBee.bo.BOFactory;
+import lk.ijse.fuelBee.bo.custom.IncomeBO;
+import lk.ijse.fuelBee.bo.custom.OutcomeBO;
 import lk.ijse.fuelBee.dao.custom.IncomeDAO;
 import lk.ijse.fuelBee.dao.custom.OutcomeDAO;
-import lk.ijse.fuelBee.dao.impl.IncomeDAOImpl;
-import lk.ijse.fuelBee.dao.impl.OutcomeDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.IncomeDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.OutcomeDAOImpl;
 import lk.ijse.fuelBee.dto.IncomeDto;
 import lk.ijse.fuelBee.dto.OutcomeDto;
 import lk.ijse.fuelBee.dto.tm.IncomeTm;
@@ -41,10 +44,8 @@ public class ProfitFormController {
     public TableColumn<?,?> colOutcomeDate;
     public DatePicker dpStartDate;
     public DatePicker dpEndDate;
-
-    IncomeDAO incomeDAO = new IncomeDAOImpl();
-    OutcomeDAO outcomeDAO = new OutcomeDAOImpl();
-
+    IncomeBO incomeBO = (IncomeBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.INCOME);
+    OutcomeBO outcomeBO = (OutcomeBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.OUTCOME);
 
     public void initialize() throws SQLException {
         setAllOutcome();
@@ -85,7 +86,7 @@ public class ProfitFormController {
         ObservableList<OutcomeTm> obList1 = FXCollections.observableArrayList();
         ArrayList<OutcomeDto> allOutcomes = null;
         try {
-            allOutcomes = outcomeDAO.getAll();
+            allOutcomes = outcomeBO.getAllOutcomes();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -113,7 +114,7 @@ public class ProfitFormController {
         ObservableList<IncomeTm> obList = FXCollections.observableArrayList();
         ArrayList<IncomeDto> allIncomes = null;
         try {
-            allIncomes = incomeDAO.getAll();
+            allIncomes = incomeBO.getAllIncome();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -143,23 +144,23 @@ public class ProfitFormController {
             java.util.Date startDate = Date.valueOf(dpStartDate.getValue());
             java.util.Date endDate = Date.valueOf(dpEndDate.getValue());
             try {
-                allIncomes = incomeDAO.getAllIncomesByDate(startDate, endDate);
+                allIncomes = incomeBO.getAllIncomesByDate(startDate, endDate);
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
             try {
-                allOutcomes = outcomeDAO.getAllOutcomesByDate(startDate, endDate);
+                allOutcomes = outcomeBO.getAllOutcomesByDate(startDate, endDate);
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }else{
             try {
-                allIncomes = incomeDAO.getAll();
+                allIncomes = incomeBO.getAllIncome();
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
             try {
-                allOutcomes = outcomeDAO.getAll();
+                allOutcomes = outcomeBO.getAllOutcomes();
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }

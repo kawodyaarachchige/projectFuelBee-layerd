@@ -1,23 +1,22 @@
-package lk.ijse.fuelBee.dao.impl;
+package lk.ijse.fuelBee.dao.custom.impl;
 
 import lk.ijse.fuelBee.dao.SQLUtil;
 import lk.ijse.fuelBee.dao.custom.FuelDAO;
-import lk.ijse.fuelBee.db.Dbconnection;
-import lk.ijse.fuelBee.dto.FuelTypeDto;
+import lk.ijse.fuelBee.dto.EmployeeDto;
+import lk.ijse.fuelBee.dto.MachineDto;
+import lk.ijse.fuelBee.entity.Fuel;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FuelDAOImpl implements FuelDAO {
    @Override
-    public ArrayList<FuelTypeDto> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Fuel> getAll() throws SQLException, ClassNotFoundException {
        ResultSet rst = SQLUtil.execute("SELECT * FROM Fuel");
-        ArrayList<FuelTypeDto> fuelTypes = new ArrayList<>();
+        ArrayList<Fuel> fuelTypes = new ArrayList<>();
         while (rst.next()) {
-            fuelTypes.add(new FuelTypeDto(
+            fuelTypes.add(new Fuel(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getInt(3),
@@ -25,16 +24,15 @@ public class FuelDAOImpl implements FuelDAO {
             ));
         }
         return fuelTypes;
-
     }
 
     @Override
-    public boolean save(FuelTypeDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Fuel entity) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(FuelTypeDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Fuel entity) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -44,12 +42,12 @@ public class FuelDAOImpl implements FuelDAO {
     }
 
     @Override
-    public FuelTypeDto search(String id) throws SQLException {
+    public Fuel search(String id) throws SQLException {
         return null;
     }
 
     @Override
-    public FuelTypeDto get(String id) throws SQLException {
+    public Fuel get(String id) throws SQLException {
         return null;
     }
 
@@ -85,7 +83,6 @@ public class FuelDAOImpl implements FuelDAO {
        }
        return prices;
    }
-
 
 }
 

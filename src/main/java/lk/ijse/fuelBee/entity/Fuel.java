@@ -1,4 +1,4 @@
-package lk.ijse.fuelBee.dto;
+package lk.ijse.fuelBee.entity;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class FuelTypeDto {
+public class Fuel {
     String fuelId;
     String fuelType;
     int qty;

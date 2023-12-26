@@ -14,8 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import lk.ijse.fuelBee.Mail;
+import lk.ijse.fuelBee.bo.BOFactory;
+import lk.ijse.fuelBee.bo.custom.AdminBO;
 import lk.ijse.fuelBee.dao.custom.AdminDAO;
-import lk.ijse.fuelBee.dao.impl.AdminDAOImpl;
+
+import lk.ijse.fuelBee.dao.custom.impl.AdminDAOImpl;
 import lk.ijse.fuelBee.dto.AdminDto;
 
 import java.io.IOException;
@@ -34,7 +37,8 @@ public class LoginFormController {
 
     public static int oneTimePassword;
 
-    AdminDAO adminDAO = new AdminDAOImpl();
+
+    AdminBO adminBO = (AdminBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.ADMIN);
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws IOException {
         System.out.println("Login Clicked");
@@ -43,7 +47,7 @@ public class LoginFormController {
 
         if(!userName.isEmpty() || !password.isEmpty()){
                     try {
-                        AdminDto admin = adminDAO.getAdmin(userName);
+                        AdminDto admin = adminBO.getAdmin(userName);
 
                         if (admin != null) {
                             System.out.println(admin.getPassword());

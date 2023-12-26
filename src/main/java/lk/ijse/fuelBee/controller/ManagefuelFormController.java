@@ -10,10 +10,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.fuelBee.bo.BOFactory;
+import lk.ijse.fuelBee.bo.custom.MachineBO;
+import lk.ijse.fuelBee.bo.custom.TankBO;
 import lk.ijse.fuelBee.dao.custom.MachineDAO;
 import lk.ijse.fuelBee.dao.custom.TankDAO;
-import lk.ijse.fuelBee.dao.impl.MachineDAOImpl;
-import lk.ijse.fuelBee.dao.impl.TankDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.MachineDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.TankDAOImpl;
 import lk.ijse.fuelBee.dto.MachineDto;
 import lk.ijse.fuelBee.dto.TankDto;
 import lk.ijse.fuelBee.dto.tm.MachineTm;
@@ -50,8 +53,9 @@ public class ManagefuelFormController {
     public Button btnAddFuel;
     public Button btnAddFuelTank;
 
-     MachineDAO machineDAO = new MachineDAOImpl();
-     TankDAO tankDAO = new TankDAOImpl();
+     MachineBO machineBO = (MachineBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.MACHINE);
+
+     TankBO tankBO = (TankBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.TANK);
 
 
     public void initialize() throws SQLException, IOException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
@@ -59,7 +63,7 @@ public class ManagefuelFormController {
         getAllMachines();
         setCellValueFactory();
 
-        ArrayList<MachineDto> capacityLowFuels = machineDAO.getCapacityLowFuels();
+        ArrayList<MachineDto> capacityLowFuels = machineBO.getCapacityLowFuels();
         if (!capacityLowFuels.isEmpty()) {
 
             ArrayList<String> fuelTypes = new ArrayList<>();
@@ -78,7 +82,7 @@ public class ManagefuelFormController {
         ObservableList<MachineTm> obList = FXCollections.observableArrayList();
         ArrayList<MachineDto> allMachine = null;
         try {
-            allMachine = machineDAO.getAll();
+            allMachine = machineBO.getAllMachine();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -101,7 +105,7 @@ public class ManagefuelFormController {
         ObservableList<TankTm> obList = FXCollections.observableArrayList();
         ArrayList<TankDto> allTank = null;
         try {
-            allTank = tankDAO.getAll();
+            allTank = tankBO.getAllTanks();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

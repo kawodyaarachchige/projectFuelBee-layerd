@@ -8,8 +8,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.fuelBee.Mail;
+import lk.ijse.fuelBee.bo.BOFactory;
+import lk.ijse.fuelBee.bo.custom.SupplierBO;
 import lk.ijse.fuelBee.dao.custom.SupplierDAO;
-import lk.ijse.fuelBee.dao.impl.SupplierDAOImpl;
+import lk.ijse.fuelBee.dao.custom.impl.SupplierDAOImpl;
 import lk.ijse.fuelBee.dto.SupplierDto;
 import lk.ijse.fuelBee.dto.tm.SupplierTm;
 import lk.ijse.fuelBee.qr.QRGenerator;
@@ -35,7 +37,7 @@ public class SupplierFormController {
 
     public static String newId;
 
-    SupplierDAO supplierDAO = new SupplierDAOImpl();;
+    SupplierBO supplierBO = (SupplierBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.SUPPLIER);
     public void initialize() throws SQLException {
         loadAllSuppliers();
         setCellValueFactory();
@@ -63,7 +65,7 @@ public class SupplierFormController {
 
         boolean isSaved = false;
         try {
-            isSaved = supplierDAO.save(supplierDto);
+            isSaved = supplierBO.saveSupplier(supplierDto);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -102,7 +104,7 @@ public class SupplierFormController {
 
         boolean isDeleted = false;
         try {
-            isDeleted = supplierDAO.delete(id);
+            isDeleted = supplierBO.deleteSupplier(id);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -125,7 +127,7 @@ public class SupplierFormController {
         ObservableList<SupplierTm> obList = FXCollections.observableArrayList();
         ArrayList<SupplierDto> allSuppliers = null;
         try {
-            allSuppliers = supplierDAO.getAll();
+            allSuppliers = supplierBO.getAllSuppliers();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -176,7 +178,7 @@ public class SupplierFormController {
         SupplierDto supplierDto = new SupplierDto(id, name, fuelType, Integer.parseInt(contact), address, email);
         boolean isUpdated = false;
         try {
-            isUpdated = supplierDAO.update(supplierDto);
+            isUpdated = supplierBO.updateSupplier(supplierDto);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
