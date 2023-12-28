@@ -113,8 +113,10 @@ public class IncomeBOImpl implements IncomeBO {
         try{
             connection.setAutoCommit(false);
             boolean isDeleted = machineDAO.delete(id);
+            System.out.println(isDeleted);
            // boolean isDeleted = SQLUtil.execute("DELETE FROM Machine WHERE machine_id=?",id);
            boolean isDeleted1 = incomeDAO.delete(id);
+            System.out.println(isDeleted1);
            // boolean isDeleted1 =SQLUtil.execute("DELETE FROM Income WHERE income_id=?",id);
             if ((isDeleted ) && (isDeleted1 )) {
                 connection.commit();

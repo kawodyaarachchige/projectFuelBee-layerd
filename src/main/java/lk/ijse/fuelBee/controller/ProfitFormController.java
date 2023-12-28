@@ -71,7 +71,7 @@ public class ProfitFormController {
         String outcomeId = prefix + timestampString + randomComponent;
         return outcomeId;
     }
-    public static String generateIncomeId() {
+    /*public static String generateIncomeId() {
         String prefix = "INC";
         long timestamp1 = System.currentTimeMillis();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HHmmss");
@@ -80,7 +80,7 @@ public class ProfitFormController {
         int randomComponent = random.nextInt(1000);
         String incomeId = prefix + timestampString + randomComponent;
         return incomeId;
-    }
+    }*/
 
     public void setAllOutcome() throws SQLException {
         ObservableList<OutcomeTm> obList1 = FXCollections.observableArrayList();

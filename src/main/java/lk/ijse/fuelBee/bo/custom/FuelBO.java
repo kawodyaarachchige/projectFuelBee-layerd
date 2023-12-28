@@ -18,4 +18,6 @@ public interface FuelBO extends SuperBO {
     Double getFuelPriceByName(String name) throws SQLException, ClassNotFoundException;
 
     ArrayList<Double> getFuelPrices() throws SQLException, ClassNotFoundException;
+
+
 }

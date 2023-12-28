@@ -43,7 +43,7 @@ public class MachineDAOImpl implements MachineDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("DELETE FROM Machine WHERE machine_id=?", id);
     }
 
     @Override

@@ -164,4 +164,9 @@ public class MachineBOImpl implements MachineBO {
 
     }
 
+    @Override
+    public boolean deleteMachine(String id) throws SQLException, ClassNotFoundException {
+        return machineDAO.delete(id);
+    }
+
 }

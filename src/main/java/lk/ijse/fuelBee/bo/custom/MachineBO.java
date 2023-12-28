@@ -24,5 +24,8 @@ public interface MachineBO extends SuperBO {
     boolean updateMachineSpecs(MachineDto dto) throws SQLException;
 
     MachineDto searchMachine(String id) throws SQLException, ClassNotFoundException;
+    boolean deleteMachine(String id) throws SQLException, ClassNotFoundException;
+
+
 
 }

@@ -79,7 +79,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public boolean updateOrderStatus(String id, String status) throws SQLException, ClassNotFoundException {
+    public boolean updateStatus(String id, String status) throws SQLException, ClassNotFoundException {
         // return SQLUtil.execute("UPDATE Orders SET status=? WHERE order_id=?", status, id);
         return SQLUtil.execute("UPDATE Orders SET status='PAID' WHERE order_id=?",(id));
     }

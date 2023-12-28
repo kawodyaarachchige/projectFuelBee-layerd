@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="FuelBee@localhost" uuid="4ca2f62a-c2e3-4d8e-b3e3-5b2b22d347ed">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/FuelBee</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="FuelBee@localhost [2]" uuid="c8e9feec-1b85-438d-a75b-14d4b9fe0dc1">
+    <data-source source="LOCAL" name="FuelBee@localhost" uuid="2fd40f83-7563-4fd1-838c-e9e048631a63">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

@@ -18,17 +18,20 @@ public class TankBOImpl implements TankBO {
     TankDAO tankDAO = (TankDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.TANK);
     @Override
     public  boolean saveTank(TankDto dto) throws SQLException, ClassNotFoundException {
-       return SQLUtil.execute("INSERT INTO Tank VALUES(?,?,?,?,?,?)",dto.getTankId(),dto.getFuelType(),dto.getQty(),dto.getRemainingFuel(),dto.getCapacityOfWaste(),dto.getDate());
+       return tankDAO.save(new Tank(dto.getTankId(),dto.getFuelType(),dto.getQty(),dto.getRemainingFuel(),dto.getCapacityOfWaste(),dto.getDate()));
+        //return SQLUtil.execute("INSERT INTO Tank VALUES(?,?,?,?,?,?)",dto.getTankId(),dto.getFuelType(),dto.getQty(),dto.getRemainingFuel(),dto.getCapacityOfWaste(),dto.getDate());
 
     }
    @Override
     public  boolean deleteTank(String id) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("DELETE FROM Tank WHERE tank_id=?", id);
+       return tankDAO.delete(id);
+        // return SQLUtil.execute("DELETE FROM Tank WHERE tank_id=?", id);
 
     }
   @Override
     public  boolean updateTank(TankDto dto) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("UPDATE Tank SET type=?,qty=?,remaining_fuel_in_tank=?,capacity_of_waste=?,date=? WHERE tank_id=?",dto.getFuelType(),dto.getQty(),dto.getRemainingFuel(),dto.getCapacityOfWaste(),dto.getDate(),dto.getTankId());
+        return tankDAO.update(new Tank(dto.getTankId(),dto.getFuelType(),dto.getQty(),dto.getRemainingFuel(),dto.getCapacityOfWaste(),dto.getDate()));
+        //return SQLUtil.execute("UPDATE Tank SET type=?,qty=?,remaining_fuel_in_tank=?,capacity_of_waste=?,date=? WHERE tank_id=?",dto.getFuelType(),dto.getQty(),dto.getRemainingFuel(),dto.getCapacityOfWaste(),dto.getDate(),dto.getTankId());
 
     }
     @Override

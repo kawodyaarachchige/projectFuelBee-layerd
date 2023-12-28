@@ -26,13 +26,14 @@ public class PaymentsBOImpl implements PaymentsBO {
     OutcomeDAO outcomeDAO = (OutcomeDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.OUTCOME);
    @Override
     public boolean updatePayment(PaymentDto dto) throws SQLException, ClassNotFoundException {
-       return SQLUtil.execute("UPDATE Payment SET email=?, sup_email=?, method=?, amount=?, date=?, status=?,order_id=? WHERE pay_id=?", dto.getEmail(), dto.getSup_email(), dto.getMethod(), dto.getAmount(), dto.getDate(), dto.getStatus(), dto.getOrderId(), dto.getPaymentId());
-
+       //return SQLUtil.execute("UPDATE Payment SET email=?, sup_email=?, method=?, amount=?, date=?, status=?,order_id=? WHERE pay_id=?", dto.getEmail(), dto.getSup_email(), dto.getMethod(), dto.getAmount(), dto.getDate(), dto.getStatus(), dto.getOrderId(), dto.getPaymentId());
+    return paymentsDAO.update(new Payment(dto.getPaymentId(), dto.getEmail(), dto.getSup_email(), dto.getOrderId(), dto.getMethod(), dto.getAmount(), dto.getDate(), dto.getStatus()));
     }
 
     @Override
     public boolean deletePayment(String id) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("DELETE FROM Payment WHERE outcome_id=?", id);
+        //return SQLUtil.execute("DELETE FROM Payment WHERE outcome_id=?", id);
+        return  paymentsDAO.delete(id);
     }
 
 @Override
@@ -56,7 +57,8 @@ public class PaymentsBOImpl implements PaymentsBO {
 
     @Override
     public boolean savePayment(PaymentDto dto) throws SQLException, ClassNotFoundException {
-        return  SQLUtil.execute("INSERT INTO Payment VALUES(?,?,?,?,?,?,?,?)", dto.getPaymentId(), dto.getEmail(), dto.getSup_email(), dto.getOrderId(), dto.getMethod(), dto.getAmount(), dto.getDate(), dto.getStatus());
+       return  paymentsDAO.save(new Payment(dto.getPaymentId(), dto.getEmail(), dto.getSup_email(), dto.getOrderId(), dto.getMethod(), dto.getAmount(), dto.getDate(), dto.getStatus()));
+       //return  SQLUtil.execute("INSERT INTO Payment VALUES(?,?,?,?,?,?,?,?)", dto.getPaymentId(), dto.getEmail(), dto.getSup_email(), dto.getOrderId(), dto.getMethod(), dto.getAmount(), dto.getDate(), dto.getStatus());
     }
    @Override
     public boolean confirmPayment(PaymentDto dto) throws SQLException {
@@ -67,7 +69,7 @@ public class PaymentsBOImpl implements PaymentsBO {
            // boolean isSaved = SQLUtil.execute("INSERT INTO Payment VALUES(?,?,?,?,?,?,?,?)", paymentDto.getPaymentId(), paymentDto.getEmail(), paymentDto.getSup_email(), paymentDto.getOrderId(), paymentDto.getMethod(), paymentDto.getAmount(), paymentDto.getDate(), paymentDto.getStatus());
             System.out.println("Method Value: " + dto.getMethod());
           //  PaymentsDto paymentDto = new PaymentsDto(dto.getOrderId();
-            boolean isUpdated = orderDAO.updateOrderStatus((dto.getOrderId()), "PAID");
+            boolean isUpdated = orderDAO.updateStatus((dto.getOrderId()), "PAID");
            // boolean isUpdated = SQLUtil.execute("UPDATE Orders SET status='PAID' WHERE order_id=?", paymentDto.getOrderId());
            // boolean isOutcomeSaved = SQLUtil.execute("INSERT INTO Outcome VALUES(?,?,?)",paymentDto.getPaymentId(), ProfitFormController.generateOutcomeId(),paymentDto.getAmount() ,new java.sql.Date(paymentDto.getDate().getTime()));
             //boolean isOutcomeSaved = outcomeDAO.save(new PaymentsDto(dto.getPaymentId(), ProfitFormController.generateOutcomeId(), dto.getAmount(), new java.sql.Date(dto.getDate().getTime())));

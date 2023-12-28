@@ -36,7 +36,7 @@ public class IncomeDAOImpl implements IncomeDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("DELETE FROM Income WHERE income_id=?", id);
     }
 
     @Override
