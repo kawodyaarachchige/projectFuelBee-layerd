@@ -14,6 +14,7 @@ import lk.ijse.fuelBee.entity.Outcome;
 import lk.ijse.fuelBee.entity.Payment;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class PaymentsBOImpl implements PaymentsBO {
            // boolean isUpdated = SQLUtil.execute("UPDATE Orders SET status='PAID' WHERE order_id=?", paymentDto.getOrderId());
            // boolean isOutcomeSaved = SQLUtil.execute("INSERT INTO Outcome VALUES(?,?,?)",paymentDto.getPaymentId(), ProfitFormController.generateOutcomeId(),paymentDto.getAmount() ,new java.sql.Date(paymentDto.getDate().getTime()));
             //boolean isOutcomeSaved = outcomeDAO.save(new PaymentsDto(dto.getPaymentId(), ProfitFormController.generateOutcomeId(), dto.getAmount(), new java.sql.Date(dto.getDate().getTime())));
-           boolean isOutcomeSaved = outcomeDAO.save(new Outcome(ProfitFormController.generateOutcomeId(), dto.getAmount(), new java.sql.Date(dto.getDate().getTime())));
+           boolean isOutcomeSaved = outcomeDAO.save(new Outcome(dto.getPaymentId(), dto.getAmount(), (Date) dto.getDate()));
             if ((isSaved) && (isUpdated) && (isOutcomeSaved)) {
                 connection.commit();
                 return true;

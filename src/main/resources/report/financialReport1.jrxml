@@ -17,21 +17,21 @@
 		<groupHeader>
 			<band height="46">
 				<staticText>
-					<reportElement x="20" y="15" width="100" height="30" uuid="c49c3404-adfb-4c6f-aed3-93589deea54f"/>
+					<reportElement x="4" y="15" width="100" height="30" uuid="c49c3404-adfb-4c6f-aed3-93589deea54f"/>
 					<textElement>
 						<font size="16" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Incomes ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="279" y="15" width="100" height="30" uuid="beb66279-aa65-4d0c-b9cf-40df7db56bca"/>
+					<reportElement x="291" y="15" width="100" height="30" uuid="beb66279-aa65-4d0c-b9cf-40df7db56bca"/>
 					<textElement>
 						<font size="16" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Outcomes]]></text>
 				</staticText>
 				<rectangle>
-					<reportElement x="8" y="-11" width="543" height="1" uuid="e4310de6-ad2c-4de6-93d5-e98c151428d1"/>
+					<reportElement x="8" y="-11" width="543" height="1" forecolor="#FFBA0D" uuid="e4310de6-ad2c-4de6-93d5-e98c151428d1"/>
 				</rectangle>
 			</band>
 		</groupHeader>
@@ -43,9 +43,9 @@
 		<groupFooter>
 			<band height="184">
 				<staticText>
-					<reportElement x="58" y="7" width="100" height="30" uuid="418809b0-e28a-4c7f-8b0e-8a658c18ac18"/>
+					<reportElement x="48" y="5" width="100" height="30" uuid="418809b0-e28a-4c7f-8b0e-8a658c18ac18"/>
 					<textElement textAlignment="Right">
-						<font size="11"/>
+						<font size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total Income  :]]></text>
 				</staticText>
@@ -57,9 +57,9 @@
 					<textFieldExpression><![CDATA[$P{tolIncome}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="339" y="7" width="110" height="30" uuid="71122af3-60e4-419d-bf9e-33a9ab73f9d4"/>
+					<reportElement x="336" y="6" width="110" height="30" uuid="71122af3-60e4-419d-bf9e-33a9ab73f9d4"/>
 					<textElement textAlignment="Right">
-						<font size="11"/>
+						<font size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total Outcome  :]]></text>
 				</staticText>
@@ -102,7 +102,7 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="280" y="9" width="100" height="30" uuid="acdffc47-1f99-40a9-b081-8365c1cf8d2b"/>
+				<reportElement x="274" y="7" width="100" height="30" uuid="acdffc47-1f99-40a9-b081-8365c1cf8d2b"/>
 				<textElement textAlignment="Center">
 					<font size="20" isBold="true"/>
 				</textElement>
@@ -130,8 +130,8 @@
 				<text><![CDATA[Panadura,]]></text>
 			</staticText>
 			<image>
-				<reportElement x="191" y="13" width="109" height="51" uuid="b05a2865-afcd-4ea8-bdb4-fed3cc6e8280"/>
-				<imageExpression><![CDATA["/home/kitty99/IdeaProjects/project_fuel_bee/src/main/resources/asserts/icons/large_fuelbee.png"]]></imageExpression>
+				<reportElement x="127" y="0" width="130" height="72" uuid="b05a2865-afcd-4ea8-bdb4-fed3cc6e8280"/>
+				<imageExpression><![CDATA["/Users/tharushikawodya/Downloads/project_fuel_bee 2/src/main/resources/asserts/icons/large_fuelbee.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

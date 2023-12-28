@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.fuelBee.bo.BOFactory;
 import lk.ijse.fuelBee.bo.custom.IncomeBO;
 import lk.ijse.fuelBee.bo.custom.OutcomeBO;
+import lk.ijse.fuelBee.bo.custom.ReportsBO;
 import lk.ijse.fuelBee.dao.custom.IncomeDAO;
 import lk.ijse.fuelBee.dao.custom.OutcomeDAO;
 import lk.ijse.fuelBee.dao.custom.impl.IncomeDAOImpl;
@@ -46,7 +47,7 @@ public class ProfitFormController {
     public DatePicker dpEndDate;
     IncomeBO incomeBO = (IncomeBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.INCOME);
     OutcomeBO outcomeBO = (OutcomeBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.OUTCOME);
-
+    ReportsBO reportsBO = (ReportsBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.REPORT);
     public void initialize() throws SQLException {
         setAllOutcome();
         setAllIncome();
@@ -61,7 +62,7 @@ public class ProfitFormController {
         colOutcomeAmount.setCellValueFactory(new PropertyValueFactory<>("outcomeAmount"));
         colOutcomeDate.setCellValueFactory(new PropertyValueFactory<>("outcomeDate"));
     }
-    public static String generateOutcomeId() {
+  /*  public static String generateOutcomeId() {
         String prefix = "OUT";
         long timestamp = System.currentTimeMillis();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HHmmss");
@@ -70,7 +71,7 @@ public class ProfitFormController {
         int randomComponent = random.nextInt(1000);
         String outcomeId = prefix + timestampString + randomComponent;
         return outcomeId;
-    }
+    }*/
     /*public static String generateIncomeId() {
         String prefix = "INC";
         long timestamp1 = System.currentTimeMillis();
@@ -189,14 +190,15 @@ public class ProfitFormController {
         map.put("finalTotal", String.format("%.0f",finalTotal));
 
         try {
-            InputStream resourceAsStream = getClass().getResourceAsStream("/report/financialReport1.jrxml");
+            reportsBO.ProfitReport(map);
+            /*InputStream resourceAsStream = getClass().getResourceAsStream("/report/financialReport1.jrxml");
             JasperDesign load = JRXmlLoader.load(resourceAsStream);
             JasperReport compileReport = JasperCompileManager.compileReport(load);
             JasperPrint jasperPrint = JasperFillManager.fillReport(
                     compileReport,
                     map,
                     new JREmptyDataSource());
-            JasperViewer.viewReport(jasperPrint, false);
+            JasperViewer.viewReport(jasperPrint, false);*/
         } catch (JRException e) {
             e.printStackTrace();
         }

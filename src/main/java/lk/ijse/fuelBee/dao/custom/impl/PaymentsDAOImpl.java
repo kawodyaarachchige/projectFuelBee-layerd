@@ -18,7 +18,7 @@ public class PaymentsDAOImpl implements PaymentsDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("DELETE FROM Payment WHERE outcome_id=?", id);
+        return SQLUtil.execute("DELETE FROM Payment WHERE pay_id=?", id);
     }
 
     @Override

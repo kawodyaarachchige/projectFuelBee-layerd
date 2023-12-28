@@ -59,7 +59,7 @@ public class PaymentFormController {
 
      OutcomeBO outcomeBO = (OutcomeBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.OUTCOME);
      PaymentsBO paymentsBO = (PaymentsBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.PAYMENT);
-
+     ReportsBO reportsBO = (ReportsBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.REPORT);
     public void initialize() throws SQLException, ClassNotFoundException {
         getAllSuppliers();
         getAllOrderId();
@@ -283,17 +283,8 @@ public class PaymentFormController {
     }
 
     public void btnReportOnAction(ActionEvent actionEvent) throws JRException, SQLException {
-        InputStream resourceAsStream = getClass().getResourceAsStream("/report/paymentHistory1.jrxml");
-        JasperDesign load = JRXmlLoader.load(resourceAsStream);
-        JasperReport jasperReport = JasperCompileManager.compileReport(load);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(
-                jasperReport,
-                null,
-                Dbconnection.getInstance().getConnection());
-        JasperViewer.viewReport(jasperPrint, false);
-
+        JasperPrint jasperPrint = reportsBO.paymentReport();
         String filepath = "/home/kitty99/IdeaProjects/paymentRecipt/"+txtPayId+".pdf";
-
         JasperExportManager.exportReportToPdfFile(jasperPrint, filepath);
         System.out.println("saved");
 

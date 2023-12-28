@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="FuelBee@localhost" uuid="2fd40f83-7563-4fd1-838c-e9e048631a63">
+    <data-source source="LOCAL" name="MySQL" uuid="82b19cf6-394f-43eb-b9e7-d3c792c6845b">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/FuelBee</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/fuelbee</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

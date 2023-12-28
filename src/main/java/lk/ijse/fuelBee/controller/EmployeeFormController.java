@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.fuelBee.bo.BOFactory;
 import lk.ijse.fuelBee.bo.custom.EmployeeBO;
+import lk.ijse.fuelBee.bo.custom.ReportsBO;
 import lk.ijse.fuelBee.dao.custom.EmployeeDAO;
 import lk.ijse.fuelBee.dao.custom.impl.EmployeeDAOImpl;
 import lk.ijse.fuelBee.db.Dbconnection;
@@ -45,6 +46,7 @@ public class EmployeeFormController {
     public TableColumn<?,?> colAge;
     public TableColumn<?,?> colOption;
     public TextField txtEmpId1;
+    ReportsBO reportsBO = (ReportsBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.REPORT);
 
     EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.EMPLOYEE);
 
@@ -181,14 +183,7 @@ public class EmployeeFormController {
     }
 
     public void btnReportOnAction(ActionEvent actionEvent) throws JRException, SQLException {
-        InputStream resourceAsStream = getClass().getResourceAsStream("/report/salarySheet1.jrxml");
-        JasperDesign load = JRXmlLoader.load(resourceAsStream);
-        JasperReport jasperReport = JasperCompileManager.compileReport(load);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(
-                jasperReport,
-                null,
-                Dbconnection.getInstance().getConnection());
-        JasperViewer.viewReport(jasperPrint, false);
+        reportsBO.SalaryReport();
     }
 
     public void txtEmpIdOnAction(MouseEvent mouseEvent) {
