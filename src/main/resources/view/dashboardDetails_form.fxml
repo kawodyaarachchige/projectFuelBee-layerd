@@ -20,9 +20,9 @@
    <children>
       <Pane layoutX="16.0" layoutY="17.0" prefHeight="66.0" prefWidth="364.0" style="-fx-background-color: fdedd0; -fx-background-radius: 25;">
          <children>
-            <Text fill="#d7a30f" layoutX="24.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCTS">
+            <Text fill="#d7a30f" layoutX="24.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCTS">
                <font>
-                  <Font name="Dyuthi Regular" size="20.0" />
+                  <Font name="Baloo 2 SemiBold" size="19.0" />
                </font>
             </Text>
             <Text fill="#d7a30f" layoutX="243.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" PRICE(LKR)" wrappingWidth="126.0">

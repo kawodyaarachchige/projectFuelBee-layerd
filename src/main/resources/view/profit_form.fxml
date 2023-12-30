@@ -11,57 +11,57 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="profitpane" prefHeight="600.0" prefWidth="1045.0" style="-fx-background-radius: 50;" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.ProfitFormController">
+<AnchorPane fx:id="profitpane" prefHeight="600.0" prefWidth="1045.0" style="-fx-background-radius: 50;" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.ProfitFormController">
    <children>
-      <Label layoutX="183.0" layoutY="16.0" text="Manage Profit">
+      <Label layoutX="189.0" layoutY="16.0" text="Manage Profit">
          <font>
-            <Font name="Dyuthi Regular" size="29.0" />
+            <Font name="Baloo Da 2 SemiBold" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="501.0" layoutY="182.0" text="INCOME">
+      <Label layoutX="489.0" layoutY="165.0" text="INCOME">
          <font>
-            <Font name="Dyuthi Regular" size="22.0" />
+            <Font name="Baloo Da 2 SemiBold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="482.0" layoutY="439.0" text="OUTCOME">
+      <Label layoutX="469.0" layoutY="436.0" text="OUTCOME">
          <font>
-            <Font name="Dyuthi Regular" size="22.0" />
+            <Font name="Baloo Da 2 SemiBold" size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="tblIncome" layoutX="585.0" layoutY="64.0" prefHeight="246.0" prefWidth="394.0">
+      <TableView fx:id="tblIncome" layoutX="585.0" layoutY="64.0" prefHeight="246.0" prefWidth="451.0">
         <columns>
-          <TableColumn fx:id="colIncomeId" prefWidth="100.0" text="Income Id" />
-          <TableColumn fx:id="colIncomeAmount" prefWidth="151.0" text="Amount(LKR)" />
-            <TableColumn fx:id="colIncomeDate" prefWidth="142.0" text="Date" />
+          <TableColumn fx:id="colIncomeId" prefWidth="137.0" text="Income Id" />
+          <TableColumn fx:id="colIncomeAmount" prefWidth="171.0" text="Amount(LKR)" />
+            <TableColumn fx:id="colIncomeDate" prefWidth="139.0" text="Date" />
         </columns>
       </TableView>
-      <TableView fx:id="tblOutcome" layoutX="584.0" layoutY="342.0" prefHeight="246.0" prefWidth="394.0">
+      <TableView fx:id="tblOutcome" layoutX="584.0" layoutY="342.0" prefHeight="246.0" prefWidth="451.0">
          <columns>
-            <TableColumn fx:id="colOutcomeId" prefWidth="100.0" text="Outcome Id" />
-            <TableColumn fx:id="colOutcomeAmount" prefWidth="151.0" text="Amount(LKR)" />
-            <TableColumn fx:id="colOutcomeDate" prefWidth="142.0" text="Date" />
+            <TableColumn fx:id="colOutcomeId" prefWidth="135.0" text="Outcome Id" />
+            <TableColumn fx:id="colOutcomeAmount" prefWidth="162.0" text="Amount(LKR)" />
+            <TableColumn fx:id="colOutcomeDate" prefWidth="152.0" text="Date" />
          </columns>
       </TableView>
       <Pane layoutX="37.0" layoutY="97.0" prefHeight="217.0" prefWidth="438.0" style="-fx-background-color: #fdedd0; -fx-background-radius: 15;">
          <children>
-            <Label layoutX="23.0" layoutY="7.0" text="Select Time Frame">
+            <Label layoutX="17.0" text="Select Time Frame">
+               <font>
+                  <Font name="Baloo Da 2 SemiBold" size="22.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="dpStartDate" layoutX="159.0" layoutY="49.0" />
+            <Label layoutX="17.0" layoutY="59.0" text="Start Date :">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
             </Label>
-            <DatePicker fx:id="dpStartDate" layoutX="161.0" layoutY="45.0" />
-            <Label layoutX="21.0" layoutY="55.0" text="Start Date :">
+            <Label layoutX="21.0" layoutY="110.0" text="End Date :">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="103.0" text="End Date :">
-               <font>
-                  <Font name="Dyuthi Regular" size="22.0" />
-               </font>
-            </Label>
-            <DatePicker fx:id="dpEndDate" layoutX="158.0" layoutY="93.0" />
-            <Button fx:id="rppane3" layoutX="138.0" layoutY="152.0" mnemonicParsing="false" onAction="#btnProfitReportOnAction" prefHeight="43.0" prefWidth="189.0" text="View Report">
+            <DatePicker fx:id="dpEndDate" layoutX="159.0" layoutY="96.0" />
+            <Button fx:id="rppane3" layoutX="136.0" layoutY="159.0" mnemonicParsing="false" onAction="#btnProfitReportOnAction" prefHeight="43.0" prefWidth="189.0" text="View Report">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

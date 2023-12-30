@@ -17,11 +17,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.ManageFuelTankDetailsFormController">
+<AnchorPane prefHeight="600.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.ManageFuelTankDetailsFormController">
    <children>
-      <Label layoutX="136.0" layoutY="32.0" text="Manage Fuel Tanks Details">
+      <Label layoutX="136.0" layoutY="19.0" text="Manage Fuel Tanks Details">
          <font>
-            <Font name="Dyuthi Regular" size="28.0" />
+            <Font name="Baloo Da 2 SemiBold" size="28.0" />
          </font>
       </Label>
       <Pane layoutX="40.0" layoutY="112.0" prefHeight="441.0" prefWidth="551.0" style="-fx-background-color: fdedd0; -fx-background-radius: 15;" stylesheets="@../asserts/stylesheet/style.css">
@@ -63,32 +63,32 @@
             </TextField>
             <Text layoutX="13.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tank Id:" wrappingWidth="151.0">
                <font>
-                  <Font name="Dyuthi Regular" size="26.0" />
+                  <Font size="26.0" />
                </font>
             </Text>
             <Text layoutX="13.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="151.0">
                <font>
-                  <Font name="Dyuthi Regular" size="26.0" />
+                  <Font size="26.0" />
                </font>
             </Text>
             <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:">
                <font>
-                  <Font name="Dyuthi Regular" size="26.0" />
+                  <Font size="26.0" />
                </font>
             </Text>
             <Text layoutX="11.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
                <font>
-                  <Font name="Dyuthi Regular" size="26.0" />
+                  <Font size="26.0" />
                </font>
             </Text>
             <Text layoutX="9.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remaining Fuel in tank:" wrappingWidth="264.0">
                <font>
-                  <Font name="Dyuthi Regular" size="26.0" />
+                  <Font size="26.0" />
                </font>
             </Text>
             <Text layoutX="12.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity of Waste:" wrappingWidth="258.0">
                <font>
-                  <Font name="Dyuthi Regular" size="26.0" />
+                  <Font size="26.0" />
                </font>
             </Text>
             <JFXButton fx:id="savpane1" buttonType="RAISED" layoutX="40.0" layoutY="364.0" onAction="#btnTankSaveOnAction" prefHeight="43.0" prefWidth="99.0" text="SAVE">
@@ -158,12 +158,12 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color red="0.9098039269447327" green="0.8235294222831726" blue="0.7490196228027344" />
+                  <Color blue="0.7490196228027344" green="0.8235294222831726" red="0.9098039269447327" />
                </color>
             </DropShadow>
          </effect>
       </Pane>
       <TextField fx:id="txtSearchFuelTank" layoutX="67.0" layoutY="81.0" prefHeight="24.0" prefWidth="412.0" promptText="Search" />
-      <Button layoutX="489.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnSearchFuelTankOnAction" prefHeight="24.0" prefWidth="99.0" text="Search" />
+      <Button fx:id="searchpane1" layoutX="489.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnSearchFuelTankOnAction" prefHeight="24.0" prefWidth="99.0" text="Search" />
    </children>
 </AnchorPane>

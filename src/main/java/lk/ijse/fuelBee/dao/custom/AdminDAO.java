@@ -11,6 +11,6 @@ public interface AdminDAO extends CrudDAO <Admin>{
 
     boolean save(Admin entity) throws SQLException, ClassNotFoundException;
 
-    boolean updateAdmin(String email,String password) throws SQLException, ClassNotFoundException;
+    boolean update(String email,String password) throws SQLException, ClassNotFoundException;
 
 }

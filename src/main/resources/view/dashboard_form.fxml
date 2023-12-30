@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainpain" prefHeight="800.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.DashboardFormController">
+<AnchorPane fx:id="mainpain" prefHeight="800.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.DashboardFormController">
    <children>
       <AnchorPane layoutY="-2.0" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: fdedd0;">
          <children>
@@ -19,19 +19,19 @@
                <children>
                   <JFXButton fx:id="dashpane1" buttonType="RAISED" layoutX="67.0" layoutY="142.0" onAction="#manageDashboardOnAction" prefHeight="50.0" prefWidth="200.0" ripplerFill="#824e4e" stylesheets="@../asserts/stylesheet/style.css" text="       Dashboard" textAlignment="CENTER">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font name="Baloo 2 SemiBold" size="22.0" />
                      </font>
                      <effect>
                         <DropShadow>
                            <color>
-                              <Color red="0.05263157933950424" green="0.01803118921816349" blue="0.01803118921816349" />
+                              <Color blue="0.01803118921816349" green="0.01803118921816349" red="0.05263157933950424" />
                            </color>
                         </DropShadow>
                      </effect>
                   </JFXButton>
                   <JFXButton fx:id="fuelpane1" buttonType="RAISED" layoutX="66.0" layoutY="227.0" onAction="#manageFuelOnAction" prefHeight="54.0" prefWidth="200.0" ripplerFill="#ebc5aa" stylesheets="@../asserts/stylesheet/style.css" text="     Manage Fuel" textAlignment="RIGHT">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font name="Baloo 2 SemiBold" size="22.0" />
                      </font>
                      <effect>
                         <InnerShadow />
@@ -39,27 +39,27 @@
                   </JFXButton>
                   <JFXButton fx:id="orpane" buttonType="RAISED" layoutX="64.0" layoutY="314.0" onAction="#OdersOnAction" prefHeight="50.0" prefWidth="200.0" ripplerFill="#0f2f6b" stylesheets="@../asserts/stylesheet/style.css" text="             Orders">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font name="Baloo 2 SemiBold" size="22.0" />
                      </font>
                   </JFXButton>
                   <JFXButton fx:id="empane" buttonType="RAISED" layoutX="62.0" layoutY="489.0" onAction="#manageEmployeesOnAction" prefHeight="50.0" prefWidth="200.0" stylesheets="@../asserts/stylesheet/style.css" text="     Employees">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font name="Baloo 2 SemiBold" size="22.0" />
                      </font>
                   </JFXButton>
                   <JFXButton fx:id="suppane" buttonType="RAISED" layoutX="63.0" layoutY="402.0" onAction="#manageSuppliersOnAction" prefHeight="50.0" prefWidth="200.0" stylesheets="@../asserts/stylesheet/style.css" text="    Suppliers" textAlignment="JUSTIFY">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font name="Baloo 2 SemiBold" size="22.0" />
                      </font>
                   </JFXButton>
                   <JFXButton fx:id="paypane" buttonType="RAISED" layoutX="63.0" layoutY="574.0" onAction="#managePaymentOnAction" prefHeight="50.0" prefWidth="200.0" stylesheets="@../asserts/stylesheet/style.css" text="      Payments">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font name="Baloo 2 SemiBold" size="22.0" />
                      </font>
                   </JFXButton>
                   <JFXButton fx:id="propane" buttonType="RAISED" layoutX="62.0" layoutY="656.0" onAction="#btnManageProfitOnAction" prefHeight="50.0" prefWidth="200.0" stylesheets="@../asserts/stylesheet/style.css" text="            Profit">
                      <font>
-                        <Font name="Dyuthi Regular" size="22.0" />
+                        <Font name="Baloo 2 SemiBold" size="22.0" />
                      </font>
                   </JFXButton>
                   <ImageView fitHeight="32.0" fitWidth="25.0" layoutX="84.0" layoutY="153.0">
@@ -104,14 +104,14 @@
                   </ImageView>
                   <Text fx:id="userName" layoutX="116.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="85.0">
                      <font>
-                        <Font name="Dyuthi Regular" size="20.0" />
+                        <Font name="Baloo Da 2 Regular" size="20.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
             <JFXButton fx:id="logoutbtn" buttonType="RAISED" layoutX="1299.0" layoutY="37.0" onAction="#logoutOnAction" prefHeight="38.0" prefWidth="109.0" ripplerFill="#17100a" stylesheets="@../asserts/stylesheet/style.css" text="LOG OUT">
                <font>
-                  <Font name="Dyuthi Regular" size="15.0" />
+                  <Font name="Baloo Da 2 Bold" size="15.0" />
                </font>
                <effect>
                   <DropShadow />
@@ -119,7 +119,7 @@
             </JFXButton>
             <Label fx:id="lblTime" layoutX="1146.0" layoutY="41.0" prefHeight="32.0" prefWidth="128.0">
                <font>
-                  <Font name="Dyuthi Regular" size="19.0" />
+                  <Font name="Baloo Da 2 Regular" size="20.0" />
                </font>
             </Label>
             <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="1386.0" layoutY="44.0">
@@ -129,7 +129,7 @@
             </ImageView>
             <Text fx:id="txtDate1" fill="#252323" layoutX="409.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="108.99999999999966">
                <font>
-                  <Font name="Dyuthi Regular" size="19.0" />
+                  <Font name="Baloo Bhai 2 SemiBold" size="20.0" />
                </font>
             </Text>
             <Text layoutX="778.0" layoutY="768.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel Bee" />

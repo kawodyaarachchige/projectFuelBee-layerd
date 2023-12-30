@@ -15,26 +15,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="employeepane" prefHeight="600.0" prefWidth="1045.0" style="-fx-background-radius: 50;" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.EmployeeFormController">
+<AnchorPane fx:id="employeepane" prefHeight="600.0" prefWidth="1045.0" style="-fx-background-radius: 50;" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.EmployeeFormController">
    <children>
       <Pane layoutX="75.0" layoutY="61.0" prefHeight="264.0" prefWidth="896.0" style="-fx-background-color: #fdedd0; -fx-background-radius: 15;">
          <children>
-            <Label layoutX="20.0" layoutY="18.0" prefHeight="24.0" prefWidth="141.0" text="Employee Id:">
+            <Label layoutX="20.0" layoutY="24.0" prefHeight="24.0" prefWidth="141.0" text="Employee Id:">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="20.0" layoutY="55.0" text="First Name:">
+            <Label layoutX="20.0" layoutY="61.0" text="First Name:">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="20.0" layoutY="96.0" text="Last Name:">
+            <Label layoutX="20.0" layoutY="100.0" text="Last Name:">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="480.0" layoutY="17.0" text="Job Title:">
+            <Label layoutX="480.0" layoutY="22.0" text="Job Title:">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
@@ -42,17 +42,17 @@
                   <Glow level="0.0" />
                </effect>
             </Label>
-            <Label layoutX="479.0" layoutY="52.0" text="Address:">
+            <Label layoutX="479.0" layoutY="60.0" text="Address:">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="480.0" layoutY="91.0" prefHeight="21.0" prefWidth="81.0" text="Salary:">
+            <Label layoutX="482.0" layoutY="96.0" prefHeight="21.0" prefWidth="81.0" text="Salary:">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="135.0" text="Age:">
+            <Label layoutX="25.0" layoutY="144.0" text="Age:">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
@@ -142,9 +142,9 @@
             <TableColumn fx:id="colAge" prefWidth="161.0" text="Age" />
          </columns>
       </TableView>
-      <Label layoutX="393.0" layoutY="14.0" text="Manage Employee ">
+      <Label layoutX="393.0" layoutY="-2.0" text="Manage Employee ">
          <font>
-            <Font name="Dyuthi Regular" size="30.0" />
+            <Font name="Baloo Bhaina 2 SemiBold" size="30.0" />
          </font>
       </Label>
       <ImageView fitHeight="170.0" fitWidth="185.0" layoutX="378.0" layoutY="73.0" opacity="0.4">

@@ -33,12 +33,12 @@
       </TableView>
       <Label layoutX="148.0" layoutY="15.0" text="Manage Fuel">
          <font>
-            <Font name="Dyuthi Regular" size="29.0" />
+            <Font name="Baloo 2 SemiBold" size="29.0" />
          </font>
       </Label>
       <Label layoutX="134.0" layoutY="302.0" text="Manage Fuel Tanks">
          <font>
-            <Font name="Dyuthi Regular" size="28.0" />
+            <Font name="Baloo 2 SemiBold" size="28.0" />
          </font>
       </Label>
       <Button fx:id="btnAddFuel" layoutX="385.0" layoutY="23.0" mnemonicParsing="false" onAction="#btnAddFuelOnAction" prefHeight="41.0" prefWidth="76.0" text="ADD">

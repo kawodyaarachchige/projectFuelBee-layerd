@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.ManageFuelMachineDetailsFormController">
+<AnchorPane prefHeight="600.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.ManageFuelMachineDetailsFormController">
    <children>
       <Pane layoutX="36.0" layoutY="109.0" prefHeight="441.0" prefWidth="551.0" style="-fx-background-color: fdedd0; -fx-background-radius: 15;" stylesheets="@../asserts/stylesheet/style.css">
          <children>
@@ -127,7 +127,7 @@
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.1315789520740509" green="0.028021441772580147" blue="0.028021441772580147" />
+                        <Color blue="0.028021441772580147" green="0.028021441772580147" red="0.1315789520740509" />
                      </color>
                   </DropShadow>
                </effect>
@@ -136,17 +136,17 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color red="0.9098039269447327" green="0.8235294222831726" blue="0.7490196228027344" />
+                  <Color blue="0.7490196228027344" green="0.8235294222831726" red="0.9098039269447327" />
                </color>
             </DropShadow>
          </effect>
       </Pane>
-      <Label layoutX="118.0" layoutY="28.0" text="Manage Fuel Machines Details">
+      <Label layoutX="118.0" layoutY="21.0" text="Manage Fuel Machines Details">
          <font>
-            <Font name="Dyuthi Regular" size="28.0" />
+            <Font name="Baloo 2 SemiBold" size="27.0" />
          </font>
       </Label>
       <TextField fx:id="txtSearchMachineId" layoutX="48.0" layoutY="76.0" prefHeight="24.0" prefWidth="453.0" promptText="Search" />
-      <Button layoutX="510.0" layoutY="76.0" mnemonicParsing="false" onAction="#btnSearchMachineIdOnAction" prefHeight="24.0" prefWidth="76.0" text="Search" />
+      <Button fx:id="searchpane" layoutX="510.0" layoutY="76.0" mnemonicParsing="false" onAction="#btnSearchMachineIdOnAction" prefHeight="24.0" prefWidth="76.0" text="Search" />
    </children>
 </AnchorPane>

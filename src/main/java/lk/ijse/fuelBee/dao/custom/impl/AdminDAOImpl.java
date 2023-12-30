@@ -22,12 +22,6 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public boolean update(Admin entity) throws SQLException, ClassNotFoundException {
-        return false;
-    }
-
-
-    @Override
     public boolean delete(String entity) throws SQLException, ClassNotFoundException {
         return false;
     }
@@ -62,12 +56,17 @@ public class AdminDAOImpl implements AdminDAO {
 
 
     @Override
-    public boolean updateAdmin(String email, String password) throws SQLException, ClassNotFoundException {
+    public boolean update(String email, String password) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("UPDATE Admin SET password=AES_ENCRYPT(?, 'fuelBee') WHERE email=?",password,email);
     }
     @Override
     public boolean save(Admin entity) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("INSERT INTO Admin VALUES(?,AES_ENCRYPT(?,'fuelBee'),?,?,) ,adminDto.getEmail(),adminDto.getPassword(),adminDto.getUsername(),adminDto.getType()");
 
+    }
+
+    @Override
+    public boolean update(Admin dto) throws SQLException, ClassNotFoundException {
+        return false;
     }
 }

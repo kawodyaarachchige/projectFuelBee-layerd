@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.SignupFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.SignupFormController">
    <children>
       <ImageView fitHeight="609.0" fitWidth="915.0" layoutY="-3.0" opacity="0.51">
          <image>
@@ -23,24 +23,24 @@
             <TextField fx:id="txtUserName" layoutX="76.0" layoutY="206.0" prefHeight="38.0" prefWidth="329.0" promptText="Input your User Name" stylesheets="@../asserts/stylesheet/style.css" />
             <TextField fx:id="txtpwd" layoutX="76.0" layoutY="302.0" prefHeight="38.0" prefWidth="329.0" promptText="choose password" />
             <TextField fx:id="txtCpwd" layoutX="76.0" layoutY="398.0" prefHeight="38.0" prefWidth="329.0" promptText="re-enter password" />
-            <Label layoutX="84.0" layoutY="71.0" text="E-mail ">
+            <Label layoutX="81.0" layoutY="71.0" text="E-mail ">
                <font>
-                  <Font name="Dyuthi Regular" size="23.0" />
+                  <Font name="Baloo Da 2 SemiBold" size="23.0" />
                </font>
             </Label>
             <Label layoutX="81.0" layoutY="166.0" text="User name">
                <font>
-                  <Font name="Dyuthi Regular" size="23.0" />
+                  <Font name="Baloo Da 2 SemiBold" size="22.0" />
                </font>
             </Label>
             <Label layoutX="79.0" layoutY="261.0" text="Password">
                <font>
-                  <Font name="Dyuthi Regular" size="23.0" />
+                  <Font name="Baloo Da 2 SemiBold" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="81.0" layoutY="360.0" text="confirm password">
+            <Label layoutX="80.0" layoutY="360.0" text="confirm password">
                <font>
-                  <Font name="Dyuthi Regular" size="23.0" />
+                  <Font name="Baloo Bhai 2 SemiBold" size="21.0" />
                </font>
             </Label>
             <JFXButton fx:id="btnsign" buttonType="RAISED" layoutX="161.0" layoutY="468.0" onAction="#btnSignUpOnAction" prefHeight="44.0" prefWidth="153.0" text="    SIGN UP" textFill="#fffbfb">
@@ -58,34 +58,34 @@
                   <Font name="Dyuthi Regular" size="17.0" />
                </font>
             </Label>
-            <JFXButton fx:id="inpane" layoutX="304.0" layoutY="522.0" onMouseClicked="#txtLogInOnAction" text="Log in" textFill="#1b1be1">
+            <JFXButton fx:id="inpane" layoutX="304.0" layoutY="518.0" onMouseClicked="#txtLogInOnAction" text="Log in" textFill="#1b1be1">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <ImageView layoutX="349.0" layoutY="117.0">
+            <ImageView layoutX="357.0" layoutY="117.0">
                <image>
                   <Image url="@../asserts/icons/icons8-mail-30.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="354.0" layoutY="210.0">
+            <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="355.0" layoutY="209.0">
                <image>
                   <Image url="@../asserts/icons/icons8-user-50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="350.0" layoutY="302.0">
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="353.0" layoutY="302.0">
                <image>
                   <Image url="@../asserts/icons/icons8-lock-50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="356.0" layoutY="402.0">
+            <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="354.0" layoutY="402.0">
                <image>
                   <Image url="@../asserts/icons/icons8-confirm-24.png" />
                </image>
             </ImageView>
             <Label layoutX="608.0" layoutY="33.0" prefHeight="73.0" prefWidth="165.0" text="SIGN UP">
                <font>
-                  <Font name="Dyuthi Regular" size="44.0" />
+                  <Font name="Baloo Bhai 2 SemiBold" size="44.0" />
                </font>
             </Label>
             <ImageView fitHeight="57.0" fitWidth="124.0" layoutX="754.0" layoutY="3.0">

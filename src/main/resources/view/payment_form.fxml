@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="changePain" prefHeight="600.0" prefWidth="1045.0" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.PaymentFormController">
+<AnchorPane fx:id="changePain" prefHeight="600.0" prefWidth="1045.0" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.PaymentFormController">
    <children>
       <TableView fx:id="tblPayments" layoutX="28.0" layoutY="313.0" prefHeight="242.0" prefWidth="1000.0" stylesheets="@../asserts/stylesheet/style.css">
         <columns>
@@ -30,7 +30,7 @@
       </TableView>
       <Text fill="#131414" layoutX="387.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Payments" wrappingWidth="355.0">
          <font>
-            <Font name="Dyuthi Regular" size="29.0" />
+            <Font name="Baloo 2 SemiBold" size="29.0" />
          </font>
       </Text>
       <Pane layoutX="37.0" layoutY="64.0" prefHeight="242.0" prefWidth="988.0" style="-fx-background-color: fdedd0; -fx-background-radius: 15;">

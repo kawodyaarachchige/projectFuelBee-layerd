@@ -15,23 +15,23 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="suplypane" prefHeight="600.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.SupplierFormController">
+<AnchorPane fx:id="suplypane" prefHeight="600.0" prefWidth="1045.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.SupplierFormController">
    <children>
       <Label layoutX="406.0" layoutY="21.0" text="Manage Supplier">
          <font>
-            <Font name="Dyuthi Regular" size="29.0" />
+            <Font name="Baloo Bhai 2 SemiBold" size="29.0" />
          </font>
       </Label>
       <Label layoutX="84.0" layoutY="204.0" />
       <Pane layoutX="85.0" layoutY="87.0" prefHeight="211.0" prefWidth="868.0" style="-fx-background-color: fdedd0; -fx-background-radius: 15;">
          <children>
-            <Label layoutX="23.0" layoutY="8.0" text="Supplier Id :">
+            <Label layoutX="23.0" layoutY="16.0" text="Supplier Id :">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="txtSupId" layoutX="188.0" onAction="#txtSupplierIdOnAction" prefHeight="35.0" prefWidth="234.0" stylesheets="@../asserts/stylesheet/style.css" />
-            <Label layoutX="22.0" layoutY="51.0" text="Company Name :">
+            <TextField fx:id="txtSupId" layoutX="188.0" layoutY="4.0" onAction="#txtSupplierIdOnAction" prefHeight="35.0" prefWidth="234.0" stylesheets="@../asserts/stylesheet/style.css" />
+            <Label layoutX="22.0" layoutY="62.0" text="Company Name :">
                <font>
                   <Font name="Dyuthi Regular" size="22.0" />
                </font>
@@ -110,12 +110,12 @@
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.1315789520740509" green="0.028021441772580147" blue="0.028021441772580147" />
+                        <Color blue="0.028021441772580147" green="0.028021441772580147" red="0.1315789520740509" />
                      </color>
                   </DropShadow>
                </effect>
             </JFXButton>
-            <TextField fx:id="txtSupName" layoutX="189.0" layoutY="40.0" onAction="#txtSupplierIdOnAction" prefHeight="35.0" prefWidth="234.0" stylesheets="@../asserts/stylesheet/style.css" />
+            <TextField fx:id="txtSupName" layoutX="189.0" layoutY="47.0" onAction="#txtSupplierIdOnAction" prefHeight="35.0" prefWidth="234.0" stylesheets="@../asserts/stylesheet/style.css" />
             <JFXButton fx:id="mailpane" buttonType="RAISED" layoutX="676.0" layoutY="129.0" onAction="#sendMailOnAction" prefHeight="44.0" prefWidth="138.0" stylesheets="@../asserts/stylesheet/style.css" text="     SEND MAIL">
                <font>
                   <Font name="System Bold" size="13.0" />

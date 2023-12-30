@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="orderpane" prefHeight="600.0" prefWidth="1045.0" style="-fx-background-radius: 50;" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.OrderFormController">
+<AnchorPane fx:id="orderpane" prefHeight="600.0" prefWidth="1045.0" style="-fx-background-radius: 50;" stylesheets="@../asserts/stylesheet/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.fuelBee.controller.OrderFormController">
    <children>
       <Pane layoutX="65.0" layoutY="74.0" prefHeight="228.0" prefWidth="919.0" style="-fx-background-color: fdedd0; -fx-background-radius: 15;">
          <children>
@@ -123,7 +123,7 @@
       </TableView>
       <Label layoutX="403.0" layoutY="18.0" text="Manage Orders" textFill="#110a0a">
          <font>
-            <Font name="Dyuthi Regular" size="28.0" />
+            <Font name="Baloo 2 SemiBold" size="28.0" />
          </font>
       </Label>
    </children>

@@ -45,7 +45,7 @@ public class AdminBOImpl implements AdminBO {
 
     @Override
     public boolean updateAdmin(String email, String password) throws SQLException, ClassNotFoundException {
-        return adminDAO.updateAdmin(email, password);
+        return adminDAO.update(email, password);
         //return SQLUtil.execute("UPDATE Admin SET password=AES_ENCRYPT(?, 'fuelBee') WHERE email=?",password,email);
     }
 }

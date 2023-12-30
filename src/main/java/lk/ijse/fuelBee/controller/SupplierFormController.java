@@ -75,7 +75,7 @@ public class SupplierFormController {
 
             String values =supId + "," + name ;
 
-            String filepath = "/home/kitty99/IdeaProjects/SupplierQr/"+ supId + ".png";
+            String filepath = "/Users/tharushikawodya/Desktop/FuelBee/SupplierQr/"+ supId + ".png";
             boolean isGenerated = QRGenerator.generateQrCode(values, 1250, 1250, filepath);
 
             if(isGenerated){
