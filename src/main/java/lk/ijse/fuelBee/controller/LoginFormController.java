@@ -13,12 +13,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import lk.ijse.fuelBee.Mail;
+import lk.ijse.fuelBee.util.Mail;
 import lk.ijse.fuelBee.bo.BOFactory;
 import lk.ijse.fuelBee.bo.custom.AdminBO;
-import lk.ijse.fuelBee.dao.custom.AdminDAO;
 
-import lk.ijse.fuelBee.dao.custom.impl.AdminDAOImpl;
 import lk.ijse.fuelBee.dto.AdminDto;
 
 import java.io.IOException;

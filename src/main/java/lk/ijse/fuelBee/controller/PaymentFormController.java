@@ -6,25 +6,18 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.fuelBee.Mail;
+import lk.ijse.fuelBee.util.Mail;
 import lk.ijse.fuelBee.bo.BOFactory;
 import lk.ijse.fuelBee.bo.custom.*;
-import lk.ijse.fuelBee.dao.custom.*;
-import lk.ijse.fuelBee.dao.custom.impl.*;
 
-import lk.ijse.fuelBee.db.Dbconnection;
 import lk.ijse.fuelBee.dto.AdminDto;
 import lk.ijse.fuelBee.dto.OrderDto;
 import lk.ijse.fuelBee.dto.PaymentDto;
 import lk.ijse.fuelBee.dto.SupplierDto;
 import lk.ijse.fuelBee.dto.tm.PaymentTm;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.File;
-import java.io.InputStream;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -284,13 +277,13 @@ public class PaymentFormController {
 
     public void btnReportOnAction(ActionEvent actionEvent) throws JRException, SQLException {
         JasperPrint jasperPrint = reportsBO.paymentReport();
-        String filepath = "/home/kitty99/IdeaProjects/paymentRecipt/"+txtPayId+".pdf";
+        String filepath = "/Users/tharushikawodya/Desktop/FuelBee/paymentReceipt/"+txtPayId+".pdf";
         JasperExportManager.exportReportToPdfFile(jasperPrint, filepath);
         System.out.println("saved");
 
         Mail mail = new Mail();
         mail.setMsg("Payment History");
-        mail.setTo("projectfuelbee@gmail.com");
+        mail.setTo("kawodya.wa@gmail.com");
         mail.setSubject("Fuel Bee");
         mail.setFile(new File(filepath));
 

@@ -1,4 +1,4 @@
-package lk.ijse.fuelBee.regex;
+package lk.ijse.fuelBee.util;
 
 import java.util.regex.Pattern;
 

@@ -61,7 +61,7 @@ public class AdminDAOImpl implements AdminDAO {
     }
     @Override
     public boolean save(Admin entity) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("INSERT INTO Admin VALUES(?,AES_ENCRYPT(?,'fuelBee'),?,?,) ,adminDto.getEmail(),adminDto.getPassword(),adminDto.getUsername(),adminDto.getType()");
+        return SQLUtil.execute("INSERT INTO Admin VALUES(?,AES_ENCRYPT(?,'fuelBee'),?,?)",entity.getEmail(),entity.getPassword(),entity.getUsername(),entity.getType());
 
     }
 

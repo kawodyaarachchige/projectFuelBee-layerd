@@ -1,4 +1,4 @@
-package lk.ijse.fuelBee;
+package lk.ijse.fuelBee.util;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
