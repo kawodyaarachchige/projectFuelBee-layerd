@@ -19,7 +19,6 @@ Fuel Inventory Management System is a JavaFX application designed for managing f
    
    ✅Save and manage supplier information.
    
-   ✅ Password-encrypted storage for sensitive supplier data.
 
 3. **Order Management:**
    
@@ -65,6 +64,12 @@ Fuel Inventory Management System is a JavaFX application designed for managing f
 10. **Warning Notification:**
   
     ✅ Display a warning message when stock running low
+
+11.  **Password Encryption:**
+
+   
+     ✅ Securely encrypt user login passwords using a strong encryption algorithm.
+
 
 
 
