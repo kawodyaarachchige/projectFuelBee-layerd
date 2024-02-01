@@ -139,7 +139,8 @@ Fuel Inventory Management System is a JavaFX application designed for managing f
 
 ## License
 
-This project is licensed under the  License - see the[LICENSE] file for details.
+© 2023 All Right Reserved Designed By Tharushi Kawodya
+This project is licensed under the MIT license.
 
 
 ## Feedback
