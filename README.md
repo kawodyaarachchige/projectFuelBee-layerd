@@ -71,9 +71,6 @@ Fuel Inventory Management System is a JavaFX application designed for managing f
      ✅ Securely encrypt user login passwords using a strong encryption algorithm.
 
 
-
-
-
 ## Technologies Used
 
 - JavaFX: Frontend development.
